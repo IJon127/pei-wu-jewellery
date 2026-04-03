@@ -65,13 +65,20 @@ void getAlbedo() {
     // 1. Mapping Node (Object/Local position)
     vec3 pos = vPositionO;
 
+    // Calculate how much object space is covered by a single screen pixel
+    float pixelFootprint = length(fwidth(pos));
+
     // 2. Noise Texture Node (Scale: 40.0, Detail: 20.0)
-    // Note: Detail in GLSL requires a fractal loop (fBM)
     float noiseVal = 0.0;
     float amplitude = 0.5;
     float frequency = 40.0;
+    
     for(int i = 0; i < 4; i++) { // Simplification of "Detail: 20"
-        noiseVal += snoise(pos * frequency) * amplitude;
+        // Antialiasing: Predict when this octave's detail will become smaller than a pixel and smoothly fade it out
+        // This simulates the behavior of hardware Mipmaps for procedural textures
+        float fade = smoothstep(1.2, 0.4, pixelFootprint * frequency);
+        
+        noiseVal += snoise(pos * frequency) * amplitude * fade;
         frequency *= 2.0;
         amplitude *= 0.5;
     }
