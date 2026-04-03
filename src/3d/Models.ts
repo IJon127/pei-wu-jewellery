@@ -14,7 +14,6 @@ export class Models {
         this.entity = new pc.Entity('models')
 
         const glbs = [
-            'camera.glb',
             'donut.glb',
             'drip.glb',
             'egg.glb',

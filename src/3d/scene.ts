@@ -100,6 +100,14 @@ export class Scene {
         })
     }
 
+    public startInteraction() {
+        this.camera?.startInteraction();
+    }
+
+    public updateScroll(progress: number) {
+        this.camera?.updateScroll(progress);
+    }
+
     public start() {
         this.app?.start()
     }
