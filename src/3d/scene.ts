@@ -1,6 +1,6 @@
 import * as pc from 'playcanvas'
 
-export class PlayCanvasEngine {
+export class Scene {
     public app: pc.Application;
     private cube: pc.Entity;
 

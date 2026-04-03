@@ -1,23 +1,23 @@
 import { useEffect, useRef } from 'react'
-import { PlayCanvasEngine } from '../3d/engine'
+import { Scene } from '../3d/scene'
 
 function App() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
-    const engineRef = useRef<PlayCanvasEngine | null>(null)
+    const sceneRef = useRef<Scene | null>(null)
 
     useEffect(() => {
         if (!canvasRef.current) return
 
         // Initialize the abstracted 3D engine boundary
-        engineRef.current = new PlayCanvasEngine(canvasRef.current)
-        engineRef.current.start()
+        sceneRef.current = new Scene(canvasRef.current)
+        sceneRef.current.start()
 
-        const onResize = () => engineRef.current?.resize()
+        const onResize = () => sceneRef.current?.resize()
         window.addEventListener('resize', onResize)
 
         return () => {
             window.removeEventListener('resize', onResize)
-            engineRef.current?.destroy()
+            sceneRef.current?.destroy()
         }
     }, [])
 
