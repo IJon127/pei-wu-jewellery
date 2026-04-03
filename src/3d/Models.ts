@@ -59,17 +59,17 @@ export class Models {
     }
 
     setDonut() {
-        const material = this.createCrystalMaterial(new pc.Color(0, 0, 0));
+        const material = this.createCrystalMaterial(new pc.Color(1.0, 1.0, 1.0), 1.0);
         this.applyMaterialToEntity(this._donut, material);
     }
 
     setDrip() {
-        const material = this.createCrystalMaterial(new pc.Color(0.5, 0.5, 0));
+        const material = this.createCrystalMaterial(new pc.Color(0.65, 0.8, 1.0), 0.8);
         this.applyMaterialToEntity(this._drip, material);
     }
 
     setEgg() {
-        const material = this.createCrystalMaterial(new pc.Color(0, 0.5, 0));
+        const material = this.createCrystalMaterial(new pc.Color(1.0, 0.68, 0.68), 0.8);
         this.applyMaterialToEntity(this._egg, material);
     }
 
@@ -83,20 +83,21 @@ export class Models {
         this.applyMaterialToEntity(this._stairs, material);
     }
 
-    createCrystalMaterial(color: pc.Color) {
+    createCrystalMaterial(color: pc.Color, gloss: number) {
         const material = new pc.StandardMaterial();
         material.diffuse = color;
-        // material.emissive = color;
-        // material.opacity = 0.5;
-        material.blendType = pc.BLEND_PREMULTIPLIED;
+        // material.opacity = 0.99;
+        // material.clearCoatGloss = 1.0;
+        // material.blendType = pc.BLEND_PREMULTIPLIED;
         material.metalness = 0.0;       // low metalness, otherwise it's reflective
-        material.gloss = 1.0;
-        material.glossMapChannel = 'g';
+        material.gloss = gloss;
         material.useMetalness = true; // refractive materials are currently supported only with metalness
         material.refraction = 0.8;
         material.refractionIndex = 1.0 / 1.33; // water
         material.blendType = pc.BLEND_NORMAL;
+        material.dispersion = 0.5;
         material.thickness = 0.4;
+        material.useDynamicRefraction = true; // Allow scene-texture refraction
         material.update();
         return material;
     }
