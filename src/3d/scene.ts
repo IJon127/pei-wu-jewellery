@@ -1,13 +1,13 @@
 import * as pc from 'playcanvas'
 import { Models } from './Models'
-// import { vertexShader, getFragmentShader } from './shaders/dome'
+import { Camera } from './Camera'
 import domeVS from './shaders/domeVS.glsl?raw'
 import domeFS from './shaders/domeFS.glsl?raw'
-import { vertexShader } from './shaders/dome';
 
 export class Scene {
     public app: pc.Application;
     private models: Models;
+    private camera: Camera;
 
     constructor(canvas: HTMLCanvasElement) {
         this.init(canvas);
@@ -23,17 +23,8 @@ export class Scene {
         this.app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW)
         this.app.setCanvasResolution(pc.RESOLUTION_AUTO)
 
-        // Create camera
-        const camera = new pc.Entity('camera')
-        camera.addComponent('camera', {
-            clearColor: new pc.Color(0.1, 0.15, 0.2),
-            toneMapping: pc.TONEMAP_ACES,
-            // Automatically apply correct gamma for standard display output
-            // gammaCorrection: pc.GAMMA_SRGB
-        })
-        camera.camera!.requestSceneColorMap(true);
-        camera.setPosition(0, 0, 5)
-        this.app.root.addChild(camera)
+        // Initialize Camera
+        this.camera = new Camera(this.app);
 
         // Rearrange depth layer to capture environment/skybox for dynamic refraction
         const depthLayer = this.app.scene.layers.getLayerById(pc.LAYERID_DEPTH)
@@ -105,6 +96,7 @@ export class Scene {
         // Setup update loop for animation
         this.app.on('update', (dt: number) => {
             this.models.update(dt)
+            this.camera.update(dt)
         })
     }
 

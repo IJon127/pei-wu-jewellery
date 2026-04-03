@@ -57,7 +57,7 @@ export class Models {
     }
 
     update(dt: number) {
-        this.entity.rotate(0, 10 * dt, 0)
+        // Logic for rotating models removed; camera orbits instead
     }
 
     setDonut() {
