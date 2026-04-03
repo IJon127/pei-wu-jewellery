@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Scene } from '../3d/scene'
+import { Scene } from '../3d/Scene'
 
 function App() {
     const canvasRef = useRef<HTMLCanvasElement>(null)

@@ -1,8 +1,9 @@
 import * as pc from 'playcanvas'
+import { Models } from './Models'
 
 export class Scene {
     public app: pc.Application;
-    private cube: pc.Entity;
+    private models: Models;
 
     constructor(canvas: HTMLCanvasElement) {
         // Initialize PlayCanvas application
@@ -28,24 +29,13 @@ export class Scene {
         light.setEulerAngles(45, 30, 0)
         this.app.root.addChild(light)
 
-        // Create a rotating cube
-        this.cube = new pc.Entity('cube')
-        this.cube.addComponent('render', {
-            type: 'box'
-        })
-
-        const material = new pc.StandardMaterial()
-        material.diffuse = new pc.Color(0.8, 0.6, 0.2) // gold-like color
-        material.metalness = 0.5
-        material.useMetalness = true
-        material.update()
-        this.cube.render!.meshInstances[0].material = material
-
-        this.app.root.addChild(this.cube)
+        // Initialize and add Model
+        this.models = new Models(this.app)
+        this.app.root.addChild(this.models.entity)
 
         // Setup update loop for animation
         this.app.on('update', (dt: number) => {
-            this.cube.rotate(10 * dt, 20 * dt, 30 * dt)
+            this.models.update(dt)
         })
     }
 
