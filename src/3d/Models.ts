@@ -1,4 +1,6 @@
 import * as pc from 'playcanvas'
+import stoneDiffuseChunk from './shaders/stoneDiffuse.glsl?raw'
+import stoneTransformVSChunk from './shaders/stoneTransformVS.glsl?raw'
 
 export class Models {
     entity: pc.Entity;
@@ -114,9 +116,16 @@ export class Models {
 
     createStoneMaterial() {
         const material = new pc.StandardMaterial();
-        material.metalness = 0.0;
-        material.gloss = 1.0;
+        material.metalness = 0.1;
+        material.gloss = 0.8;
         material.useMetalness = true;
+        
+        // Pass Local/Object position from vertex to fragment shader to lock 3D noise directly to the mesh 
+        material.chunks.transformVS = stoneTransformVSChunk;
+        
+        // Override the diffuse fragment shader chunk
+        material.chunks.diffusePS = stoneDiffuseChunk;
+        
         material.update();
         return material;
     }
