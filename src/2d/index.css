@@ -171,9 +171,9 @@ body {
 
 .section-idx {
   font-family: 'Quicksand', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .section-title {
@@ -181,7 +181,37 @@ body {
   font-size: 6rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.55);
+  text-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
   margin: 0;
+}
+
+.section-more-btn {
+  /* display: block; */
+  margin-top: 2rem;
+  /* margin-left: auto; */
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  /* letter-spacing: 0.2em; */
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  pointer-events: auto;
+  transition: color 0.2s;
+  /* text-align: right; */
+}
+
+.section-more-btn:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.section-more-btn-right-align {
+  display: block;
+  margin-left: auto;
+  text-align: right;
 }
 
 /* ── 01 Statement ───────────────────────────────────────── */
@@ -342,7 +372,7 @@ body {
   grid-template-columns: 5rem 1fr 1fr;
   gap: 1.5rem;
   padding: 1rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
   align-items: baseline;
 }
 
@@ -353,18 +383,19 @@ body {
 }
 
 .ex-title {
-  font-family: 'Bonheur Royale', serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: 1.8rem;
-  font-style: italic;
+  /* font-style: italic; */
   color: rgba(255, 255, 255, 0.85);
 }
 
 .ex-venue {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.4);
   text-align: right;
 }
+
 
 /* ── 04 Press ───────────────────────────────────────────── */
 .section-press {
@@ -383,9 +414,9 @@ body {
 }
 
 .press-quote {
-  font-family: 'Bonheur Royale', serif;
-  font-size: 2rem;
-  font-style: italic;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.5rem;
+  /* font-style: italic; */
   color: rgba(255, 255, 255, 0.8);
   margin: 0 0 0.75rem;
   line-height: 1.3;

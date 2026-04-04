@@ -25,6 +25,7 @@ export function ExhibitionsSection({ scrollTop, align = 'left' }: SectionProps) 
                         </li>
                     ))}
                 </ul>
+                <button className="section-more-btn section-more-btn-right-align">View All →</button>
             </div>
         </div>
     )

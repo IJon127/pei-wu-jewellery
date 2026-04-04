@@ -25,6 +25,7 @@ export function PressSection({ scrollTop, align = 'left' }: SectionProps) {
                         </div>
                     ))}
                 </div>
+                <button className="section-more-btn">View All →</button>
             </div>
         </div>
     )

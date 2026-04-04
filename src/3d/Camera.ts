@@ -37,6 +37,7 @@ export class Camera {
         this.entity.addComponent('camera', {
             clearColor: new pc.Color(0.1, 0.15, 0.2),
             toneMapping: pc.TONEMAP_ACES,
+            fov: 45,
         });
 
         // Needed to capture background for dynamic refraction
@@ -156,9 +157,12 @@ export class Camera {
             // Lerp transformations 
             const p = new pc.Vec3().lerp(this.startPos, this.targetPos, t);
             const r = new pc.Quat().slerp(this.startRot, this.targetRot, t);
+            const f = pc.math.lerp(45, 70, t);
 
             this.entity.setPosition(p);
             this.entity.setRotation(r);
+            this.entity.camera!.fov = f;
+
         } else if (this.stage === CameraStage.ANIMATION) {
             // Animating
         }
