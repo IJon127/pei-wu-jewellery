@@ -1,6 +1,7 @@
-import type { SectionProps } from '../sectionTypes'
 
-export const exhibitions = [
+import type { Exhibition, SectionProps } from '../sectionTypes'
+
+export const exhibitions: Exhibition[] = [
     { year: '2024', title: 'Threshold', venue: 'Galerie Nuit Blanche', city: 'Paris' },
     { year: '2024', title: 'Material Witness', venue: 'Design Museum', city: 'London' },
     { year: '2023', title: 'Soft Power', venue: 'Grassimesse', city: 'Leipzig' },
@@ -19,9 +20,11 @@ export function ExhibitionsSection({ scrollTop, align = 'left', onOpenDetail }: 
                 <ul className="exhibitions-list">
                     {exhibitions.map((ex, i) => (
                         <li key={i} className="exhibition-row">
-                            <span className="ex-year">{ex.year}</span>
-                            <span className="ex-title">{ex.title}</span>
-                            <span className="ex-venue">{ex.venue}, {ex.city}</span>
+                            <button type="button" className="exhibition-row--btn" onClick={() => console.log('clicked')}>
+                                <span className="ex-year">{ex.year}</span>
+                                <span className="ex-title">{ex.title}</span>
+                                <span className="ex-venue">{ex.venue}, {ex.city}</span>
+                            </button>
                         </li>
                     ))}
                 </ul>

@@ -1,6 +1,6 @@
-import type { SectionProps } from '../sectionTypes'
+import type { PressEntry, SectionProps } from '../sectionTypes'
 
-export const pressItems = [
+export const pressItems: PressEntry[] = [
     { pub: 'Crafts Magazine', quote: 'A jeweller who understands silence as much as form.', date: 'Nov 2024' },
     { pub: 'Wallpaper*', quote: "Wu's work occupies a rare space between sculpture and intimacy.", date: 'Sep 2024' },
     { pub: 'Another Magazine', quote: 'The body is her canvas — and every piece, a sentence.', date: 'Jun 2023' },

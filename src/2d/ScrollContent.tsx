@@ -6,7 +6,7 @@ import { PressSection } from './sections/PressSection'
 import { LabSection } from './sections/LabSection'
 import { NewsSection } from './sections/NewsSection'
 import { AboutSection } from './sections/AboutSection'
-import { SectionDetailModal } from './SectionDetailModal'
+import { Modal } from './Modal'
 import type { SectionDetailKind, SectionProps } from './sectionTypes'
 
 /**
@@ -19,7 +19,7 @@ export const CYCLE_VH = 3240
  * Adjust scrollTop (in vh) to control when each section appears
  * within one cycle of the 3240vh scrollable space.
  */
-export type { SectionDetailKind, SectionProps } from './sectionTypes'
+export type { Exhibition, PressEntry, ProjectCard, SectionDetailKind, SectionProps } from './sectionTypes'
 
 const SECTION_CONFIG: Array<{ component: React.ComponentType<SectionProps>; scrollTop: number; align?: SectionProps['align'] }> = [
     { component: StatementSection, scrollTop: 160, align: 'center' },
@@ -84,7 +84,7 @@ export function ScrollContent({ visible }: ScrollContentProps) {
                     />
                 ))
             )}
-            <SectionDetailModal kind={detailKind} onClose={onCloseDetail} />
+            <Modal kind={detailKind} onClose={onCloseDetail} onOpenDetail={onOpenDetail} />
         </div>
     )
 }

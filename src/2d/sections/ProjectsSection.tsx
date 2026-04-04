@@ -1,19 +1,4 @@
-import type { SectionProps } from '../sectionTypes'
-
-interface ProjectCard {
-    id: string
-    title: string
-    year: string
-    image: string
-    /** CSS aspect-ratio value, e.g. '3/4', '1/1', '4/3' — defaults to '3/4' */
-    aspectRatio?: string
-    /** Card width as a fraction of its grid column, 0–1 — defaults to 1 (full column) */
-    width?: number
-    /** horizontal nudge in px — positive shifts right */
-    xOffset?: number
-    /** vertical nudge in px — positive shifts down */
-    yOffset?: number
-}
+import type { ProjectCard, SectionProps } from '../sectionTypes'
 
 export const projects: ProjectCard[] = [
     { id: '01', title: 'Liminal Vessels', year: '2024', image: '/assets/images/projects/project1.jpg', aspectRatio: '3/4', width: 1, xOffset: 0, yOffset: 0 },
