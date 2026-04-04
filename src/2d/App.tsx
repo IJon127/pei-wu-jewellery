@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Scene } from '../3d/scene'
+import './index.css'
 
 function App() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -7,7 +8,7 @@ function App() {
     const [isInteracting, setIsInteracting] = useState(false)
 
     const isInteractingRef = useRef(isInteracting)
-    
+
     // Sync state to ref so the scroll listener can access it without causing re-runs
     useEffect(() => {
         isInteractingRef.current = isInteracting
@@ -46,24 +47,19 @@ function App() {
     };
 
     return (
-        <div style={{ minHeight: isInteracting ? '500vh' : '100vh', transition: 'min-height 0.5s', width: '100%', overflow: 'hidden' }}>
-            <canvas
-                ref={canvasRef}
-                id="playcanvas-app"
-                style={{ width: '100vw', height: '100vh', display: 'block', position: 'fixed', top: 0, zIndex: 0, pointerEvents: 'auto' }}
-            />
+        <div className="app-wrapper" style={{ minHeight: isInteracting ? '500vh' : '100vh' }}>
+            <canvas ref={canvasRef} id="playcanvas-app" />
 
             {!isInteracting && (
-                <div style={{ pointerEvents: 'auto', padding: '2rem', position: 'fixed', zIndex: 1, top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center' }}>
-                    <h1 style={{ color: '#fff', textShadow: '0 4px 12px rgba(0,0,0,0.8)', fontSize: '5rem', margin: 0, whiteSpace: 'nowrap' }}>
-                        Pei Wu Jewellery
+                <div className="landing-overlay">
+                    <h1 className="landing-title">
+                        <span className="title-sans">Pei Wu </span>
+                        <span className="title-serif">Jewellery</span>
                     </h1>
-                    <p style={{ color: '#ddd', fontSize: '1.4rem', marginTop: '1rem', textShadow: '0 2px 6px rgba(0,0,0,0.8)' }}>
-                        Interactive 3D Lookbook
+                    <p className="landing-subtitle">
+                        The combination of all senses reflects the state of mind under her story. “We are all very similar.”
                     </p>
-                    <button 
-                        onClick={handleInteract}
-                        style={{ marginTop: '3rem', padding: '1.2rem 4rem', background: 'rgba(255,255,255,0.9)', color: '#000', border: 'none', borderRadius: '40px', cursor: 'pointer', fontSize: '1.2rem', fontWeight: 'bold', boxShadow: '0 10px 30px rgba(0,0,0,0.5)', transition: 'transform 0.2s' }}>
+                    <button className="landing-btn" onClick={handleInteract}>
                         Enter
                     </button>
                 </div>
@@ -73,3 +69,4 @@ function App() {
 }
 
 export default App
+

@@ -56,6 +56,7 @@ export class Camera {
         this.app.assets.loadFromUrl('/assets/3d/Action.glb', 'container', (err: any, asset: pc.Asset | undefined) => {
             if (!err && asset && asset.resource) {
                 const resource = asset.resource as pc.ContainerResource;
+                console.log(`[Camera resource]:`, resource.data.animations[0].outputs);
                 this.cameraRig = resource.instantiateRenderEntity({ castShadows: false });
                 this.app.root.addChild(this.cameraRig);
 
@@ -68,7 +69,6 @@ export class Camera {
                 if (!found && this.cameraRig.children.length > 0) found = this.cameraRig.children[0] as pc.Entity;
 
                 this.animatedNode = found || this.cameraRig;
-                console.log(`[Camera ${this.id}] 🔗 Linked animated node:`, this.animatedNode.name);
 
                 // PlayCanvas instantiateRenderEntity does not automatically add the anim component.
                 // We must attach it and assign the GLB's embedded animation track to it.
@@ -78,14 +78,14 @@ export class Camera {
                     this.cameraRig.addComponent('anim', {
                         activate: true
                     });
-                    
+
                     // Assign the first animation track to a default state
                     this.cameraRig.anim?.assignAnimation('CameraAction', this.animTrack as pc.AnimTrack);
-                    
+
                     // Force the state graph to transition and resolve its layout
                     this.cameraRig.anim?.baseLayer?.play('CameraAction');
-                    this.cameraRig.anim?.update(0); 
-                    
+                    this.cameraRig.anim?.update(0);
+
                     // Now safely pause it for manual scrubbing logic in Stage 3
                     if (this.cameraRig.anim?.baseLayer) {
                         this.cameraRig.anim.baseLayer.playing = false;
@@ -96,7 +96,6 @@ export class Camera {
     }
 
     public startInteraction() {
-        console.log(`[Camera ${this.id}] Interaction requested. Current Stage: ${this.stage}`);
         if (this.stage !== CameraStage.ORBIT || !this.cameraRig) return;
 
         // Scrub animation to exactly 0 to extract target poses securely
@@ -109,7 +108,6 @@ export class Camera {
         this.targetPos.copy(targetNode.getPosition());
         this.targetRot.copy(targetNode.getRotation());
 
-        console.log(`[Camera ${this.id}] 🎯 TARGET Extracted:`, this.targetPos.toString());
 
         this.startPos.copy(this.entity.getPosition());
         this.startRot.copy(this.entity.getRotation());
@@ -127,13 +125,13 @@ export class Camera {
 
         const duration = this.animTrack.duration;
         const newTime = progress * duration;
-        
+
         if (this.cameraRig.anim && this.cameraRig.anim.baseLayer) {
             this.cameraRig.anim.baseLayer.activeStateCurrentTime = newTime;
             this.cameraRig.anim.update(0); // evaluate immediately
-            
+
             console.log(`[Camera ${this.id}] 📜 Scrubbing Animation: Time ${newTime.toFixed(2)} / ${duration.toFixed(2)}`);
-            
+
             const targetNode = this.animatedNode || this.cameraRig;
             this.entity.setPosition(targetNode.getPosition());
             this.entity.setRotation(targetNode.getRotation());
