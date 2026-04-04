@@ -2,7 +2,9 @@ import { useEffect } from 'react'
 import { AllExhibitions } from './modals/AllExhibitions'
 import { AllPress } from './modals/AllPress'
 import { AllProjects } from './modals/AllProjects'
+import { ExhibitionDetail } from './modals/ExhibitionDetail'
 import { ProjectDetail } from './modals/ProjectDetail'
+import { getExhibitionById } from './sections/ExhibitionsSection'
 import { getProjectById } from './sections/ProjectsSection'
 import type { ModalKind } from './sectionTypes'
 
@@ -15,11 +17,12 @@ import type { ModalKind } from './sectionTypes'
 export interface ModalProps {
     kind: ModalKind | null
     selectedProjectId: string | null
+    selectedExhibitionId: string | null
     onClose: () => void
-    onOpenModal: (kind: ModalKind, projectId?: string) => void
+    onOpenModal: (kind: ModalKind, id?: string) => void
 }
 
-export function Modal({ kind, selectedProjectId, onClose, onOpenModal }: ModalProps) {
+export function Modal({ kind, selectedProjectId, selectedExhibitionId, onClose, onOpenModal }: ModalProps) {
     useEffect(() => {
         if (!kind) return
         const prev = document.body.style.overflow
@@ -39,6 +42,11 @@ export function Modal({ kind, selectedProjectId, onClose, onOpenModal }: ModalPr
     const projectDetail =
         kind === 'project' && selectedProjectId ? getProjectById(selectedProjectId) : undefined
 
+    const exhibitionDetail =
+        kind === 'exhibition' && selectedExhibitionId
+            ? getExhibitionById(selectedExhibitionId)
+            : undefined
+
     return (
         <div
             className="section-detail-overlay"
@@ -54,12 +62,27 @@ export function Modal({ kind, selectedProjectId, onClose, onOpenModal }: ModalPr
                             ←
                         </button>
                     )}
+                    {kind === 'allExhibitions' && (
+                        <button type="button" className="section-detail-back" onClick={onClose} aria-label="Back">
+                            ←
+                        </button>
+                    )}
                     {kind === 'project' && (
                         <button
                             type="button"
                             className="section-detail-back"
                             onClick={() => onOpenModal('allProjects')}
                             aria-label="Back to all projects"
+                        >
+                            ←
+                        </button>
+                    )}
+                    {kind === 'exhibition' && (
+                        <button
+                            type="button"
+                            className="section-detail-back"
+                            onClick={() => onOpenModal('allExhibitions')}
+                            aria-label="Back to all exhibitions"
                         >
                             ←
                         </button>
@@ -75,6 +98,12 @@ export function Modal({ kind, selectedProjectId, onClose, onOpenModal }: ModalPr
                     {kind === 'project' && projectDetail && <ProjectDetail project={projectDetail} />}
                     {kind === 'project' && !projectDetail && (
                         <p className="single-project-missing">Project not found.</p>
+                    )}
+                    {kind === 'exhibition' && exhibitionDetail && (
+                        <ExhibitionDetail exhibition={exhibitionDetail} />
+                    )}
+                    {kind === 'exhibition' && !exhibitionDetail && (
+                        <p className="exhibition-detail-missing">Exhibition not found.</p>
                     )}
                 </div>
             </div>

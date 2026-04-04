@@ -2,7 +2,7 @@ import type { ModalKind } from '../sectionTypes'
 import { exhibitions } from '../sections/ExhibitionsSection'
 
 export interface AllExhibitionsProps {
-    onOpenModal: (kind: ModalKind) => void
+    onOpenModal: (kind: ModalKind, id?: string) => void
 }
 
 export function AllExhibitions({ onOpenModal }: AllExhibitionsProps) {
@@ -12,12 +12,18 @@ export function AllExhibitions({ onOpenModal }: AllExhibitionsProps) {
             Exhibitions
         </h2>
         <ul className="exhibitions-list">
-            {exhibitions.map((ex, i) => (
-                <li key={i} className="exhibition-row">
-                    <button type="button" className="exhibition-row--btn" onClick={() => onOpenModal('allExhibitions')}>
+            {exhibitions.map(ex => (
+                <li key={ex.id} className="exhibition-row">
+                    <button
+                        type="button"
+                        className="exhibition-row--btn"
+                        onClick={() => onOpenModal('exhibition', ex.id)}
+                    >
                         <span className="ex-year">{ex.year}</span>
                         <span className="ex-title">{ex.title}</span>
-                        <span className="ex-venue">{ex.venue}, {ex.city}</span>
+                        <span className="ex-venue">
+                            {ex.venue}, {ex.city}
+                        </span>
                     </button>
                 </li>
             ))}

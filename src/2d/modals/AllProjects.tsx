@@ -2,7 +2,7 @@ import type { ModalKind } from '../sectionTypes'
 import { projects } from '../sections/ProjectsSection'
 
 export interface AllProjectsProps {
-    onOpenModal: (kind: ModalKind, projectId?: string) => void
+    onOpenModal: (kind: ModalKind, id?: string) => void
 }
 
 export function AllProjects({ onOpenModal }: AllProjectsProps) {

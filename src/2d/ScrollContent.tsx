@@ -19,7 +19,15 @@ export const CYCLE_VH = 3240
  * Adjust scrollTop (in vh) to control when each section appears
  * within one cycle of the 3240vh scrollable space.
  */
-export type { Exhibition, PressEntry, ProjectCard, ProjectDetail, ModalKind, SectionProps } from './sectionTypes'
+export type {
+    Exhibition,
+    ExhibitionDetail,
+    PressEntry,
+    ProjectCard,
+    ProjectDetail,
+    ModalKind,
+    SectionProps,
+} from './sectionTypes'
 
 const SECTION_CONFIG: Array<{ component: React.ComponentType<SectionProps>; scrollTop: number; align?: SectionProps['align'] }> = [
     { component: StatementSection, scrollTop: 160, align: 'center' },
@@ -42,18 +50,33 @@ export function ScrollContent({ visible }: ScrollContentProps) {
     const [cycles, setCycles] = useState(INITIAL_CYCLES)
     const [modalKind, setModalKind] = useState<ModalKind | null>(null)
     const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null)
+    const [selectedExhibitionId, setSelectedExhibitionId] = useState<string | null>(null)
 
-    const onOpenModal = useCallback((kind: ModalKind, projectId?: string) => {
+    const onOpenModal = useCallback((kind: ModalKind, id?: string) => {
         setModalKind(kind)
-        setSelectedProjectId(projectId ?? null)
+        if (kind === 'project') {
+            setSelectedProjectId(id ?? null)
+            setSelectedExhibitionId(null)
+        } else if (kind === 'exhibition') {
+            setSelectedExhibitionId(id ?? null)
+            setSelectedProjectId(null)
+        } else {
+            setSelectedProjectId(null)
+            setSelectedExhibitionId(null)
+        }
     }, [])
 
-    const onCloseDetail = useCallback(() => setModalKind(null), [])
+    const onCloseDetail = useCallback(() => {
+        setModalKind(null)
+        setSelectedProjectId(null)
+        setSelectedExhibitionId(null)
+    }, [])
 
     useEffect(() => {
         if (!visible) {
             setModalKind(null)
             setSelectedProjectId(null)
+            setSelectedExhibitionId(null)
         }
     }, [visible])
 
@@ -92,6 +115,7 @@ export function ScrollContent({ visible }: ScrollContentProps) {
             <Modal
                 kind={modalKind}
                 selectedProjectId={selectedProjectId}
+                selectedExhibitionId={selectedExhibitionId}
                 onClose={onCloseDetail}
                 onOpenModal={onOpenModal}
             />

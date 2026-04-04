@@ -29,6 +29,13 @@ export interface Exhibition {
     city: string
 }
 
+/** Full exhibition copy for the exhibition detail modal */
+export interface ExhibitionDetail extends Exhibition {
+    id: string
+    description: string
+    images: string[]
+}
+
 export interface PressEntry {
     pub: string
     quote: string
@@ -38,5 +45,6 @@ export interface PressEntry {
 export interface SectionProps {
     scrollTop: number
     align?: 'left' | 'center' | 'right'
-    onOpenModal?: (kind: ModalKind, projectId?: string) => void
+    /** Second argument is `projectId` when kind is `project`, `exhibitionId` when kind is `exhibition` */
+    onOpenModal?: (kind: ModalKind, id?: string) => void
 }
