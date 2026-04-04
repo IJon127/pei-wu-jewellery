@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Scene } from '../3d/scene'
 import { LoadingScreen } from './LoadingScreen'
-import { ScrollContent } from './ScrollContent'
+import { ScrollContent, CYCLE_VH } from './ScrollContent'
 import './index.css'
 
 function App() {
@@ -31,13 +31,12 @@ function App() {
         const onScroll = () => {
             console.log('[App] scroll fired, isInteracting:', isInteractingRef.current, 'scrollY:', window.scrollY);
             if (!sceneRef.current || !isInteractingRef.current) return;
-            const maxScroll = document.body.scrollHeight - window.innerHeight;
-            console.log('[App] maxScroll:', maxScroll);
-            if (maxScroll > 0) {
-                const progress = Math.min(1.0, Math.max(0.0, window.scrollY / maxScroll));
-                console.log('[App] calling updateScroll with progress:', progress);
-                sceneRef.current.updateScroll(progress);
-            }
+            // Wrap scrollY within one cycle so the camera animation loops infinitely
+            const cycleHeightPx = CYCLE_VH * window.innerHeight / 100
+            const scrollInCycle = window.scrollY % cycleHeightPx
+            const progress = scrollInCycle / cycleHeightPx
+            console.log('[App] cycle progress:', progress.toFixed(3));
+            sceneRef.current.updateScroll(progress);
         };
         window.addEventListener('scroll', onScroll, { passive: true })
 
@@ -50,7 +49,7 @@ function App() {
 
     const handleInteract = () => {
         setIsInteracting(true);
-        document.body.style.minHeight = '3240vh'; // Make body scrollable
+        document.body.style.minHeight = `${3 * CYCLE_VH}vh`; // 3 initial cycles
         sceneRef.current?.startInteraction();
     };
 
