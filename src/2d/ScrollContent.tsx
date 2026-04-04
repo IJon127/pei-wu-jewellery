@@ -19,7 +19,7 @@ export const CYCLE_VH = 3240
  * Adjust scrollTop (in vh) to control when each section appears
  * within one cycle of the 3240vh scrollable space.
  */
-export type { Exhibition, PressEntry, ProjectCard, ModalKind, SectionProps } from './sectionTypes'
+export type { Exhibition, PressEntry, ProjectCard, ProjectDetail, ModalKind, SectionProps } from './sectionTypes'
 
 const SECTION_CONFIG: Array<{ component: React.ComponentType<SectionProps>; scrollTop: number; align?: SectionProps['align'] }> = [
     { component: StatementSection, scrollTop: 160, align: 'center' },
@@ -41,15 +41,20 @@ interface ScrollContentProps {
 export function ScrollContent({ visible }: ScrollContentProps) {
     const [cycles, setCycles] = useState(INITIAL_CYCLES)
     const [modalKind, setModalKind] = useState<ModalKind | null>(null)
+    const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null)
 
-    const onOpenModal = useCallback((kind: ModalKind) => {
+    const onOpenModal = useCallback((kind: ModalKind, projectId?: string) => {
         setModalKind(kind)
+        setSelectedProjectId(projectId ?? null)
     }, [])
 
     const onCloseDetail = useCallback(() => setModalKind(null), [])
 
     useEffect(() => {
-        if (!visible) setModalKind(null)
+        if (!visible) {
+            setModalKind(null)
+            setSelectedProjectId(null)
+        }
     }, [visible])
 
     // Grow body and cycle count as user approaches the end
@@ -84,7 +89,12 @@ export function ScrollContent({ visible }: ScrollContentProps) {
                     />
                 ))
             )}
-            <Modal kind={modalKind} onClose={onCloseDetail} onOpenModal={onOpenModal} />
+            <Modal
+                kind={modalKind}
+                selectedProjectId={selectedProjectId}
+                onClose={onCloseDetail}
+                onOpenModal={onOpenModal}
+            />
         </div>
     )
 }

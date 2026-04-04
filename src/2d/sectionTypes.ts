@@ -15,6 +15,13 @@ export interface ProjectCard {
     yOffset?: number
 }
 
+/** Full project copy for the single-project modal */
+export interface ProjectDetail extends ProjectCard {
+    description: string
+    /** Gallery images in addition to `image` (main) */
+    otherImages: string[]
+}
+
 export interface Exhibition {
     year: string
     title: string
@@ -31,5 +38,5 @@ export interface PressEntry {
 export interface SectionProps {
     scrollTop: number
     align?: 'left' | 'center' | 'right'
-    onOpenModal?: (kind: ModalKind) => void
+    onOpenModal?: (kind: ModalKind, projectId?: string) => void
 }

@@ -925,3 +925,104 @@ button.project-block:hover {
   background: rgba(255, 255, 255, 0.06);
   border-radius: 2px;
 }
+
+.all-projects-grid .section-detail-project-card {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+button.section-detail-project-card--btn {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 2px;
+  overflow: hidden;
+  transition: opacity 0.2s;
+}
+
+button.section-detail-project-card--btn:hover {
+  opacity: 0.9;
+}
+
+button.section-detail-project-card--btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.35);
+  outline-offset: 2px;
+}
+
+button.section-detail-project-card--btn img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  background: rgba(255, 255, 255, 0.06);
+  vertical-align: middle;
+}
+
+/* ── Single project (modal) ─ */
+.single-project {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.single-project-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.single-project-title {
+  margin: 0;
+  flex: 1;
+  min-width: min(100%, 12rem);
+}
+
+.single-project-date {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.single-project-body {
+  margin-bottom: 2rem;
+}
+
+.single-project-description {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+}
+
+.single-project-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.single-project-gallery-img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.single-project-missing {
+  font-family: 'Quicksand', sans-serif;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
