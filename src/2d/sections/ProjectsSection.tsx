@@ -4,27 +4,34 @@ interface ProjectCard {
     id: string
     title: string
     year: string
+    image: string
+    /** CSS aspect-ratio value, e.g. '3/4', '1/1', '4/3' — defaults to '3/4' */
+    aspectRatio?: string
+    /** Card width as a fraction of its grid column, 0–1 — defaults to 1 (full column) */
+    width?: number
     /** horizontal nudge in px — positive shifts right */
     xOffset?: number
     /** vertical nudge in px — positive shifts down */
     yOffset?: number
-    /** aspect ratio class: 'portrait' | 'landscape' */
-    aspect?: 'portrait' | 'square' | 'landscape'
 }
 
 const projects: ProjectCard[] = [
-    { id: '01', title: 'Liminal Vessels', year: '2024', xOffset: 0, yOffset: 0 },
-    { id: '02', title: 'Bone Lace', year: '2023', xOffset: 24, yOffset: 80 },
-    { id: '03', title: 'Still Water', year: '2023', xOffset: -16, yOffset: 40 },
-    { id: '04', title: 'Echo Chamber', year: '2022', xOffset: 32, yOffset: -20 },
-    { id: '05', title: 'Veil & Bone', year: '2022', xOffset: -8, yOffset: 56 },
+    { id: '01', title: 'Liminal Vessels', year: '2024', image: '/assets/images/projects/project1.jpg', aspectRatio: '3/4', width: 1, xOffset: 0, yOffset: 0 },
+    { id: '02', title: 'Bone Lace', year: '2023', image: '/assets/images/projects/project2.jpg', aspectRatio: '3/4', width: 0.75, xOffset: 24, yOffset: 80 },
+    { id: '03', title: 'Still Water', year: '2023', image: '/assets/images/projects/project3.jpg', aspectRatio: '4/3', width: 1, xOffset: -16, yOffset: 40 },
+    { id: '04', title: 'Echo Chamber', year: '2022', image: '/assets/images/projects/project4.png', aspectRatio: '1/1', width: 0.6, xOffset: 32, yOffset: -20 },
+    { id: '05', title: 'Veil & Bone', year: '2022', image: '/assets/images/projects/project5.png', aspectRatio: '3/4', width: 0.75, xOffset: 8, yOffset: 56 },
+    { id: '06', title: 'Bone Lace', year: '2023', image: '/assets/images/projects/project6.png', aspectRatio: '3/4', width: 1, xOffset: -24, yOffset: -50 },
+    // { id: '07', title: 'Still Water', year: '2023', image: '/assets/images/projects/project7.png', aspectRatio: '4/3', width: 1, xOffset: -16, yOffset: 40 },
+    // { id: '08', title: 'Echo Chamber', year: '2022', image: '/assets/images/projects/project8.png', aspectRatio: '1/1', width: 0.8, xOffset: 32, yOffset: -20 },
+    { id: '09', title: 'Veil & Bone', year: '2022', image: '/assets/images/projects/project9.png', aspectRatio: '3/4', width: 0.75, xOffset: 30, yOffset: -30 },
 ]
 
 export function ProjectsSection({ scrollTop, align = 'left' }: SectionProps) {
     return (
         <div className={`scroll-section section-tall section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
             <div className="section-projects">
-                <div className="section-header-row">
+                <div className="section-header-row" style={{ marginBottom: '15rem' }}>
                     <span className="section-idx">02</span>
                     <h2 className="section-title">Projects</h2>
                 </div>
@@ -35,10 +42,16 @@ export function ProjectsSection({ scrollTop, align = 'left' }: SectionProps) {
                             key={p.id}
                             className={`project-block`}
                             style={{
+                                width: p.width != null ? `${p.width * 100}%` : undefined,
                                 transform: `translate(${p.xOffset ?? 0}px, ${p.yOffset ?? 0}px)`,
                             }}
                         >
-                            <div className="project-block-img" />
+                            <img
+                                className="project-block-img"
+                                src={p.image}
+                                alt={p.title}
+                                style={p.aspectRatio ? { aspectRatio: p.aspectRatio } : undefined}
+                            />
                             <div className="project-block-meta">
                                 <span className="project-block-id">{p.id}</span>
                                 <span className="project-block-year">{p.year}</span>
@@ -47,14 +60,13 @@ export function ProjectsSection({ scrollTop, align = 'left' }: SectionProps) {
                         </div>
                     ))}
 
-                    {/* Empty "More" card */}
-                    <div
+                    {/* "More" glass card */}
+                    <button
                         className="project-block project-block--more"
-                        style={{ transform: 'translate(16px, 32px)' }}
+                    // style={{ transform: 'translate(0px, 0px)' }}
                     >
-                        <div className="project-block-img" />
-                        <button className="project-more-btn">More →</button>
-                    </div>
+                        <div className="project-more-btn">More →</div>
+                    </button>
                 </div>
             </div>
         </div>

@@ -26,7 +26,7 @@ export interface SectionProps {
 
 const SECTION_CONFIG: Array<{ component: React.ComponentType<SectionProps>; scrollTop: number; align?: SectionProps['align'] }> = [
     { component: StatementSection, scrollTop: 160, align: 'center' },
-    { component: ProjectsSection, scrollTop: 600, align: 'left' },
+    { component: ProjectsSection, scrollTop: 590, align: 'left' },
     { component: ExhibitionsSection, scrollTop: 1200, align: 'right' },
     { component: PressSection, scrollTop: 1700, align: 'left' },
     { component: LabSection, scrollTop: 2400, align: 'right' },
