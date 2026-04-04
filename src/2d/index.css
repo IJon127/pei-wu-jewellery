@@ -95,18 +95,21 @@ body {
 .landing-btn {
   margin-top: 3rem;
   padding: 1.2rem 4rem;
-  background: rgba(255, 255, 255, 0.9);
-  color: #555;
-  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 40px;
   cursor: pointer;
   font-family: 'Quicksand', sans-serif;
   font-size: 1.2rem;
   font-weight: bold;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  transition: transform 0.2s;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.2s, background 0.2s;
 }
 
 .landing-btn:hover {
   transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.22);
 }

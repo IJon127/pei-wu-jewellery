@@ -68,10 +68,10 @@ void getAlbedo() {
     // Calculate how much object space is covered by a single screen pixel
     float pixelFootprint = length(fwidth(pos));
 
-    // 2. Noise Texture Node (Scale: 40.0, Detail: 20.0)
+    // 2. Noise Texture Node (Scale: 20.0, Detail: 20.0)
     float noiseVal = 0.0;
     float amplitude = 0.5;
-    float frequency = 40.0;
+    float frequency = 22.0;
     
     for(int i = 0; i < 4; i++) { // Simplification of "Detail: 20"
         // Antialiasing: Predict when this octave's detail will become smaller than a pixel and smoothly fade it out
