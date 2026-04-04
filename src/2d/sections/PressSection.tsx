@@ -1,12 +1,12 @@
-import type { SectionProps } from '../ScrollContent'
+import type { SectionProps } from '../sectionTypes'
 
-const pressItems = [
+export const pressItems = [
     { pub: 'Crafts Magazine', quote: 'A jeweller who understands silence as much as form.', date: 'Nov 2024' },
     { pub: 'Wallpaper*', quote: "Wu's work occupies a rare space between sculpture and intimacy.", date: 'Sep 2024' },
     { pub: 'Another Magazine', quote: 'The body is her canvas — and every piece, a sentence.', date: 'Jun 2023' },
 ]
 
-export function PressSection({ scrollTop, align = 'left' }: SectionProps) {
+export function PressSection({ scrollTop, align = 'left', onOpenDetail }: SectionProps) {
     return (
         <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
             <div className="section-press">
@@ -25,7 +25,9 @@ export function PressSection({ scrollTop, align = 'left' }: SectionProps) {
                         </div>
                     ))}
                 </div>
-                <button className="section-more-btn">View All →</button>
+                <button type="button" className="section-more-btn" onClick={() => onOpenDetail?.('press')}>
+                    View All →
+                </button>
             </div>
         </div>
     )

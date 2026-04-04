@@ -1,4 +1,4 @@
-import type { SectionProps } from '../ScrollContent'
+import type { SectionProps } from '../sectionTypes'
 
 const news = [
     { date: 'Dec 2024', tag: 'Award', title: 'Recipient of the Goldsmiths Craft & Design Award 2024' },

@@ -1,4 +1,4 @@
-import type { SectionProps } from '../ScrollContent'
+import type { SectionProps } from '../sectionTypes'
 
 export function AboutSection({ scrollTop, align = 'left' }: SectionProps) {
     return (

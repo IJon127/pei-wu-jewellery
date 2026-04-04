@@ -1,4 +1,4 @@
-import type { SectionProps } from '../ScrollContent'
+import type { SectionProps } from '../sectionTypes'
 
 interface ProjectCard {
     id: string
@@ -15,7 +15,7 @@ interface ProjectCard {
     yOffset?: number
 }
 
-const projects: ProjectCard[] = [
+export const projects: ProjectCard[] = [
     { id: '01', title: 'Liminal Vessels', year: '2024', image: '/assets/images/projects/project1.jpg', aspectRatio: '3/4', width: 1, xOffset: 0, yOffset: 0 },
     { id: '02', title: 'Bone Lace', year: '2023', image: '/assets/images/projects/project2.jpg', aspectRatio: '3/4', width: 0.75, xOffset: 24, yOffset: 80 },
     { id: '03', title: 'Still Water', year: '2023', image: '/assets/images/projects/project3.jpg', aspectRatio: '4/3', width: 1, xOffset: -16, yOffset: 40 },
@@ -27,7 +27,7 @@ const projects: ProjectCard[] = [
     { id: '09', title: 'Veil & Bone', year: '2022', image: '/assets/images/projects/project9.png', aspectRatio: '3/4', width: 0.75, xOffset: 30, yOffset: -30 },
 ]
 
-export function ProjectsSection({ scrollTop, align = 'left' }: SectionProps) {
+export function ProjectsSection({ scrollTop, align = 'left', onOpenDetail }: SectionProps) {
     return (
         <div className={`scroll-section section-tall section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
             <div className="section-projects">
@@ -62,8 +62,9 @@ export function ProjectsSection({ scrollTop, align = 'left' }: SectionProps) {
 
                     {/* "More" glass card */}
                     <button
+                        type="button"
                         className="project-block project-block--more"
-                    // style={{ transform: 'translate(0px, 0px)' }}
+                        onClick={() => onOpenDetail?.('projects')}
                     >
                         <div className="project-more-btn">More →</div>
                     </button>

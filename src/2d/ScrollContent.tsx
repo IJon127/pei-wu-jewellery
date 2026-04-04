@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { StatementSection } from './sections/StatementSection'
 import { ProjectsSection } from './sections/ProjectsSection'
 import { ExhibitionsSection } from './sections/ExhibitionsSection'
@@ -6,6 +6,8 @@ import { PressSection } from './sections/PressSection'
 import { LabSection } from './sections/LabSection'
 import { NewsSection } from './sections/NewsSection'
 import { AboutSection } from './sections/AboutSection'
+import { SectionDetailModal } from './SectionDetailModal'
+import type { SectionDetailKind, SectionProps } from './sectionTypes'
 
 /**
  * Total height of one cycle in vh.
@@ -17,12 +19,7 @@ export const CYCLE_VH = 3240
  * Adjust scrollTop (in vh) to control when each section appears
  * within one cycle of the 3240vh scrollable space.
  */
-/** Shared props every section receives */
-export interface SectionProps {
-    scrollTop: number
-    /** Horizontal alignment of the section panel within the viewport */
-    align?: 'left' | 'center' | 'right'
-}
+export type { SectionDetailKind, SectionProps } from './sectionTypes'
 
 const SECTION_CONFIG: Array<{ component: React.ComponentType<SectionProps>; scrollTop: number; align?: SectionProps['align'] }> = [
     { component: StatementSection, scrollTop: 160, align: 'center' },
@@ -43,6 +40,17 @@ interface ScrollContentProps {
 
 export function ScrollContent({ visible }: ScrollContentProps) {
     const [cycles, setCycles] = useState(INITIAL_CYCLES)
+    const [detailKind, setDetailKind] = useState<SectionDetailKind | null>(null)
+
+    const onOpenDetail = useCallback((kind: SectionDetailKind) => {
+        setDetailKind(kind)
+    }, [])
+
+    const onCloseDetail = useCallback(() => setDetailKind(null), [])
+
+    useEffect(() => {
+        if (!visible) setDetailKind(null)
+    }, [visible])
 
     // Grow body and cycle count as user approaches the end
     useEffect(() => {
@@ -72,9 +80,11 @@ export function ScrollContent({ visible }: ScrollContentProps) {
                         key={`${cycleIndex}-${i}`}
                         scrollTop={scrollTop + cycleIndex * CYCLE_VH}
                         align={align}
+                        onOpenDetail={onOpenDetail}
                     />
                 ))
             )}
+            <SectionDetailModal kind={detailKind} onClose={onCloseDetail} />
         </div>
     )
 }

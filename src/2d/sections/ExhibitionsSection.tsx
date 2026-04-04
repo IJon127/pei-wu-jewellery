@@ -1,6 +1,6 @@
-import type { SectionProps } from '../ScrollContent'
+import type { SectionProps } from '../sectionTypes'
 
-const exhibitions = [
+export const exhibitions = [
     { year: '2024', title: 'Threshold', venue: 'Galerie Nuit Blanche', city: 'Paris' },
     { year: '2024', title: 'Material Witness', venue: 'Design Museum', city: 'London' },
     { year: '2023', title: 'Soft Power', venue: 'Grassimesse', city: 'Leipzig' },
@@ -8,7 +8,7 @@ const exhibitions = [
     { year: '2022', title: 'New Skin', venue: 'National Museum of Scotland', city: 'Edinburgh' },
 ]
 
-export function ExhibitionsSection({ scrollTop, align = 'left' }: SectionProps) {
+export function ExhibitionsSection({ scrollTop, align = 'left', onOpenDetail }: SectionProps) {
     return (
         <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
             <div className="section-exhibitions">
@@ -25,7 +25,13 @@ export function ExhibitionsSection({ scrollTop, align = 'left' }: SectionProps) 
                         </li>
                     ))}
                 </ul>
-                <button className="section-more-btn section-more-btn-right-align">View All →</button>
+                <button
+                    type="button"
+                    className="section-more-btn section-more-btn-right-align"
+                    onClick={() => onOpenDetail?.('exhibitions')}
+                >
+                    View All →
+                </button>
             </div>
         </div>
     )

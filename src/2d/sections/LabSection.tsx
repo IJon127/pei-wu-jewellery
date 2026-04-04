@@ -1,4 +1,4 @@
-import type { SectionProps } from '../ScrollContent'
+import type { SectionProps } from '../sectionTypes'
 
 const experiments = [
     { code: 'LAB-01', title: 'Fluid Metal Studies', status: 'Ongoing' },
