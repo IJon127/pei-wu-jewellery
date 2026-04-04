@@ -57,20 +57,35 @@ export function LoadingScreen({ visible }: Props) {
             }}
             onTransitionEnd={() => setIsMounted(false)}
         >
-            <p
-                className="loading-count"
+            <div
+                className="loading-content"
                 style={{
                     opacity: numberFadeOut ? 0 : 1,
                     transition: numberFadeOut ? 'opacity 0.5s ease' : 'none',
                 }}
                 onTransitionEnd={(e) => {
-                    // Guard: only react to this element's own transition, not a child's
                     e.stopPropagation()
                     setBgFadeOut(true)
                 }}
             >
-                {count}
-            </p>
+                {/* 16 dots arranged in a circle */}
+                <div className="loading-ring">
+                    {Array.from({ length: 16 }).map((_, i) => (
+                        <span
+                            key={i}
+                            className="loading-dot-pivot"
+                            style={{ transform: `rotate(${i * (360 / 16)}deg)` }}
+                        >
+                            <span
+                                className="loading-dot"
+                                style={{ animationDelay: `${(i / 16) * 1.6}s` }}
+                            />
+                        </span>
+                    ))}
+                </div>
+
+                <p className="loading-count">{count}</p>
+            </div>
         </div>
     )
 }
