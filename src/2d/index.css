@@ -39,6 +39,304 @@ body {
   transition: min-height 0.5s;
 }
 
+/* ── Scrollable Section Layout ──────────────────────────── */
+.scroll-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.scroll-section {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  pointer-events: auto;
+}
+
+.section-tall { height: 140vh; }
+
+/* Shared header row */
+.section-header-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.section-idx {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.35);
+}
+.section-title {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin: 0;
+}
+
+/* ── 01 Statement ───────────────────────────────────────── */
+.section-statement {
+  padding: 0 10vw 6rem;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.statement-quote {
+  font-family: 'Bonheur Royale', serif;
+  font-size: 3.5rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.2;
+  margin: 0 0 2.5rem;
+  border: none;
+}
+.statement-body {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.55);
+  margin: 0 0 2rem;
+}
+.statement-sig {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.1em;
+}
+
+/* ── 02 Projects ────────────────────────────────────────── */
+.section-projects {
+  padding: 0 5vw 4rem;
+  width: 100%;
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.project-img-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.project-meta { display: flex; flex-direction: column; gap: 0.2rem; }
+.project-year {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.1em;
+}
+.project-name {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.8);
+  margin: 0;
+}
+.project-material {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.35);
+  margin: 0;
+}
+
+/* ── 03 Exhibitions ─────────────────────────────────────── */
+.section-exhibitions { padding: 0 5vw 4rem; width: 100%; }
+.exhibitions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.exhibition-row {
+  display: grid;
+  grid-template-columns: 5rem 1fr 1fr;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  align-items: baseline;
+}
+.ex-year {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.35);
+}
+.ex-title {
+  font-family: 'Bonheur Royale', serif;
+  font-size: 1.8rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.85);
+}
+.ex-venue {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+  text-align: right;
+}
+
+/* ── 04 Press ───────────────────────────────────────────── */
+.section-press { padding: 0 6vw 4rem; width: 100%; }
+.press-items { display: flex; flex-direction: column; gap: 2.5rem; }
+.press-item { max-width: 660px; }
+.press-quote {
+  font-family: 'Bonheur Royale', serif;
+  font-size: 2rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.8);
+  margin: 0 0 0.75rem;
+  line-height: 1.3;
+}
+.press-byline {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+.press-pub {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+.press-date {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ── 05 Lab ─────────────────────────────────────────────── */
+.section-lab { padding: 0 5vw 4rem; width: 100%; }
+.lab-description {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.45);
+  margin: 0 0 2rem;
+}
+.lab-table { width: 100%; border-collapse: collapse; }
+.lab-row {
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.lab-row td { padding: 0.9rem 0; }
+.lab-code {
+  font-family: 'Roboto', monospace;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.1em;
+  width: 7rem;
+}
+.lab-exp-title {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.75);
+}
+.lab-status {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.3);
+  text-align: right;
+  letter-spacing: 0.08em;
+}
+.lab-status.status-active { color: rgba(180,255,180,0.6); }
+
+/* ── 06 News ────────────────────────────────────────────── */
+.section-news { padding: 0 5vw 4rem; width: 100%; }
+.news-list { list-style: none; padding: 0; margin: 0; }
+.news-item {
+  display: grid;
+  grid-template-columns: 6rem 7rem 1fr;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  align-items: baseline;
+}
+.news-date {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.3);
+}
+.news-tag {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  align-self: center;
+}
+.news-title {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.7);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── 07 About ───────────────────────────────────────────── */
+.section-about { padding: 0 5vw 4rem; width: 100%; }
+.about-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+.about-portrait {
+  aspect-ratio: 3/4;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.about-bio {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.about-bio p {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.55);
+  margin: 0;
+}
+.about-contact {
+  display: flex;
+  gap: 2rem;
+  margin-top: 0.5rem;
+}
+.about-link {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 0.1rem;
+  transition: color 0.2s;
+}
+.about-link:hover { color: rgba(255,255,255,0.8); }
+
+
 /* ── PlayCanvas Canvas ──────────────────────────────────── */
 #playcanvas-app {
   display: block;

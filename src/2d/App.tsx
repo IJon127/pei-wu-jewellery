@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Scene } from '../3d/scene'
 import { LoadingScreen } from './LoadingScreen'
+import { ScrollContent } from './ScrollContent'
 import './index.css'
 
 function App() {
@@ -58,6 +59,8 @@ function App() {
             <canvas ref={canvasRef} id="playcanvas-app" />
 
             <LoadingScreen visible={!isSceneReady} />
+
+            <ScrollContent visible={isInteracting} />
 
             {!isInteracting && (
                 <div className="landing-overlay">
