@@ -28,10 +28,13 @@ function App() {
         window.addEventListener('resize', onResize)
 
         const onScroll = () => {
+            console.log('[App] scroll fired, isInteracting:', isInteractingRef.current, 'scrollY:', window.scrollY);
             if (!sceneRef.current || !isInteractingRef.current) return;
             const maxScroll = document.body.scrollHeight - window.innerHeight;
+            console.log('[App] maxScroll:', maxScroll);
             if (maxScroll > 0) {
                 const progress = Math.min(1.0, Math.max(0.0, window.scrollY / maxScroll));
+                console.log('[App] calling updateScroll with progress:', progress);
                 sceneRef.current.updateScroll(progress);
             }
         };
@@ -46,11 +49,12 @@ function App() {
 
     const handleInteract = () => {
         setIsInteracting(true);
+        document.body.style.minHeight = '3240vh'; // Make body scrollable
         sceneRef.current?.startInteraction();
     };
 
     return (
-        <div className="app-wrapper" style={{ minHeight: isInteracting ? '500vh' : '100vh' }}>
+        <div className="app-wrapper">
             <canvas ref={canvasRef} id="playcanvas-app" />
 
             <LoadingScreen visible={!isSceneReady} />

@@ -36,7 +36,6 @@ body {
 /* ── App Layout ─────────────────────────────────────────── */
 .app-wrapper {
   width: 100%;
-  overflow: hidden;
   transition: min-height 0.5s;
 }
 

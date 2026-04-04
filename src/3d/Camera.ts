@@ -121,6 +121,7 @@ export class Camera {
     }
 
     public updateScroll(progress: number) {
+        console.log(`[Camera ${this.id}] 📜 Scrubbing Animation: Time ${progress.toFixed(2)}`);
         if (this.stage !== CameraStage.ANIMATION || !this.cameraRig || !this.animTrack) return;
 
         const duration = this.animTrack.duration;
