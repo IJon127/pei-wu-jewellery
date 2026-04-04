@@ -9,6 +9,9 @@ export class Scene {
     private models: Models;
     private camera: Camera;
 
+    public onProgress?: (value: number) => void;
+    public onReady?: () => void;
+
     constructor(canvas: HTMLCanvasElement) {
         this.init(canvas);
     }
@@ -97,6 +100,17 @@ export class Scene {
         this.app.on('update', (dt: number) => {
             this.models.update(dt)
             this.camera.update(dt)
+        })
+
+        // Wire loading progress events to React
+        this.app.on('preload:end', () => {
+            this.app.off('preload:progress')
+        })
+        this.app.on('preload:progress', (value: number) => {
+            this.onProgress?.(value)
+        })
+        this.app.on('start', () => {
+            this.onReady?.()
         })
     }
 

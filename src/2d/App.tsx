@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { Scene } from '../3d/scene'
+import { LoadingScreen } from './LoadingScreen'
 import './index.css'
 
 function App() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const sceneRef = useRef<Scene | null>(null)
     const [isInteracting, setIsInteracting] = useState(false)
+    const [isSceneReady, setIsSceneReady] = useState(false)
 
     const isInteractingRef = useRef(isInteracting)
 
@@ -19,6 +21,7 @@ function App() {
 
         // Initialize the abstracted 3D engine boundary
         sceneRef.current = new Scene(canvasRef.current)
+        sceneRef.current.onReady = () => setIsSceneReady(true)
         sceneRef.current.start()
 
         const onResize = () => sceneRef.current?.resize()
@@ -49,6 +52,8 @@ function App() {
     return (
         <div className="app-wrapper" style={{ minHeight: isInteracting ? '500vh' : '100vh' }}>
             <canvas ref={canvasRef} id="playcanvas-app" />
+
+            <LoadingScreen visible={!isSceneReady} />
 
             {!isInteracting && (
                 <div className="landing-overlay">

@@ -113,3 +113,25 @@ body {
   transform: scale(1.05);
   background: rgba(255, 255, 255, 0.22);
 }
+
+/* ── Loading Screen ─────────────────────────────────────── */
+.loading-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #97787d;
+  pointer-events: all;
+}
+
+.loading-count {
+  font-family: 'Roboto', sans-serif;
+  font-size: 6rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
