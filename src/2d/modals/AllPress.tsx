@@ -7,10 +7,6 @@ export interface AllPressProps {
 
 export function AllPress() {
     return (
-        <>
-        <h2 id="section-detail-title" className="section-detail-title">
-            Press
-        </h2>
         <ul className="press-list">
             {pressItems.map((item, i) => (
                 <li key={i} className="press-row">
@@ -24,6 +20,5 @@ export function AllPress() {
                 </li>
             ))}
         </ul>
-        </>
     )
 }

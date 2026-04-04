@@ -8,11 +8,11 @@ import { getExhibitionById } from './sections/ExhibitionsSection'
 import { getProjectById } from './sections/ProjectsSection'
 import type { ModalKind } from './sectionTypes'
 
-// const titles: Record<ModalKind, string> = {
-//     allProjects: 'Projects',
-//     allExhibitions: 'Exhibitions',
-//     allPress: 'Press',
-// }
+const titles: Record<string, string> = {
+    allProjects: 'Projects',
+    allExhibitions: 'Exhibitions',
+    allPress: 'Press',
+}
 
 export interface ModalProps {
     kind: ModalKind | null
@@ -57,22 +57,15 @@ export function Modal({ kind, selectedProjectId, selectedExhibitionId, onClose, 
         >
             <div className="section-detail-panel" onClick={e => e.stopPropagation()}>
                 <div className="section-detail-head">
-                    {kind === 'allProjects' && (
-                        <button type="button" className="section-detail-back" onClick={onClose} aria-label="Back">
-                            ←
-                        </button>
-                    )}
-                    {kind === 'allExhibitions' && (
-                        <button type="button" className="section-detail-back" onClick={onClose} aria-label="Back">
-                            ←
-                        </button>
+                    {(kind === 'allProjects' || kind === 'allExhibitions' || kind === 'allPress') && (
+                        <h2 id="section-detail-title" className="section-detail-title">{titles[kind]}</h2>
                     )}
                     {kind === 'project' && (
                         <button
                             type="button"
                             className="section-detail-back"
                             onClick={() => onOpenModal('allProjects')}
-                            aria-label="Back to all projects"
+                            aria-label= "Back to projects"
                         >
                             ←
                         </button>
@@ -82,7 +75,7 @@ export function Modal({ kind, selectedProjectId, selectedExhibitionId, onClose, 
                             type="button"
                             className="section-detail-back"
                             onClick={() => onOpenModal('allExhibitions')}
-                            aria-label="Back to all exhibitions"
+                            aria-label= "Back to exhibitions"
                         >
                             ←
                         </button>

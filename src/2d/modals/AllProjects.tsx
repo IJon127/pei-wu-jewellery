@@ -7,10 +7,6 @@ export interface AllProjectsProps {
 
 export function AllProjects({ onOpenModal }: AllProjectsProps) {
     return (
-        <>
-        <h2 id="section-detail-title" className="section-detail-title">
-            Projects
-        </h2>
         <ul className="all-projects-grid">
             {projects.map(p => (
                 <li key={p.id} className="section-detail-project-card">
@@ -21,9 +17,8 @@ export function AllProjects({ onOpenModal }: AllProjectsProps) {
                     >
                         <img src={p.image} alt={p.title} />
                     </button>
-                    </li>
-                ))}
-            </ul>
-        </>
+                </li>
+            ))}
+        </ul>
     )
 }

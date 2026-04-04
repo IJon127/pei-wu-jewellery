@@ -7,10 +7,6 @@ export interface AllExhibitionsProps {
 
 export function AllExhibitions({ onOpenModal }: AllExhibitionsProps) {
     return (
-        <>
-        <h2 id="section-detail-title" className="section-detail-title">
-            Exhibitions
-        </h2>
         <ul className="exhibitions-list">
             {exhibitions.map(ex => (
                 <li key={ex.id} className="exhibition-row">
@@ -28,6 +24,5 @@ export function AllExhibitions({ onOpenModal }: AllExhibitionsProps) {
                 </li>
             ))}
         </ul>
-        </>
     )
 }
