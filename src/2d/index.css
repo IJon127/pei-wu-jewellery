@@ -33,13 +33,8 @@ body {
   /* Let clicks pass through to 3D canvas by default */
 }
 
-/* ── App Layout ─────────────────────────────────────────── */
-.app-wrapper {
-  width: 100%;
-  transition: min-height 0.5s;
-}
-
-/* ── Scroll Hint Mouse ──────────────────────────────────── */
+/* ── App Layout ───────────────────────────────────�
+/* ── Scroll Hint (pill + falling ball) ─────────────────── */
 .scroll-hint {
   position: fixed;
   bottom: 3rem;
@@ -49,294 +44,79 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
   pointer-events: none;
 }
 
-/* Mouse shell: gradient sweeps up then color switches */
-.scroll-hint-mouse {
+/* Tall pill container */
+.scroll-hint-pill {
+  width: 56px;
+  height: 90px;
+  /* border-radius: 100px; */
+  /* border: 2px solid rgba(255, 255, 255, 0.5); */
   position: relative;
-  width: 52px;
-  height: 88px;
-  border-radius: 100px;
-  background: #c5a3b7 linear-gradient(transparent 0%,
-      transparent 50%,
-      #ffffff 50%,
-      #ffffff 100%);
-  background-size: 100% 200%;
-  animation:
-    sh-colorSlide 5s linear infinite,
-    sh-nudgeMouse 5s ease-out infinite;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10px;
 }
 
-/* Inner cutout (gives the "border" look) */
-.scroll-hint-mouse::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-  width: 46px;
-  /* 52 - 6 */
-  height: 82px;
-  /* 88 - 6 */
-  background-color: #f1e2e4;
-  border-radius: 100px;
+/* The ball — animates down; box-shadow creates the fading ghost trail above */
+.scroll-hint-ball {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  animation: scroll-hint-fall 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-/* Trackball dot */
-.scroll-hint-mouse::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-  background-color: #ffffff;
-  width: 10px;
-  height: 10px;
-  border-radius: 100%;
-  animation: sh-trackBallSlide 5s linear infinite;
+@keyframes scroll-hint-fall {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+    box-shadow:
+      0 -28px 0 rgba(255, 255, 255, 0.06),
+      0 -56px 0 rgba(255, 255, 255, 0.03);
+  }
+
+  60% {
+    opacity: 1;
+    box-shadow:
+      0 -28px 0 rgba(255, 255, 255, 0.2),
+      0 -56px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  80% {
+    transform: translateY(64px);
+    opacity: 0.8;
+    box-shadow:
+      0 -28px 0 rgba(255, 255, 255, 0.35),
+      0 -56px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  100% {
+    transform: translateY(64px);
+    opacity: 0;
+    box-shadow:
+      0 -28px 0 rgba(255, 255, 255, 0.15),
+      0 -56px 0 rgba(255, 255, 255, 0.05);
+  }
 }
 
 .scroll-hint-text {
-  margin-top: 16px;
   font-family: 'Quicksand', sans-serif;
-  letter-spacing: 12px;
-  text-indent: 12px;
-  color: #ffffff;
-  font-size: 0.7rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  animation:
-    sh-colorText 5s ease-out infinite,
-    sh-nudgeText 5s ease-out infinite;
+  color: rgba(255, 255, 255, 0.6);
+  text-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+  margin: 0;
 }
 
-@keyframes sh-colorSlide {
-  0% {
-    background-position: 0% 100%;
-  }
-
-  20% {
-    background-position: 0% 0%;
-  }
-
-  21% {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-
-  29.99% {
-    background-color: #ffffff;
-    background-position: 0% 0%;
-  }
-
-  30% {
-    background-color: rgba(255, 255, 255, 0.2);
-    background-position: 0% 100%;
-  }
-
-  50% {
-    background-position: 0% 0%;
-  }
-
-  51% {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-
-  59% {
-    background-color: #ffffff;
-    background-position: 0% 0%;
-  }
-
-  60% {
-    background-color: rgba(255, 255, 255, 0.2);
-    background-position: 0% 100%;
-  }
-
-  80% {
-    background-position: 0% 0%;
-  }
-
-  81% {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-
-  90%,
-  100% {
-    background-color: #ffffff;
-  }
-}
-
-@keyframes sh-trackBallSlide {
-  0% {
-    opacity: 1;
-    transform: scale(1) translateY(-20px);
-  }
-
-  6% {
-    opacity: 1;
-    transform: scale(0.9) translateY(5px);
-  }
-
-  14% {
-    opacity: 0;
-    transform: scale(0.4) translateY(40px);
-  }
-
-  15%,
-  19% {
-    opacity: 0;
-    transform: scale(0.4) translateY(-20px);
-  }
-
-  28%,
-  29.99% {
-    opacity: 1;
-    transform: scale(1) translateY(-20px);
-  }
-
-  30% {
-    opacity: 1;
-    transform: scale(1) translateY(-20px);
-  }
-
-  36% {
-    opacity: 1;
-    transform: scale(0.9) translateY(5px);
-  }
-
-  44% {
-    opacity: 0;
-    transform: scale(0.4) translateY(40px);
-  }
-
-  45%,
-  49% {
-    opacity: 0;
-    transform: scale(0.4) translateY(-20px);
-  }
-
-  58%,
-  59.99% {
-    opacity: 1;
-    transform: scale(1) translateY(-20px);
-  }
-
-  60% {
-    opacity: 1;
-    transform: scale(1) translateY(-20px);
-  }
-
-  66% {
-    opacity: 1;
-    transform: scale(0.9) translateY(5px);
-  }
-
-  74% {
-    opacity: 0;
-    transform: scale(0.4) translateY(40px);
-  }
-
-  75%,
-  79% {
-    opacity: 0;
-    transform: scale(0.4) translateY(-20px);
-  }
-
-  88%,
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(-20px);
-  }
-}
-
-@keyframes sh-nudgeMouse {
-  0% {
-    transform: translateY(0);
-  }
-
-  20% {
-    transform: translateY(8px);
-  }
-
-  30% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(8px);
-  }
-
-  60% {
-    transform: translateY(0);
-  }
-
-  80% {
-    transform: translateY(8px);
-  }
-
-  90% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes sh-nudgeText {
-  0% {
-    transform: translateY(0);
-  }
-
-  20% {
-    transform: translateY(2px);
-  }
-
-  30% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(2px);
-  }
-
-  60% {
-    transform: translateY(0);
-  }
-
-  80% {
-    transform: translateY(2px);
-  }
-
-  90% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes sh-colorText {
-  21% {
-    color: #c5a3b7;
-  }
-
-  30% {
-    color: #ffffff;
-  }
-
-  51% {
-    color: #c5a3b7;
-  }
-
-  60% {
-    color: #ffffff;
-  }
-
-  81% {
-    color: #c5a3b7;
-  }
-
-  90% {
-    color: #ffffff;
-  }
-}
 
 
 /* ── Scrollable Section Layout ──────────────────────────── */
@@ -591,7 +371,7 @@ body {
 }
 
 .lab-code {
-  font-family: 'Roboto', monospace;
+  font-family: 'Quicksand', sans-serif;
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.25);
   letter-spacing: 0.1em;
@@ -807,7 +587,7 @@ body {
 }
 
 .loading-count {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: 4rem;
   font-weight: 300;
   color: rgba(255, 255, 255, 0.7);

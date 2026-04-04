@@ -14,7 +14,6 @@ export function ScrollHint({ visible }: Props) {
 
     useEffect(() => {
         if (visible) {
-            // Mount first (opacity still 0), then delay for camera transition, then fade in
             setIsMounted(true)
             mountedRef.current = true
             const t = setTimeout(() => {
@@ -22,7 +21,6 @@ export function ScrollHint({ visible }: Props) {
             }, CAMERA_TRANSITION_MS)
             return () => clearTimeout(t)
         } else {
-            // Fade out, then unmount after 2000ms
             mountedRef.current = false
             setOpacity(0)
             const t = setTimeout(() => setIsMounted(false), 2000)
@@ -32,16 +30,13 @@ export function ScrollHint({ visible }: Props) {
 
     if (!isMounted) return null
 
-    const transition = opacity === 0
-        ? 'opacity 2s ease'   // fade out
-        : 'opacity 1s ease'   // fade in
+    const transition = opacity === 0 ? 'opacity 2s ease' : 'opacity 1s ease'
 
     return (
-        <div
-            className="scroll-hint"
-            style={{ opacity, transition, pointerEvents: 'none' }}
-        >
-            <div className="scroll-hint-mouse" />
+        <div className="scroll-hint" style={{ opacity, transition, pointerEvents: 'none' }}>
+            <div className="scroll-hint-pill">
+                <div className="scroll-hint-ball" />
+            </div>
             <p className="scroll-hint-text">scroll</p>
         </div>
     )
