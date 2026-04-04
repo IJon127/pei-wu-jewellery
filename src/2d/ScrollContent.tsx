@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StatementSection } from './sections/StatementSection'
 import { ProjectsSection } from './sections/ProjectsSection'
 import { ExhibitionsSection } from './sections/ExhibitionsSection'
@@ -17,14 +17,21 @@ export const CYCLE_VH = 3240
  * Adjust scrollTop (in vh) to control when each section appears
  * within one cycle of the 3240vh scrollable space.
  */
-const SECTION_CONFIG = [
-    { component: StatementSection, scrollTop: 160 },
-    { component: ProjectsSection, scrollTop: 680 },
-    { component: ExhibitionsSection, scrollTop: 1140 },
-    { component: PressSection, scrollTop: 1600 },
-    { component: LabSection, scrollTop: 2060 },
-    { component: NewsSection, scrollTop: 2520 },
-    { component: AboutSection, scrollTop: 2980 },
+/** Shared props every section receives */
+export interface SectionProps {
+    scrollTop: number
+    /** Horizontal alignment of the section panel within the viewport */
+    align?: 'left' | 'center' | 'right'
+}
+
+const SECTION_CONFIG: Array<{ component: React.ComponentType<SectionProps>; scrollTop: number; align?: SectionProps['align'] }> = [
+    { component: StatementSection, scrollTop: 160, align: 'center' },
+    { component: ProjectsSection, scrollTop: 600, align: 'left' },
+    { component: ExhibitionsSection, scrollTop: 1200, align: 'right' },
+    { component: PressSection, scrollTop: 1700, align: 'left' },
+    { component: LabSection, scrollTop: 2400, align: 'right' },
+    { component: NewsSection, scrollTop: 2790, align: 'center' },
+    { component: AboutSection, scrollTop: 3070, align: 'center' },
 ]
 
 /** How many cycles to seed on first render */
@@ -60,10 +67,11 @@ export function ScrollContent({ visible }: ScrollContentProps) {
     return (
         <div className="scroll-content">
             {Array.from({ length: cycles }).map((_, cycleIndex) =>
-                SECTION_CONFIG.map(({ component: SectionComp, scrollTop }, i) => (
+                SECTION_CONFIG.map(({ component: SectionComp, scrollTop, align }, i) => (
                     <SectionComp
                         key={`${cycleIndex}-${i}`}
                         scrollTop={scrollTop + cycleIndex * CYCLE_VH}
+                        align={align}
                     />
                 ))
             )}

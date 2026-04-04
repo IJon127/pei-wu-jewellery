@@ -1,8 +1,8 @@
-interface Props { scrollTop: number }
+import type { SectionProps } from '../ScrollContent'
 
-export function StatementSection({ scrollTop }: Props) {
+export function StatementSection({ scrollTop, align = 'center' }: SectionProps) {
     return (
-        <div className="scroll-section" style={{ top: `${scrollTop}vh` }}>
+        <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
             <div className="section-statement">
                 <blockquote className="statement-quote">
                     "The combination of all senses reflects<br />

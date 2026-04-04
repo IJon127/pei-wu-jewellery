@@ -1,4 +1,4 @@
-interface Props { scrollTop: number }
+import type { SectionProps } from '../ScrollContent'
 
 const experiments = [
     { code: 'LAB-01', title: 'Fluid Metal Studies', status: 'Ongoing' },
@@ -7,9 +7,9 @@ const experiments = [
     { code: 'LAB-04', title: 'Digital Void Forms', status: 'In Development' },
 ]
 
-export function LabSection({ scrollTop }: Props) {
+export function LabSection({ scrollTop, align = 'left' }: SectionProps) {
     return (
-        <div className="scroll-section" style={{ top: `${scrollTop}vh` }}>
+        <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
             <div className="section-lab">
                 <div className="section-header-row">
                     <span className="section-idx">05</span>

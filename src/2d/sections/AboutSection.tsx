@@ -1,8 +1,8 @@
-interface Props { scrollTop: number }
+import type { SectionProps } from '../ScrollContent'
 
-export function AboutSection({ scrollTop }: Props) {
+export function AboutSection({ scrollTop, align = 'left' }: SectionProps) {
     return (
-        <div className="scroll-section" style={{ top: `${scrollTop}vh` }}>
+        <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
             <div className="section-about">
                 <div className="section-header-row">
                     <span className="section-idx">07</span>

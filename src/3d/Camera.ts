@@ -27,7 +27,6 @@ export class Camera {
 
     constructor(app: pc.Application) {
         this.app = app;
-        console.log(`[Camera ${this.id}] Constructing new camera instance`);
 
         // Create pivot to easily orbit the origin
         this.pivot = new pc.Entity('camera_pivot');
@@ -56,7 +55,7 @@ export class Camera {
         this.app.assets.loadFromUrl('/assets/3d/Action.glb', 'container', (err: any, asset: pc.Asset | undefined) => {
             if (!err && asset && asset.resource) {
                 const resource = asset.resource as pc.ContainerResource;
-                console.log(`[Camera resource]:`, resource.data.animations[0].outputs);
+
                 this.cameraRig = resource.instantiateRenderEntity({ castShadows: false });
                 this.app.root.addChild(this.cameraRig);
 
@@ -117,11 +116,9 @@ export class Camera {
 
         this.stage = CameraStage.TRANSITION;
         this.transitionTime = 0;
-        console.log(`[Camera ${this.id}] ✅ Successfully switched mode to TRANSITION.`);
     }
 
     public updateScroll(progress: number) {
-        console.log(`[Camera ${this.id}] 📜 Scrubbing Animation: Time ${progress.toFixed(2)}`);
         if (this.stage !== CameraStage.ANIMATION || !this.cameraRig || !this.animTrack) return;
 
         const duration = this.animTrack.duration;
@@ -131,7 +128,7 @@ export class Camera {
             this.cameraRig.anim.baseLayer.activeStateCurrentTime = newTime;
             this.cameraRig.anim.update(0); // evaluate immediately
 
-            console.log(`[Camera ${this.id}] 📜 Scrubbing Animation: Time ${newTime.toFixed(2)} / ${duration.toFixed(2)}`);
+
 
             const targetNode = this.animatedNode || this.cameraRig;
             this.entity.setPosition(targetNode.getPosition());
@@ -152,7 +149,6 @@ export class Camera {
             if (t >= 1.0) {
                 t = 1.0;
                 this.stage = CameraStage.ANIMATION; // Transition Complete!
-                console.log(`[Camera ${this.id}] 🏁 Transition Complete, entering ANIMATION scroll phase!`);
             } else {
                 t = t * t * (3.0 - 2.0 * t); // Smoothstep easing
             }

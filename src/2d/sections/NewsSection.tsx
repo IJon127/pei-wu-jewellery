@@ -1,4 +1,4 @@
-interface Props { scrollTop: number }
+import type { SectionProps } from '../ScrollContent'
 
 const news = [
     { date: 'Dec 2024', tag: 'Award', title: 'Recipient of the Goldsmiths Craft & Design Award 2024' },
@@ -7,9 +7,9 @@ const news = [
     { date: 'Jun 2024', tag: 'Talk', title: 'Keynote speaker, Jewellery Designers Forum, Basel' },
 ]
 
-export function NewsSection({ scrollTop }: Props) {
+export function NewsSection({ scrollTop, align = 'left' }: SectionProps) {
     return (
-        <div className="scroll-section" style={{ top: `${scrollTop}vh` }}>
+        <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
             <div className="section-news">
                 <div className="section-header-row">
                     <span className="section-idx">06</span>

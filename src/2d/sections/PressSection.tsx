@@ -1,4 +1,4 @@
-interface Props { scrollTop: number }
+import type { SectionProps } from '../ScrollContent'
 
 const pressItems = [
     { pub: 'Crafts Magazine', quote: 'A jeweller who understands silence as much as form.', date: 'Nov 2024' },
@@ -6,9 +6,9 @@ const pressItems = [
     { pub: 'Another Magazine', quote: 'The body is her canvas — and every piece, a sentence.', date: 'Jun 2023' },
 ]
 
-export function PressSection({ scrollTop }: Props) {
+export function PressSection({ scrollTop, align = 'left' }: SectionProps) {
     return (
-        <div className="scroll-section" style={{ top: `${scrollTop}vh` }}>
+        <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
             <div className="section-press">
                 <div className="section-header-row">
                     <span className="section-idx">04</span>

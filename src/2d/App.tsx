@@ -37,7 +37,6 @@ function App() {
             const cycleHeightPx = CYCLE_VH * window.innerHeight / 100
             const scrollInCycle = window.scrollY % cycleHeightPx
             const progress = scrollInCycle / cycleHeightPx
-            console.log('[App] cycle progress:', progress.toFixed(3));
             sceneRef.current.updateScroll(progress);
         };
         window.addEventListener('scroll', onScroll, { passive: true })
