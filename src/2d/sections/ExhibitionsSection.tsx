@@ -9,7 +9,7 @@ export const exhibitions: Exhibition[] = [
     { year: '2022', title: 'New Skin', venue: 'National Museum of Scotland', city: 'Edinburgh' },
 ]
 
-export function ExhibitionsSection({ scrollTop, align = 'left', onOpenDetail }: SectionProps) {
+export function ExhibitionsSection({ scrollTop, align = 'left', onOpenModal }: SectionProps) {
     return (
         <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
             <div className="section-exhibitions">
@@ -31,7 +31,7 @@ export function ExhibitionsSection({ scrollTop, align = 'left', onOpenDetail }: 
                 <button
                     type="button"
                     className="section-more-btn section-more-btn-right-align"
-                    onClick={() => onOpenDetail?.('exhibitions')}
+                    onClick={() => onOpenModal?.('allExhibitions')}
                 >
                     View All →
                 </button>

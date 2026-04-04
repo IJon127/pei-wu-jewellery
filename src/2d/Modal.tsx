@@ -2,21 +2,21 @@ import { useEffect } from 'react'
 import { AllExhibitions } from './modals/AllExhibitions'
 import { AllPress } from './modals/AllPress'
 import { AllProjects } from './modals/AllProjects'
-import type { SectionDetailKind } from './sectionTypes'
+import type { ModalKind } from './sectionTypes'
 
-const titles: Record<SectionDetailKind, string> = {
-    projects: 'Projects',
-    exhibitions: 'Exhibitions',
-    press: 'Press',
-}
+// const titles: Record<ModalKind, string> = {
+//     allProjects: 'Projects',
+//     allExhibitions: 'Exhibitions',
+//     allPress: 'Press',
+// }
 
 export interface ModalProps {
-    kind: SectionDetailKind | null
+    kind: ModalKind | null
     onClose: () => void
-    onOpenDetail: (kind: SectionDetailKind) => void
+    onOpenModal: (kind: ModalKind) => void
 }
 
-export function Modal({ kind, onClose, onOpenDetail }: ModalProps) {
+export function Modal({ kind, onClose, onOpenModal }: ModalProps) {
     useEffect(() => {
         if (!kind) return
         const prev = document.body.style.overflow
@@ -43,17 +43,20 @@ export function Modal({ kind, onClose, onOpenDetail }: ModalProps) {
         >
             <div className="section-detail-panel" onClick={e => e.stopPropagation()}>
                 <div className="section-detail-head">
-                    <h2 id="section-detail-title" className="section-detail-title">
-                        {titles[kind]}
-                    </h2>
+                    {/* create a return button that goes back to the previous section, only show if kind is not 'allProjects', 'allExhibitions', or 'allPress'*/}
+                    {kind == 'allProjects' && (
+                        <button type="button" className="section-detail-back" onClick={onClose} aria-label="Back">
+                            ←
+                        </button>
+                    )}
                     <button type="button" className="section-detail-close" onClick={onClose} aria-label="Close">
                         ×
                     </button>
                 </div>
                 <div className="section-detail-body">
-                    {kind === 'exhibitions' && <AllExhibitions onOpenDetail={onOpenDetail} />}
-                    {kind === 'press' && <AllPress onOpenDetail={onOpenDetail} />}
-                    {kind === 'projects' && <AllProjects onOpenDetail={onOpenDetail} />}
+                    {kind === 'allProjects' && <AllProjects onOpenModal={onOpenModal} />}
+                    {kind === 'allExhibitions' && <AllExhibitions onOpenModal={onOpenModal} />}
+                    {kind === 'allPress' && <AllPress />}
                 </div>
             </div>
         </div>

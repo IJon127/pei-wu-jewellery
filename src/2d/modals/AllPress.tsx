@@ -1,16 +1,20 @@
-import type { SectionDetailKind } from '../sectionTypes'
+import type { ModalKind } from '../sectionTypes'
 import { pressItems } from '../sections/PressSection'
 
 export interface AllPressProps {
-    onOpenDetail: (kind: SectionDetailKind) => void
+    onOpenModal: (kind: ModalKind) => void
 }
 
-export function AllPress({ onOpenDetail }: AllPressProps) {
+export function AllPress() {
     return (
-        <ul className="press-items">
+        <>
+        <h2 id="section-detail-title" className="section-detail-title">
+            Press
+        </h2>
+        <ul className="press-list">
             {pressItems.map((item, i) => (
-                <li key={i} className="press-item">
-                    <button type="button" className="press-item--btn" onClick={() => onOpenDetail('press')}>
+                <li key={i} className="press-row">
+                    <button type="button" className="press-row-btn" onClick={() => console.log('open press link in new tab')}>
                     <p className="press-quote">&ldquo;{item.quote}&rdquo;</p>
                     <div className="press-byline">
                             <span className="press-pub">{item.pub}</span>
@@ -20,5 +24,6 @@ export function AllPress({ onOpenDetail }: AllPressProps) {
                 </li>
             ))}
         </ul>
+        </>
     )
 }

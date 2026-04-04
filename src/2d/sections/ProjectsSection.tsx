@@ -12,7 +12,7 @@ export const projects: ProjectCard[] = [
     { id: '09', title: 'Veil & Bone', year: '2022', image: '/assets/images/projects/project9.png', aspectRatio: '3/4', width: 0.75, xOffset: 30, yOffset: -30 },
 ]
 
-export function ProjectsSection({ scrollTop, align = 'left', onOpenDetail }: SectionProps) {
+export function ProjectsSection({ scrollTop, align = 'left', onOpenModal }: SectionProps) {
     return (
         <div className={`scroll-section section-tall section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
             <div className="section-projects">
@@ -49,7 +49,7 @@ export function ProjectsSection({ scrollTop, align = 'left', onOpenDetail }: Sec
                     <button
                         type="button"
                         className="project-block project-block--more"
-                        onClick={() => onOpenDetail?.('projects')}
+                        onClick={() => onOpenModal?.('allProjects')}
                     >
                         <div className="project-more-btn">More →</div>
                     </button>

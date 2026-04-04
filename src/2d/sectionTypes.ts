@@ -1,4 +1,4 @@
-export type SectionDetailKind = 'projects' | 'exhibitions' | 'press'
+export type ModalKind = 'allProjects' | 'allExhibitions' | 'allPress' | 'project' | 'exhibition'
 
 export interface ProjectCard {
     id: string
@@ -31,5 +31,5 @@ export interface PressEntry {
 export interface SectionProps {
     scrollTop: number
     align?: 'left' | 'center' | 'right'
-    onOpenDetail?: (kind: SectionDetailKind) => void
+    onOpenModal?: (kind: ModalKind) => void
 }

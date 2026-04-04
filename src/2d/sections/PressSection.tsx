@@ -6,7 +6,7 @@ export const pressItems: PressEntry[] = [
     { pub: 'Another Magazine', quote: 'The body is her canvas — and every piece, a sentence.', date: 'Jun 2023' },
 ]
 
-export function PressSection({ scrollTop, align = 'left', onOpenDetail }: SectionProps) {
+export function PressSection({ scrollTop, align = 'left', onOpenModal }: SectionProps) {
     return (
         <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
             <div className="section-press">
@@ -14,9 +14,9 @@ export function PressSection({ scrollTop, align = 'left', onOpenDetail }: Sectio
                     <span className="section-idx">04</span>
                     <h2 className="section-title">Press</h2>
                 </div>
-                <div className="press-items">
+                <div className="press-list">
                     {pressItems.map((item, i) => (
-                        <div key={i} className="press-item">
+                        <div key={i} className="press-row">
                             <p className="press-quote">&ldquo;{item.quote}&rdquo;</p>
                             <div className="press-byline">
                                 <span className="press-pub">{item.pub}</span>
@@ -25,7 +25,7 @@ export function PressSection({ scrollTop, align = 'left', onOpenDetail }: Sectio
                         </div>
                     ))}
                 </div>
-                <button type="button" className="section-more-btn" onClick={() => onOpenDetail?.('press')}>
+                <button type="button" className="section-more-btn" onClick={() => onOpenModal?.('allPress')}>
                     View All →
                 </button>
             </div>

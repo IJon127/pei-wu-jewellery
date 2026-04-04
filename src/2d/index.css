@@ -431,14 +431,25 @@ button.project-block:hover {
   width: 100%;
 }
 
-.press-items {
+.press-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
 }
 
-.press-item {
-  max-width: 660px;
+.press-row {
+  /* max-width: 660px; */
+}
+
+.press-row-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
 }
 
 .press-quote {
@@ -472,12 +483,12 @@ button.project-block:hover {
 }
 
 /* ── 05 Lab ─────────────────────────────────────────────── */
-.section-lab {
+.section-bespoke {
   padding: 0 5vw 4rem;
   width: 100%;
 }
 
-.lab-description {
+.bespoke-description {
   font-family: 'Quicksand', sans-serif;
   font-size: 0.9rem;
   line-height: 1.8;
@@ -485,20 +496,20 @@ button.project-block:hover {
   margin: 0 0 2rem;
 }
 
-.lab-table {
+.bespoke-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.lab-row {
+.bespoke-row {
   border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.lab-row td {
+.bespoke-row td {
   padding: 0.9rem 0;
 }
 
-.lab-code {
+.bespoke-code {
   font-family: 'Quicksand', sans-serif;
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.25);
@@ -506,14 +517,14 @@ button.project-block:hover {
   width: 7rem;
 }
 
-.lab-exp-title {
+.bespoke-exp-title {
   font-family: 'Ubuntu', sans-serif;
   font-size: 1rem;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.75);
 }
 
-.lab-status {
+.bespoke-status {
   font-family: 'Quicksand', sans-serif;
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.3);
@@ -521,7 +532,7 @@ button.project-block:hover {
   letter-spacing: 0.08em;
 }
 
-.lab-status.status-active {
+.bespoke-status.status-active {
   color: rgba(180, 255, 180, 0.6);
 }
 
@@ -822,12 +833,9 @@ button.project-block:hover {
 .section-detail-head {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
   gap: 1rem;
   flex-shrink: 0;
-  margin-bottom: 1.25rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0;
 }
 
 .section-detail-title {
@@ -836,11 +844,13 @@ button.project-block:hover {
   font-weight: 500;
   color: rgba(255, 255, 255, 0.7);
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  margin: 0;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 2rem;
   line-height: 1.1;
 }
 
-.section-detail-close {
+.section-detail-back {
   flex-shrink: 0;
   width: 2.5rem;
   height: 2.5rem;
@@ -848,6 +858,24 @@ button.project-block:hover {
   align-items: center;
   justify-content: center;
   margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.75rem;
+  color: rgba(255, 255, 255, 0.55);
+  background: none;
+  border: none;
+}
+.section-detail-back:hover {
+  color: rgba(255, 255, 255, 0.95);
+}
+.section-detail-close {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 0 auto;
   padding: 0;
   font-family: 'Quicksand', sans-serif;
   font-size: 1.75rem;
