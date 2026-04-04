@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Scene } from '../3d/scene'
 import { LoadingScreen } from './LoadingScreen'
 import { ScrollContent, CYCLE_VH } from './ScrollContent'
+import { ScrollHint } from './ScrollHint'
 import './index.css'
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     const sceneRef = useRef<Scene | null>(null)
     const [isInteracting, setIsInteracting] = useState(false)
     const [isSceneReady, setIsSceneReady] = useState(false)
+    const [hasScrolled, setHasScrolled] = useState(false)
 
     const isInteractingRef = useRef(isInteracting)
 
@@ -29,7 +31,7 @@ function App() {
         window.addEventListener('resize', onResize)
 
         const onScroll = () => {
-            console.log('[App] scroll fired, isInteracting:', isInteractingRef.current, 'scrollY:', window.scrollY);
+            if (isInteractingRef.current) setHasScrolled(true);
             if (!sceneRef.current || !isInteractingRef.current) return;
             // Wrap scrollY within one cycle so the camera animation loops infinitely
             const cycleHeightPx = CYCLE_VH * window.innerHeight / 100
@@ -60,6 +62,8 @@ function App() {
             <LoadingScreen visible={!isSceneReady} />
 
             <ScrollContent visible={isInteracting} />
+
+            <ScrollHint visible={isInteracting && !hasScrolled} />
 
             {!isInteracting && (
                 <div className="landing-overlay">
