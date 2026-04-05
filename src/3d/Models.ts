@@ -118,12 +118,13 @@ export class Models {
         material.metalness = 0.1;
         material.gloss = 0.8;
         material.useMetalness = true;
+        material.shaderChunksVersion = '2.8';
         
         // Pass Local/Object position from vertex to fragment shader to lock 3D noise directly to the mesh 
-        material.chunks.transformVS = stoneTransformVSChunk;
+        material.getShaderChunks(pc.SHADERLANGUAGE_GLSL).set('transformVS', stoneTransformVSChunk);
         
         // Override the diffuse fragment shader chunk
-        material.chunks.diffusePS = stoneDiffuseChunk;
+        material.getShaderChunks(pc.SHADERLANGUAGE_GLSL).set('diffusePS', stoneDiffuseChunk);
         
         material.update();
         return material;

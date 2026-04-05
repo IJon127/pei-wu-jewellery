@@ -3,11 +3,13 @@ import { Models } from './Models'
 import { Camera } from './Camera'
 import domeVS from './shaders/domeVS.glsl?raw'
 import domeFS from './shaders/domeFS.glsl?raw'
+import { Photos } from './Photos'
 
 export class Scene {
     public app: pc.Application;
-    private models: Models;
-    private camera: Camera;
+    private models!: Models;
+    private photos!: Photos;
+    private camera!: Camera;
 
     public onProgress?: (value: number) => void;
     public onReady?: () => void;
@@ -82,15 +84,30 @@ export class Scene {
             vshader: domeVS,
             fshader: `precision ${gd.precision} float;\n` + domeFS
         }
-        const shader = new pc.Shader(gd, shaderDefinition)
-        const domeMaterial = new pc.Material()
-        domeMaterial.shader = shader
+        // const domeMaterial = new pc.ShaderMaterial(gd, shaderDefinition)
+        const domeMaterial = new pc.ShaderMaterial({
+            uniqueName: 'domeShader',
+            vertexGLSL: domeVS,
+            fragmentGLSL: domeFS,
+            cull: pc.CULLFACE_FRONT,
+            attributes: {
+                vertex_position: pc.SEMANTIC_POSITION,
+                vertex_texCoord0: pc.SEMANTIC_TEXCOORD0,
+            }
+        });
+
+        // const domeMaterial = new pc.Material()
+        // domeMaterial.shader = shader
         domeMaterial.cull = pc.CULLFACE_FRONT
         domeMaterial.update()
 
         // Apply material to sphere
         dome.render!.meshInstances[0].material = domeMaterial
         this.app.root.addChild(dome)
+
+        // Initialize and add Photos
+        this.photos = new Photos(this.app)
+        this.app.root.addChild(this.photos.entity)
 
         // Initialize and add Model
         this.models = new Models(this.app)
