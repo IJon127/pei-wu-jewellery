@@ -60,8 +60,10 @@ export class Scene {
                 lighting.destroy();
 
                 this.app.scene.envAtlas = envAtlas;
-                this.app.scene.toneMapping = pc.TONEMAP_ACES; // Often needed for correct HDR display
-                this.app.scene.exposure = 1.0;
+                if (this.camera.entity.camera) {
+                    this.camera.entity.camera.toneMapping = pc.TONEMAP_ACES;
+                    this.camera.entity.camera.exposure = 1.0;
+                }
             } else {
                 console.error("Failed to load HDR skybox", err);
             }

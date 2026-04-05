@@ -88,8 +88,8 @@ export class Photos {
             cubemap: false,
             volume: false,
             arrayLength: textures.length,
-            mipmaps: true,
-            minFilter: pc.FILTER_LINEAR_MIPMAP_LINEAR,
+            mipmaps: false,
+            minFilter: pc.FILTER_LINEAR,
             magFilter: pc.FILTER_LINEAR
         });
 

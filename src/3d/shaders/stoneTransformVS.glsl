@@ -1,12 +1,8 @@
 varying vec3 vPositionO;
 
-mat4 getModelMatrix() {
-    return matrix_model;
-}
-
 vec4 getPosition() {
-    dPositionW = (getModelMatrix() * vec4(vertex_position, 1.0)).xyz;
-    vPositionO = vertex_position;
+    dPositionW = (getModelMatrix() * vec4(vertex_position.xyz, 1.0)).xyz;
+    vPositionO = vertex_position.xyz;
     return matrix_viewProjection * vec4(dPositionW, 1.0);
 }
 
