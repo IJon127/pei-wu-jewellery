@@ -7,7 +7,7 @@ export class Photos {
     private app: pc.Application;
     private material!: pc.ShaderMaterial;
     private vertexBuffer!: pc.VertexBuffer;
-    private instanceCount = 30;
+    private instanceCount = 10;
 
     constructor(app: pc.Application) {
         this.app = app;
@@ -126,7 +126,7 @@ export class Photos {
             uniqueName: 'photosShader',
             vertexGLSL: photosVS,
             fragmentGLSL: photosPS,
-            cull: pc.CULLFACE_NONE,
+            // cull: pc.CULLFACE_NONE,
             attributes: {
                 vertex_position: pc.SEMANTIC_POSITION,
                 vertex_texCoord0: pc.SEMANTIC_TEXCOORD0,
@@ -137,6 +137,8 @@ export class Photos {
                 aInstTexIndex: pc.SEMANTIC_ATTR11
             }
         });
+        this.material.cull = pc.CULLFACE_NONE;
+        this.material.update();
 
 
         let loadedCount = 0;
@@ -149,8 +151,8 @@ export class Photos {
                 if (!err && asset) {
                     loadedTextures[index] = asset.resource as pc.Texture;
                     // temp fill texture with duplicate
-                    loadedTextures[index + imageUrls.length] = asset.resource as pc.Texture;
-                    loadedTextures[index + (imageUrls.length * 2)] = asset.resource as pc.Texture;
+                    // loadedTextures[index + imageUrls.length] = asset.resource as pc.Texture;
+                    // loadedTextures[index + (imageUrls.length * 2)] = asset.resource as pc.Texture;
 
                     loadedCount++;
 
@@ -214,7 +216,7 @@ export class Photos {
         ]);
 
         const data = new Float32Array(this.instanceCount * 17);
-        const range = 2.5;
+        const range = 2;
 
         const matrix = new pc.Mat4();
         const position = new pc.Vec3();
