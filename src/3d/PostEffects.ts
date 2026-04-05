@@ -10,27 +10,52 @@ export class PostEffects {
 
         // Initialize CameraFrame (PlayCanvas 2.x high-level post-processing pipeline)
         this.cameraFrame = new pc.CameraFrame(app, cameraEntity.camera);
-
-        // --- Core Rendering Settings (Fixes "washed out" colors) ---
         this.cameraFrame.rendering.sceneColorMap = true;
+        this.cameraFrame.rendering.toneMapping = pc.TONEMAP_NEUTRAL;
+
+        this.applyDepthOfField();
 
         // Configure Bloom for a professional, soft glow
-        this.cameraFrame.bloom.intensity = 0.02;
-        this.cameraFrame.bloom.blurLevel = 10;
+        this.applyBloom();
 
         // Configure Vignette for cinematic framing
-        this.cameraFrame.vignette.intensity = 0.5;
-        this.cameraFrame.vignette.inner = 0.5;
-        this.cameraFrame.vignette.outer = 1.0;
-        this.cameraFrame.vignette.curvature = 0.5;
-        this.cameraFrame.vignette.color.set(0.15, 0.10, 0.12);
+        this.applyVignette();
+
+
 
         // Enable TAA (Temporal Anti-Aliasing) for smooth edges
         this.cameraFrame.taa.enabled = true;
         this.cameraFrame.taa.jitter = 1.0;
+        this.cameraFrame.rendering.sharpness = 1;
 
         // Apply initial configuration
         this.cameraFrame.update();
+    }
+
+    applyBloom() {
+        this.cameraFrame.bloom.intensity = 0.02;
+        this.cameraFrame.bloom.blurLevel = 10;
+    }
+
+    applyVignette() {
+        this.cameraFrame.vignette.intensity = 0.1;
+        this.cameraFrame.vignette.inner = 0.8;
+        this.cameraFrame.vignette.outer = 1.0;
+        this.cameraFrame.vignette.curvature = 0.5;
+        // this.cameraFrame.vignette.color.set(0.15, 0.10, 0.12);
+        this.cameraFrame.vignette.color.set(0.8, 0.8, 1);
+    }
+
+    applyDepthOfField() {
+        // DOF
+        this.cameraFrame.dof.enabled = true;
+        this.cameraFrame.dof.nearBlur = true;
+        this.cameraFrame.dof.focusDistance = 1;
+        this.cameraFrame.dof.focusRange = 0.5;
+        this.cameraFrame.dof.blurRadius = 3;
+        this.cameraFrame.dof.blurRings = 2;
+        this.cameraFrame.dof.blurRingPoints = 3;
+        this.cameraFrame.dof.highQuality = true;
     }
 
     /**

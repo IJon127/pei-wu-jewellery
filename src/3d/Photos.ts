@@ -222,14 +222,17 @@ export class Photos {
         const scale = new pc.Vec3();
         const center = new pc.Vec3(-3, 0.2, -0.9);
 
+        const mySeed = 1315;
+        const random = this.createRandom(mySeed);
+
         for (let i = 0; i < this.instanceCount; i++) {
             position.set(
-                (Math.random() - 0.5) * range + center.x,
-                (Math.random() - 0.5) * range + center.y,
-                (Math.random() - 0.5) * range + center.z
+                (random() - 0.5) * range + center.x,
+                (random() - 0.5) * range + center.y,
+                (random() - 0.5) * range + center.z
             );
-            rotation.setFromEulerAngles(Math.random() * 360, Math.random() * 360, Math.random() * 360);
-            const s = Math.random() * 0.6 + 0.1;
+            rotation.setFromEulerAngles(random() * 360, random() * 360, random() * 360);
+            const s = random() * 0.6 + 0.1;
             scale.set(s, s, s);
 
             matrix.setTRS(position, rotation, scale);
@@ -242,6 +245,7 @@ export class Photos {
             // Set the Texture Array Z-index (0 through 29)
             data[offset + 16] = i;
         }
+        console.log('JJJ data', data);
 
         this.vertexBuffer = new pc.VertexBuffer(device, vbFormat, this.instanceCount, {
             data: data.buffer
@@ -254,5 +258,14 @@ export class Photos {
 
         const meshInstance = this.entity.render!.meshInstances[0];
         meshInstance.setInstancing(this.vertexBuffer);
+    }
+
+    private createRandom(seed: number) {
+        return function () {
+            let t = seed += 0x6D2B79F5;
+            t = Math.imul(t ^ t >>> 15, t | 1);
+            t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+            return ((t ^ t >>> 14) >>> 0) / 4294967296;
+        }
     }
 }

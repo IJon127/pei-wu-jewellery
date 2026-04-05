@@ -63,7 +63,7 @@ export class Scene {
 
                 this.app.scene.envAtlas = envAtlas;
                 if (this.camera.entity.camera) {
-                    // this.camera.entity.camera.toneMapping = pc.TONEMAP_ACES;
+                    this.camera.entity.camera.toneMapping = pc.TONEMAP_ACES;
                     this.camera.entity.camera.exposure = 0.1;
                 }
             } else {
