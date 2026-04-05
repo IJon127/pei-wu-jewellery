@@ -1,4 +1,14 @@
-export type ModalKind = 'allProjects' | 'allExhibitions' | 'allPress' | 'project' | 'exhibition'
+export type ModalKind = 'allProjects' | 'allExhibitions' | 'allPress' | 'project' | 'exhibition' | 'allBespoke' | 'bespoke'
+
+export interface BespokeDetail {
+    id: string
+    year: string
+    title: string
+    type: string
+    img: string
+    description: string
+    images: string[]
+}
 
 export interface ProjectCard {
     id: string

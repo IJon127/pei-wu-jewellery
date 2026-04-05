@@ -51,18 +51,26 @@ export function ScrollContent({ visible }: ScrollContentProps) {
     const [modalKind, setModalKind] = useState<ModalKind | null>(null)
     const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null)
     const [selectedExhibitionId, setSelectedExhibitionId] = useState<string | null>(null)
+    const [selectedBespokeId, setSelectedBespokeId] = useState<string | null>(null)
 
     const onOpenModal = useCallback((kind: ModalKind, id?: string) => {
         setModalKind(kind)
         if (kind === 'project') {
             setSelectedProjectId(id ?? null)
             setSelectedExhibitionId(null)
+            setSelectedBespokeId(null)
         } else if (kind === 'exhibition') {
             setSelectedExhibitionId(id ?? null)
             setSelectedProjectId(null)
+            setSelectedBespokeId(null)
+        } else if (kind === 'bespoke') {
+            setSelectedBespokeId(id ?? null)
+            setSelectedProjectId(null)
+            setSelectedExhibitionId(null)
         } else {
             setSelectedProjectId(null)
             setSelectedExhibitionId(null)
+            setSelectedBespokeId(null)
         }
     }, [])
 
@@ -70,6 +78,7 @@ export function ScrollContent({ visible }: ScrollContentProps) {
         setModalKind(null)
         setSelectedProjectId(null)
         setSelectedExhibitionId(null)
+        setSelectedBespokeId(null)
     }, [])
 
     useEffect(() => {
@@ -77,6 +86,7 @@ export function ScrollContent({ visible }: ScrollContentProps) {
             setModalKind(null)
             setSelectedProjectId(null)
             setSelectedExhibitionId(null)
+            setSelectedBespokeId(null)
         }
     }, [visible])
 
@@ -116,6 +126,7 @@ export function ScrollContent({ visible }: ScrollContentProps) {
                 kind={modalKind}
                 selectedProjectId={selectedProjectId}
                 selectedExhibitionId={selectedExhibitionId}
+                selectedBespokeId={selectedBespokeId}
                 onClose={onCloseDetail}
                 onOpenModal={onOpenModal}
             />

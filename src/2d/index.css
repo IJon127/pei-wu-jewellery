@@ -510,28 +510,28 @@ button.project-block:hover {
   margin: 0 0 2rem;
 }
 
-.bespoke-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
 .bespoke-row {
   border-top: 1px solid rgba(20, 10, 20, 0.07);
 }
 
-.bespoke-row td {
-  padding: 0.9rem 0;
+.bespoke-row--btn {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  gap: 1rem;
+  height: 10vw;
 }
 
 .bespoke-year {
+  flex: 1;
   font-family: 'Quicksand', sans-serif;
   font-size: 0.7rem;
   color: rgba(20, 10, 20, 0.25);
   letter-spacing: 0.1em;
-  width: 4rem;
 }
 
-.bespoke-exp-title {
+.bespoke-title {
+  flex: 4;
   font-family: 'Ubuntu', sans-serif;
   font-size: 1.1rem;
   font-weight: 400;
@@ -539,6 +539,7 @@ button.project-block:hover {
 }
 
 .bespoke-type {
+  flex: 3;
   font-family: 'Quicksand', sans-serif;
   font-size: 0.7rem;
   color: rgba(20, 10, 20, 0.4);
@@ -546,17 +547,16 @@ button.project-block:hover {
   letter-spacing: 0.08em;
 }
 
-.bespoke-img-cell {
-  width: 3.5rem;
-  text-align: right;
-  vertical-align: middle;
-}
-
 .bespoke-img-wrapper {
+  flex: 3;
   position: relative;
-  width: 2.5rem;
-  height: 2.5rem;
+  /* width: 2.5rem; */
+  /* height: 2.5rem; */
+  height: 9vw;
+
   margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .bespoke-img {
@@ -566,13 +566,13 @@ button.project-block:hover {
   border-radius: 2px;
   cursor: pointer;
   transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
-  transform-origin: right center;
+  transform-origin: left center;
   position: relative;
   z-index: 1;
 }
 
-.bespoke-img:hover {
-  transform: scale(4.5);
+.bespoke-row--btn:hover .bespoke-img {
+  transform: scale(2);
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
   z-index: 10;
 }
