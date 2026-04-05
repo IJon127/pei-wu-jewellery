@@ -4,12 +4,14 @@ import { Camera } from './Camera'
 import domeVS from './shaders/domeVS.glsl?raw'
 import domeFS from './shaders/domeFS.glsl?raw'
 import { Photos } from './Photos'
+import { PostEffects } from './PostEffects'
 
 export class Scene {
     public app: pc.Application;
     private models!: Models;
     private photos!: Photos;
     private camera!: Camera;
+    private postEffects!: PostEffects;
 
     public onProgress?: (value: number) => void;
     public onReady?: () => void;
@@ -61,8 +63,8 @@ export class Scene {
 
                 this.app.scene.envAtlas = envAtlas;
                 if (this.camera.entity.camera) {
-                    this.camera.entity.camera.toneMapping = pc.TONEMAP_ACES;
-                    this.camera.entity.camera.exposure = 1.0;
+                    // this.camera.entity.camera.toneMapping = pc.TONEMAP_ACES;
+                    this.camera.entity.camera.exposure = 0.1;
                 }
             } else {
                 console.error("Failed to load HDR skybox", err);
@@ -75,18 +77,6 @@ export class Scene {
         // Diameter ~50 -> Scale 50 (since base sphere is diameter 1)
         dome.setLocalScale(50, 50, 50)
 
-        const gd = this.app.graphicsDevice
-
-
-        const shaderDefinition = {
-            attributes: {
-                aPosition: pc.SEMANTIC_POSITION,
-                aUv0: pc.SEMANTIC_TEXCOORD0
-            },
-            vshader: domeVS,
-            fshader: `precision ${gd.precision} float;\n` + domeFS
-        }
-        // const domeMaterial = new pc.ShaderMaterial(gd, shaderDefinition)
         const domeMaterial = new pc.ShaderMaterial({
             uniqueName: 'domeShader',
             vertexGLSL: domeVS,
@@ -114,6 +104,9 @@ export class Scene {
         // Initialize and add Model
         this.models = new Models(this.app)
         this.app.root.addChild(this.models.entity)
+
+        // Initialize Post-processing (Bloom, Vignette)
+        this.postEffects = new PostEffects(this.app, this.camera.entity);
 
         // Setup update loop for animation
         this.app.on('update', (dt: number) => {
