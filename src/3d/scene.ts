@@ -106,7 +106,7 @@ export class Scene {
         this.app.root.addChild(this.models.entity)
 
         // Initialize Post-processing (Bloom, Vignette)
-        this.postEffects = new PostEffects(this.app, this.camera.entity);
+        // this.postEffects = new PostEffects(this.app, this.camera.entity);
 
         // Setup update loop for animation
         this.app.on('update', (dt: number) => {

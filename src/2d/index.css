@@ -4,7 +4,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(0, 0, 0, 0.87);
   background-color: #242424;
 
   font-synthesis: none;
@@ -53,7 +53,7 @@ body {
   width: 56px;
   height: 90px;
   /* border-radius: 100px; */
-  /* border: 2px solid rgba(255, 255, 255, 0.5); */
+  /* border: 2px solid rgba(50,50,51, 0.5); */
   position: relative;
   overflow: hidden;
   display: flex;
@@ -78,31 +78,31 @@ body {
     transform: translateY(0);
     opacity: 1;
     box-shadow:
-      0 -28px 0 rgba(255, 255, 255, 0.06),
-      0 -56px 0 rgba(255, 255, 255, 0.03);
+      0 -28px 0 rgba(20, 10, 20, 0.06),
+      0 -56px 0 rgba(20, 10, 20, 0.03);
   }
 
   60% {
     opacity: 1;
     box-shadow:
-      0 -28px 0 rgba(255, 255, 255, 0.2),
-      0 -56px 0 rgba(255, 255, 255, 0.1);
+      0 -28px 0 rgba(20, 10, 20, 0.2),
+      0 -56px 0 rgba(20, 10, 20, 0.1);
   }
 
   80% {
     transform: translateY(64px);
     opacity: 0.8;
     box-shadow:
-      0 -28px 0 rgba(255, 255, 255, 0.35),
-      0 -56px 0 rgba(255, 255, 255, 0.15);
+      0 -28px 0 rgba(20, 10, 20, 0.35),
+      0 -56px 0 rgba(20, 10, 20, 0.15);
   }
 
   100% {
     transform: translateY(64px);
     opacity: 0;
     box-shadow:
-      0 -28px 0 rgba(255, 255, 255, 0.15),
-      0 -56px 0 rgba(255, 255, 255, 0.05);
+      0 -28px 0 rgba(20, 10, 20, 0.15),
+      0 -56px 0 rgba(20, 10, 20, 0.05);
   }
 }
 
@@ -112,7 +112,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(20, 10, 20, 0.6);
   text-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
   margin: 0;
 }
@@ -173,14 +173,14 @@ body {
   font-family: 'Quicksand', sans-serif;
   font-size: 0.8rem;
   letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(20, 10, 20, 0.5);
 }
 
 .section-title {
   font-family: 'Bonheur Royale', serif;
   font-size: 6rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(20, 10, 20, 0.55);
   text-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
   margin: 0;
 }
@@ -194,7 +194,7 @@ body {
   font-weight: 600;
   /* letter-spacing: 0.2em; */
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(20, 10, 20, 0.75);
   background: none;
   border: none;
   cursor: pointer;
@@ -205,7 +205,7 @@ body {
 }
 
 .section-more-btn:hover {
-  color: rgba(255, 255, 255, 1);
+  color: rgba(20, 10, 20, 1);
 }
 
 .section-more-btn-right-align {
@@ -227,7 +227,7 @@ body {
   font-family: 'Bonheur Royale', serif;
   font-size: 3.5rem;
   font-style: italic;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(20, 10, 20, 0.9);
   line-height: 1.2;
   margin: 0 0 2.5rem;
   border: none;
@@ -237,14 +237,14 @@ body {
   font-family: 'Quicksand', sans-serif;
   font-size: 1rem;
   line-height: 1.9;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(20, 10, 20, 0.55);
   margin: 0 0 2rem;
 }
 
 .statement-sig {
   font-family: 'Quicksand', sans-serif;
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(20, 10, 20, 0.3);
   letter-spacing: 0.1em;
 }
 
@@ -284,7 +284,7 @@ button.project-block {
 }
 
 button.project-block:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.35);
+  outline: 2px solid rgba(20, 10, 20, 0.35);
   outline-offset: 4px;
 }
 
@@ -300,7 +300,7 @@ button.project-block:hover {
   object-fit: cover;
   object-position: center;
   display: block;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(20, 10, 20, 0.06);
 }
 
 /* Meta row beneath each image */
@@ -313,14 +313,14 @@ button.project-block:hover {
 .project-block-id {
   font-family: 'Quicksand', sans-serif;
   font-size: 0.6rem;
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(20, 10, 20, 0.25);
   letter-spacing: 0.12em;
 }
 
 .project-block-year {
   font-family: 'Quicksand', sans-serif;
   font-size: 0.6rem;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(20, 10, 20, 0.2);
   letter-spacing: 0.08em;
 }
 
@@ -328,7 +328,7 @@ button.project-block:hover {
   font-family: 'Ubuntu', sans-serif;
   font-size: 0.8rem;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(20, 10, 20, 0.65);
   margin: 0;
   flex: 1;
 }
@@ -338,11 +338,11 @@ button.project-block:hover {
 .project-block--more {
   width: 45%;
   aspect-ratio: 3 / 4;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(20, 10, 20, 0.1);
+  border: 1px solid rgba(20, 10, 20, 0.28);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(20, 10, 20, 0.22);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -352,7 +352,7 @@ button.project-block:hover {
 }
 
 .project-block--more:hover {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(20, 10, 20, 0.18);
 }
 
 .project-more-btn {
@@ -361,7 +361,7 @@ button.project-block:hover {
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(20, 10, 20, 0.75);
   background: none;
   border: none;
   cursor: pointer;
@@ -371,7 +371,7 @@ button.project-block:hover {
 }
 
 .project-block--more:hover .project-more-btn {
-  color: rgba(255, 255, 255, 1);
+  color: rgba(20, 10, 20, 1);
 }
 
 /* ── 03 Exhibitions ─────────────────────────────────────── */
@@ -390,7 +390,7 @@ button.project-block:hover {
 }
 
 .exhibition-row {
-  border-top: 2px solid rgba(255, 255, 255, 0.1);
+  border-top: 2px solid rgba(20, 10, 20, 0.1);
 }
 
 .exhibition-row--btn {
@@ -411,30 +411,30 @@ button.project-block:hover {
 }
 
 .exhibition-row--btn:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(20, 10, 20, 0.04);
 }
 
 .exhibition-row--btn:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.35);
+  outline: 2px solid rgba(20, 10, 20, 0.35);
   outline-offset: 2px;
 }
 
 .ex-year {
   font-family: 'Quicksand', sans-serif;
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(20, 10, 20, 0.35);
 }
 
 .ex-title {
   font-family: 'Quicksand', sans-serif;
   font-size: 1.8rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(20, 10, 20, 0.85);
 }
 
 .ex-venue {
   font-family: 'Ubuntu', sans-serif;
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(20, 10, 20, 0.4);
   text-align: right;
 }
 
@@ -470,7 +470,7 @@ button.project-block:hover {
   font-family: 'Quicksand', sans-serif;
   font-size: 1.5rem;
   /* font-style: italic; */
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(20, 10, 20, 0.8);
   margin: 0 0 0.75rem;
   line-height: 1.3;
 }
@@ -487,13 +487,13 @@ button.project-block:hover {
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(20, 10, 20, 0.5);
 }
 
 .press-date {
   font-family: 'Quicksand', sans-serif;
   font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(20, 10, 20, 0.3);
 }
 
 /* ── 05 Lab ─────────────────────────────────────────────── */
@@ -506,7 +506,7 @@ button.project-block:hover {
   font-family: 'Quicksand', sans-serif;
   font-size: 0.9rem;
   line-height: 1.8;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(20, 10, 20, 0.45);
   margin: 0 0 2rem;
 }
 
@@ -516,7 +516,7 @@ button.project-block:hover {
 }
 
 .bespoke-row {
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 1px solid rgba(20, 10, 20, 0.07);
 }
 
 .bespoke-row td {
@@ -526,7 +526,7 @@ button.project-block:hover {
 .bespoke-code {
   font-family: 'Quicksand', sans-serif;
   font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(20, 10, 20, 0.25);
   letter-spacing: 0.1em;
   width: 7rem;
 }
@@ -535,13 +535,13 @@ button.project-block:hover {
   font-family: 'Ubuntu', sans-serif;
   font-size: 1rem;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(20, 10, 20, 0.75);
 }
 
 .bespoke-status {
   font-family: 'Quicksand', sans-serif;
   font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(20, 10, 20, 0.3);
   text-align: right;
   letter-spacing: 0.08em;
 }
@@ -567,14 +567,14 @@ button.project-block:hover {
   grid-template-columns: 6rem 7rem 1fr;
   gap: 1.5rem;
   padding: 1rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 1px solid rgba(20, 10, 20, 0.07);
   align-items: baseline;
 }
 
 .news-date {
   font-family: 'Quicksand', sans-serif;
   font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(20, 10, 20, 0.3);
 }
 
 .news-tag {
@@ -582,8 +582,8 @@ button.project-block:hover {
   font-size: 0.65rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(20, 10, 20, 0.4);
+  border: 1px solid rgba(20, 10, 20, 0.2);
   padding: 0.15rem 0.5rem;
   border-radius: 20px;
   white-space: nowrap;
@@ -594,7 +594,7 @@ button.project-block:hover {
   font-family: 'Ubuntu', sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(20, 10, 20, 0.7);
   margin: 0;
   line-height: 1.5;
 }
@@ -614,8 +614,8 @@ button.project-block:hover {
 
 .about-portrait {
   aspect-ratio: 3/4;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(20, 10, 20, 0.05);
+  border: 1px solid rgba(20, 10, 20, 0.1);
 }
 
 .about-bio {
@@ -628,7 +628,7 @@ button.project-block:hover {
   font-family: 'Quicksand', sans-serif;
   font-size: 0.95rem;
   line-height: 1.9;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(20, 10, 20, 0.55);
   margin: 0;
 }
 
@@ -641,15 +641,15 @@ button.project-block:hover {
 .about-link {
   font-family: 'Quicksand', sans-serif;
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(20, 10, 20, 0.45);
   text-decoration: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(20, 10, 20, 0.2);
   padding-bottom: 0.1rem;
   transition: color 0.2s;
 }
 
 .about-link:hover {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(20, 10, 20, 0.8);
 }
 
 
@@ -677,7 +677,7 @@ button.project-block:hover {
 }
 
 .landing-title {
-  color: #fff;
+  color: rgba(20, 10, 20, 0.7);
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   white-space: nowrap;
   margin: 0;
@@ -698,7 +698,7 @@ button.project-block:hover {
 }
 
 .landing-subtitle {
-  color: #ddd;
+  color: rgba(20, 10, 20, 0.7);
   margin: 0;
   font-size: 1.4rem;
   font-family: 'Quicksand', sans-serif;
@@ -708,15 +708,15 @@ button.project-block:hover {
 .landing-btn {
   margin-top: 3rem;
   padding: 1.2rem 4rem;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(20, 10, 20, 0.12);
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(20, 10, 20, 0.35);
   border-radius: 40px;
   cursor: pointer;
   font-family: 'Quicksand', sans-serif;
   font-size: 1.2rem;
   font-weight: bold;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(20, 10, 20, 0.25);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition: transform 0.2s, background 0.2s;
@@ -724,7 +724,7 @@ button.project-block:hover {
 
 .landing-btn:hover {
   transform: scale(1.05);
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(20, 10, 20, 0.22);
 }
 
 /* ── Loading Screen ─────────────────────────────────────── */
@@ -743,7 +743,7 @@ button.project-block:hover {
   font-family: 'Quicksand', sans-serif;
   font-size: 4rem;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(20, 10, 20, 0.7);
   margin: 0;
   letter-spacing: -0.02em;
   line-height: 1;
@@ -781,7 +781,7 @@ button.project-block:hover {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(20, 10, 20, 0.9);
   top: -82px;
   /* radius from centre */
   left: -2.5px;
@@ -837,9 +837,9 @@ button.project-block:hover {
   flex-direction: column;
   padding: 1.75rem 1.75rem 1.25rem;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(20, 10, 20, 0.22);
   background: rgba(36, 32, 38, 0.88);
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(20, 10, 20, 0.12);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
@@ -856,7 +856,7 @@ button.project-block:hover {
   font-family: 'Bonheur Royale', serif;
   font-size: clamp(2.5rem, 6vw, 3.75rem);
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(20, 10, 20, 0.7);
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   padding: 0;
   margin-top: 0;
@@ -875,13 +875,15 @@ button.project-block:hover {
   padding: 0;
   font-family: 'Quicksand', sans-serif;
   font-size: 1.75rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(20, 10, 20, 0.55);
   background: none;
   border: none;
 }
+
 .section-detail-back:hover {
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(20, 10, 20, 0.95);
 }
+
 .section-detail-close {
   flex-shrink: 0;
   width: 2.5rem;
@@ -895,18 +897,18 @@ button.project-block:hover {
   font-size: 1.75rem;
   line-height: 1;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(20, 10, 20, 0.55);
+  background: rgba(20, 10, 20, 0.06);
+  border: 1px solid rgba(20, 10, 20, 0.15);
   border-radius: 50%;
   cursor: pointer;
   transition: color 0.2s, background 0.2s, border-color 0.2s;
 }
 
 .section-detail-close:hover {
-  color: rgba(255, 255, 255, 0.95);
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.28);
+  color: rgba(20, 10, 20, 0.95);
+  background: rgba(20, 10, 20, 0.12);
+  border-color: rgba(20, 10, 20, 0.28);
 }
 
 .section-detail-body {
@@ -936,7 +938,7 @@ button.project-block:hover {
   object-fit: cover;
   object-position: center;
   display: block;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(20, 10, 20, 0.06);
   border-radius: 2px;
 }
 
@@ -964,7 +966,7 @@ button.section-detail-project-card--btn:hover {
 }
 
 button.section-detail-project-card--btn:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.35);
+  outline: 2px solid rgba(20, 10, 20, 0.35);
   outline-offset: 2px;
 }
 
@@ -974,7 +976,7 @@ button.section-detail-project-card--btn img {
   object-fit: cover;
   object-position: center;
   display: block;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(20, 10, 20, 0.06);
   vertical-align: middle;
 }
 
@@ -1004,7 +1006,7 @@ button.section-detail-project-card--btn img {
   font-size: 0.85rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(20, 10, 20, 0.4);
 }
 
 .single-project-body {
@@ -1015,7 +1017,7 @@ button.section-detail-project-card--btn img {
   font-family: 'Quicksand', sans-serif;
   font-size: 1rem;
   line-height: 1.85;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(20, 10, 20, 0.55);
   margin: 0;
 }
 
@@ -1032,12 +1034,12 @@ button.section-detail-project-card--btn img {
   object-position: center;
   display: block;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(20, 10, 20, 0.06);
 }
 
 .single-project-missing {
   font-family: 'Quicksand', sans-serif;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(20, 10, 20, 0.45);
   margin: 0;
 }
 
@@ -1067,13 +1069,13 @@ button.section-detail-project-card--btn img {
   font-size: 0.85rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(20, 10, 20, 0.4);
 }
 
 .exhibition-detail-venue {
   font-family: 'Ubuntu', sans-serif;
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(20, 10, 20, 0.45);
   margin: 0 0 1.5rem;
   letter-spacing: 0.06em;
 }
@@ -1086,7 +1088,7 @@ button.section-detail-project-card--btn img {
   font-family: 'Quicksand', sans-serif;
   font-size: 1rem;
   line-height: 1.85;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(20, 10, 20, 0.55);
   margin: 0;
 }
 
@@ -1103,11 +1105,11 @@ button.section-detail-project-card--btn img {
   object-position: center;
   display: block;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(20, 10, 20, 0.06);
 }
 
 .exhibition-detail-missing {
   font-family: 'Quicksand', sans-serif;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(20, 10, 20, 0.45);
   margin: 0;
 }
