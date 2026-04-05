@@ -5,7 +5,7 @@ import photosPS from './shaders/photosPS.glsl?raw'
 export class Photos {
     public entity: pc.Entity;
     private app: pc.Application;
-    private material!: pc.StandardMaterial;
+    private material!: pc.ShaderMaterial;
     private vertexBuffer!: pc.VertexBuffer;
     private instanceCount = 30;
 
@@ -13,20 +13,105 @@ export class Photos {
         this.app = app;
         this.entity = new pc.Entity('photos');
 
+        // Apply engine patches for Texture Arrays BEFORE shader compilation
+        this.patchEngineForTextureArrays();
+
         const images = [
-            '/assets/images/projects/project1.jpg',
-            '/assets/images/projects/project2.jpg',
-            '/assets/images/projects/project3.jpg',
-            '/assets/images/projects/project4.png',
-            '/assets/images/projects/project5.png',
-            '/assets/images/projects/project6.png',
-            '/assets/images/projects/project7.png',
-            '/assets/images/projects/project8.png',
-            '/assets/images/projects/project9.png',
-            '/assets/images/projects/project10.png',
+            '/assets/images/photos/photo1.png',
+            '/assets/images/photos/photo2.png',
+            '/assets/images/photos/photo3.png',
+            '/assets/images/photos/photo4.png',
+            '/assets/images/photos/photo5.png',
+            '/assets/images/photos/photo6.png',
+            '/assets/images/photos/photo7.png',
+            '/assets/images/photos/photo8.png',
+            '/assets/images/photos/photo9.png',
+            '/assets/images/photos/photo10.png',
         ];
 
         this.init(images);
+    }
+
+    private patchEngineForTextureArrays() {
+        const device = this.app.graphicsDevice as any;
+
+        if (!device.isWebGL2) return;
+
+        // Map SAMPLER_2D_ARRAY to a safe internal PlayCanvas uniform type ID
+        const MONKEY_SAMPLER_2D_ARRAY_TARGET_ID = 50;
+        device.pcUniformType[device.gl.SAMPLER_2D_ARRAY] = MONKEY_SAMPLER_2D_ARRAY_TARGET_ID;
+
+        // Intercept the WebGL Shader compiler to route the new ID to the samplers list
+        const WebglShader = pc.Shader as any;
+        if (!WebglShader.prototype._prevFinalize) {
+            WebglShader.prototype._prevFinalize = WebglShader.prototype.finalize;
+            WebglShader.prototype.finalize = function (device: any, shader: any) {
+                const res = this._prevFinalize(device, shader);
+                for (let i = this.uniforms.length - 1; i >= 0; i--) {
+                    const shaderInput = this.uniforms[i];
+                    if (shaderInput.dataType === MONKEY_SAMPLER_2D_ARRAY_TARGET_ID) {
+                        this.uniforms.splice(i, 1);
+                        this.samplers.push(shaderInput);
+                    }
+                }
+                return res;
+            };
+        }
+    }
+
+    private patchTextureUpload(tex: any) {
+        // Override initialize to set the proper WebGL target (TEXTURE_2D_ARRAY)
+        if (!tex.impl._prevInitialize) {
+            tex.impl._prevInitialize = tex.impl.initialize;
+            tex.impl.initialize = function (dev: any, texture: any) {
+                this._prevInitialize(dev, texture);
+                this._glTarget = dev.gl.TEXTURE_2D_ARRAY;
+            };
+        }
+
+        // Override upload to slice the array correctly into the GPU
+        tex.impl.upload = function (dev: any, texture: any) {
+            const gl = dev.gl;
+            const sources = texture._levels[0]; // This is our JS array of HTMLImageElements
+
+            dev.setUnpackFlipY(texture._flipY);
+            dev.setUnpackPremultiplyAlpha(texture._premultiplyAlpha);
+
+            // 1. Allocate the 3D texture memory on the GPU (Pass 'null' for data)
+            gl.texImage3D(
+                gl.TEXTURE_2D_ARRAY,
+                0,
+                this._glInternalFormat,
+                texture._width,
+                texture._height,
+                texture.arrayLength,
+                0,
+                this._glFormat,
+                this._glPixelType,
+                null // Empty allocation
+            );
+
+            // 2. Upload each image into its respective Z-slice
+            if (Array.isArray(sources)) {
+                for (let i = 0; i < texture.arrayLength; i++) {
+                    if (sources[i]) {
+                        gl.texSubImage3D(
+                            gl.TEXTURE_2D_ARRAY,
+                            0,                  // mip level
+                            0, 0, i,            // x offset, y offset, z offset (slice index)
+                            texture._width,     // width
+                            texture._height,    // height
+                            1,                  // depth (1 slice at a time)
+                            this._glFormat,
+                            this._glPixelType,
+                            sources[i]          // The individual HTMLImageElement
+                        );
+                    }
+                }
+            }
+
+            texture._needsUpload = false;
+        };
     }
 
     private init(imageUrls: string[]) {
@@ -55,7 +140,8 @@ export class Photos {
 
 
         let loadedCount = 0;
-        const loadedTextures: pc.Texture[] = new Array(imageUrls.length);
+        // Initialize with the full expected size (30)
+        const loadedTextures: pc.Texture[] = new Array(this.instanceCount);
 
         // Load all textures first
         imageUrls.forEach((url, index) => {
@@ -82,9 +168,6 @@ export class Photos {
         const device = this.app.graphicsDevice;
         const baseTex = textures[0];
 
-        // Extract the raw image sources (HTMLImageElement or HTMLCanvasElement)
-        const sources = textures.map(t => t.getSource());
-
         // Create a single Texture Array
         const textureArray = new pc.Texture(device, {
             width: baseTex.width,
@@ -95,16 +178,27 @@ export class Photos {
             arrayLength: textures.length,
             mipmaps: false,
             minFilter: pc.FILTER_LINEAR,
-            magFilter: pc.FILTER_LINEAR
+            magFilter: pc.FILTER_LINEAR,
+            // Recommended constraints for Texture Arrays
+            addressU: pc.ADDRESS_CLAMP_TO_EDGE,
+            addressV: pc.ADDRESS_CLAMP_TO_EDGE
         });
 
-        // Pack the array of images into the WebGL texture array
-        textureArray.setSource(sources as any);
+        // Apply custom hardware bindings to this specific texture instance
+        this.patchTextureUpload(textureArray);
+
+        // Extract the raw image sources and pack them into the array
+        const sources = textures.map(t => t.getSource());
+        textureArray._levels[0] = sources as any;
 
         // Assign the single uniform to the material
         this.material.setParameter('uTextureArray', textureArray);
-        this.material.update();
 
+        // Force initialization using our custom webgl upload logic
+        // (textureArray as any).initialize(device);
+        textureArray.upload();
+
+        this.material.update();
         this.setupInstancing();
     }
 
@@ -120,13 +214,13 @@ export class Photos {
         ]);
 
         const data = new Float32Array(this.instanceCount * 17);
-        const range = 3.6;
+        const range = 2.5;
 
         const matrix = new pc.Mat4();
         const position = new pc.Vec3();
         const rotation = new pc.Quat();
         const scale = new pc.Vec3();
-        const center = new pc.Vec3(-3.1, 0.2, -1);
+        const center = new pc.Vec3(-3, 0.2, -0.9);
 
         for (let i = 0; i < this.instanceCount; i++) {
             position.set(
@@ -145,7 +239,7 @@ export class Photos {
                 data[offset + j] = matrix.data[j];
             }
 
-            // Set the Texture Array Z-index (0 through 8)
+            // Set the Texture Array Z-index (0 through 29)
             data[offset + 16] = i;
         }
 
