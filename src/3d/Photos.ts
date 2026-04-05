@@ -7,7 +7,7 @@ export class Photos {
     private app: pc.Application;
     private material!: pc.StandardMaterial;
     private vertexBuffer!: pc.VertexBuffer;
-    private instanceCount = 9;
+    private instanceCount = 30;
 
     constructor(app: pc.Application) {
         this.app = app;
@@ -23,6 +23,7 @@ export class Photos {
             '/assets/images/projects/project7.png',
             '/assets/images/projects/project8.png',
             '/assets/images/projects/project9.png',
+            '/assets/images/projects/project10.png',
         ];
 
         this.init(images);
@@ -61,6 +62,10 @@ export class Photos {
             this.app.assets.loadFromUrl(url, 'texture', (err, asset) => {
                 if (!err && asset) {
                     loadedTextures[index] = asset.resource as pc.Texture;
+                    // temp fill texture with duplicate
+                    loadedTextures[index + imageUrls.length] = asset.resource as pc.Texture;
+                    loadedTextures[index + (imageUrls.length * 2)] = asset.resource as pc.Texture;
+
                     loadedCount++;
 
                     if (loadedCount === imageUrls.length) {
@@ -115,21 +120,22 @@ export class Photos {
         ]);
 
         const data = new Float32Array(this.instanceCount * 17);
-        const range = 10;
+        const range = 3.6;
 
         const matrix = new pc.Mat4();
         const position = new pc.Vec3();
         const rotation = new pc.Quat();
         const scale = new pc.Vec3();
+        const center = new pc.Vec3(-3.1, 0.2, -1);
 
         for (let i = 0; i < this.instanceCount; i++) {
             position.set(
-                (Math.random() - 0.5) * range,
-                (Math.random() - 0.5) * range,
-                (Math.random() - 0.5) * range
+                (Math.random() - 0.5) * range + center.x,
+                (Math.random() - 0.5) * range + center.y,
+                (Math.random() - 0.5) * range + center.z
             );
-            rotation.setFromEulerAngles(0, Math.random() * 360, 0);
-            const s = 1.0 + Math.random() * 0.5;
+            rotation.setFromEulerAngles(Math.random() * 360, Math.random() * 360, Math.random() * 360);
+            const s = Math.random() * 0.6 + 0.1;
             scale.set(s, s, s);
 
             matrix.setTRS(position, rotation, scale);
