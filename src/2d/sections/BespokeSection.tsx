@@ -1,10 +1,10 @@
 import type { SectionProps } from '../sectionTypes'
 
-const experiments = [
-    { code: 'LAB-01', title: 'Fluid Metal Studies', status: 'Ongoing' },
-    { code: 'LAB-02', title: 'Bio-resin Casting Series', status: 'Completed' },
-    { code: 'LAB-03', title: 'Textile + Oxidisation', status: 'Ongoing' },
-    { code: 'LAB-04', title: 'Digital Void Forms', status: 'In Development' },
+const bespokePieces = [
+    { year: '2023', title: 'Fluid Metal Study', type: 'Bespoke Ring', img: '/assets/images/photos/photo1.png' },
+    { year: '2022', title: 'Bio-resin Casting', type: 'Commissioned Earring', img: '/assets/images/photos/photo2.png' },
+    { year: '2023', title: 'Oxidised Bloom', type: 'Private Brooch', img: '/assets/images/photos/photo3.png' },
+    { year: '2024', title: 'Digital Void Form', type: 'Bespoke Sculpture', img: '/assets/images/photos/photo4.png' },
 ]
 
 export function BespokeSection({ scrollTop, align = 'left' }: SectionProps) {
@@ -21,11 +21,16 @@ export function BespokeSection({ scrollTop, align = 'left' }: SectionProps) {
                 </p>
                 <table className="bespoke-table">
                     <tbody>
-                        {experiments.map(ex => (
-                            <tr key={ex.code} className="bespoke-row">
-                                <td className="bespoke-code">{ex.code}</td>
-                                <td className="bespoke-exp-title">{ex.title}</td>
-                                <td className={`bespoke-status ${ex.status === 'Ongoing' ? 'status-active' : ''}`}>{ex.status}</td>
+                        {bespokePieces.map((piece, i) => (
+                            <tr key={i} className="bespoke-row">
+                                <td className="bespoke-year">{piece.year}</td>
+                                <td className="bespoke-exp-title">{piece.title}</td>
+                                <td className="bespoke-type">{piece.type}</td>
+                                <td className="bespoke-img-cell">
+                                    <div className="bespoke-img-wrapper">
+                                        <img src={piece.img} alt={piece.title} className="bespoke-img" />
+                                    </div>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

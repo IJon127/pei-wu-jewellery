@@ -18,6 +18,9 @@ export class Camera {
     private animatedNode: pc.GraphNode | null = null;
     private animTrack: pc.AnimTrack | null = null;
 
+    // private overlay: pc.Entity | null = null;
+    private overlayMaterial: pc.StandardMaterial | null = null;
+
     private transitionTime: number = 0;
     private transitionDuration: number = 2.5;
     private startPos: pc.Vec3 = new pc.Vec3();
@@ -47,6 +50,23 @@ export class Camera {
         this.entity.setLocalPosition(0, 4, 5);
         this.entity.lookAt(0, -0.5, 0);
         this.pivot.addChild(this.entity);
+
+        // // --- Blue Overlay Setup ---
+        // this.overlay = new pc.Entity('blue_overlay');
+        // this.overlay.addComponent('render', { type: 'sphere' });
+        // this.overlay.setLocalEulerAngles(0, 0, 13); // Face camera
+        // this.overlay.setLocalPosition(0, 0, -0.11); // Just in front of the lens
+        // this.overlay.setLocalScale(0.2, 0.5, 0.05); // Large enough to cover FOV
+
+        // this.overlayMaterial = new pc.StandardMaterial();
+        // this.overlayMaterial.diffuse.set(0.65, 0.8, 1.0); // Deep Cinematic Blue
+        // this.overlayMaterial.emissive.set(0, 0.1, 0.3); // Subtle digital glow
+        // this.overlayMaterial.opacity = 0;
+        // this.overlayMaterial.blendType = pc.BLEND_NORMAL;
+        // this.overlayMaterial.update();
+
+        // this.overlay.render!.meshInstances[0].material = this.overlayMaterial;
+        // this.entity.addChild(this.overlay);
 
         // Stage 3 Initialization: Load animated camera glb
         this.loadCameraLoop();
@@ -134,7 +154,12 @@ export class Camera {
             const targetNode = this.animatedNode || this.cameraRig;
             this.entity.setPosition(targetNode.getPosition());
             this.entity.setRotation(targetNode.getRotation());
+
+            // Update the transition overlay color/opacity
+            this.updateBlueOverlay(progress);
         }
+
+        this.updateBlueOverlay(progress);
     }
 
     update(dt: number) {
@@ -165,6 +190,40 @@ export class Camera {
 
         } else if (this.stage === CameraStage.ANIMATION) {
             // Animating
+        }
+    }
+
+    updateBlueOverlay(progress: number) {
+        if (!this.overlayMaterial) return;
+
+        // --- FADE IN SETTINGS ---
+        const fadeInStart = 0.9263;
+        const fadeInEnd = 0.9271;
+
+        // --- FADE OUT SETTINGS ---
+        const fadeOutStart = 0.95;
+        const fadeOutEnd = 0.97;
+
+        let targetOpacity = 0; // Default to 0 (invisible)
+
+        if (progress >= fadeInStart && progress <= fadeInEnd) {
+            // 1. Fading In: Map progress to [0.0 -> 1.0]
+            targetOpacity = pc.math.clamp((progress - fadeInStart) / (fadeInEnd - fadeInStart), 0, 1);
+
+        } else if (progress > fadeInEnd && progress < fadeOutStart) {
+            // 2. Fully Visible: Between the fade-in and fade-out
+            targetOpacity = 1;
+
+        } else if (progress >= fadeOutStart && progress <= fadeOutEnd) {
+            // 3. Fading Out: Map progress to [1.0 -> 0.0]
+            targetOpacity = pc.math.clamp(1.0 - ((progress - fadeOutStart) / (fadeOutEnd - fadeOutStart)), 0, 1);
+        }
+        // (If progress < fadeInStart or > fadeOutEnd, targetOpacity safely remains 0)
+
+        // Apply with smooth interpolation
+        if (this.overlayMaterial.opacity !== targetOpacity) {
+            this.overlayMaterial.opacity = targetOpacity;
+            this.overlayMaterial.update();
         }
     }
 }

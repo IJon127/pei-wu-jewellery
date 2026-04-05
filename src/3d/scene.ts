@@ -132,6 +132,7 @@ export class Scene {
 
     public updateScroll(progress: number) {
         this.camera?.updateScroll(progress);
+        this.models?.updateScroll(progress);
     }
 
     public start() {

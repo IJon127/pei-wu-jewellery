@@ -10,6 +10,7 @@ export class Models {
     private _ring: pc.Entity;
     private _stairs: pc.Entity;
 
+
     constructor(app: pc.Application) {
         this.entity = new pc.Entity('models')
 
@@ -59,6 +60,18 @@ export class Models {
         // Logic for rotating models removed; camera orbits instead
     }
 
+    updateScroll(progress: number) {
+        return;
+        const startHideDrip = 0.9272;
+        const endHideDrip = 0.963;
+
+        if (progress >= startHideDrip && progress <= endHideDrip) {
+            this._drip.enabled = false;
+        } else {
+            this._drip.enabled = true;
+        }
+    }
+
     setDonut() {
         const material = this.createCrystalMaterial(new pc.Color(1.0, 1.0, 1.0), 1.0);
         this.applyMaterialToEntity(this._donut, material);
@@ -66,6 +79,9 @@ export class Models {
 
     setDrip() {
         const material = this.createCrystalMaterial(new pc.Color(0.65, 0.8, 1.0), 0.8);
+        // material.opacity = 0.5;
+        material.cull = pc.CULLFACE_NONE;
+        material.update();
         this.applyMaterialToEntity(this._drip, material);
     }
 
@@ -119,13 +135,13 @@ export class Models {
         material.gloss = 0.8;
         material.useMetalness = true;
         material.shaderChunksVersion = '2.8';
-        
+
         // Pass Local/Object position from vertex to fragment shader to lock 3D noise directly to the mesh 
         material.getShaderChunks(pc.SHADERLANGUAGE_GLSL).set('transformVS', stoneTransformVSChunk);
-        
+
         // Override the diffuse fragment shader chunk
         material.getShaderChunks(pc.SHADERLANGUAGE_GLSL).set('diffusePS', stoneDiffuseChunk);
-        
+
         material.update();
         return material;
     }
