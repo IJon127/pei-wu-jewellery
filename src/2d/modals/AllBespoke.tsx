@@ -1,14 +1,14 @@
-import type { ModalKind } from '../sectionTypes'
-import { bespokePieces } from '../sections/BespokeSection'
+import type { ModalKind, PortfolioItem } from '../sectionTypes'
 
 export interface AllBespokeProps {
+    bespoke: PortfolioItem[]
     onOpenModal: (kind: ModalKind, id?: string) => void
 }
 
-export function AllBespoke({ onOpenModal }: AllBespokeProps) {
+export function AllBespoke({ bespoke, onOpenModal }: AllBespokeProps) {
     return (
-        <ul className="exhibitions-list bespoke-modal-list">
-            {bespokePieces.map(piece => (
+        <ul className="section-list">
+            {bespoke.map(piece => (
                 <li key={piece.id} className="exhibition-row bespoke-modal-row">
                     <button
                         type="button"
@@ -17,9 +17,11 @@ export function AllBespoke({ onOpenModal }: AllBespokeProps) {
                     >
                         <span className="ex-year bespoke-year">{piece.year}</span>
                         <span className="ex-title bespoke-title">{piece.title}</span>
-                        <span className="ex-venue bespoke-type">{piece.type}</span>
+                        <span className="ex-venue bespoke-type">{piece.material}</span>
                         <div className="bespoke-img-wrapper">
-                            <img src={piece.img} alt={piece.title} className="bespoke-img" />
+                            {piece.images && piece.images[0] && (
+                                <img src={piece.images[0]} alt={piece.title} className="bespoke-img" />
+                            )}
                         </div>
                     </button>
                 </li>

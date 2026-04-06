@@ -1,12 +1,15 @@
-import type { PressEntry, SectionProps } from '../sectionTypes'
+import type { SectionProps } from '../sectionTypes'
 
-export const pressItems: PressEntry[] = [
-    { pub: 'Crafts Magazine', quote: 'A jeweller who understands silence as much as form.', date: 'Nov 2024' },
-    { pub: 'Wallpaper*', quote: "Wu's work occupies a rare space between sculpture and intimacy.", date: 'Sep 2024' },
-    { pub: 'Another Magazine', quote: 'The body is her canvas — and every piece, a sentence.', date: 'Jun 2023' },
-]
+export function PressSection({ scrollTop, align = 'left', portfolioData, onOpenModal }: SectionProps) {
+    const allPress = portfolioData?.press || []
+    console.log('JJJJ', allPress)
+    console.log('JJJJ', portfolioData?.selected?.press)
 
-export function PressSection({ scrollTop, align = 'left', onOpenModal }: SectionProps) {
+    // Attempt to map selected press indices from the fetched data
+    const selectedPress = (portfolioData?.selected?.press || []).map(ref => allPress[ref] || allPress[0]).filter(Boolean)
+    // Fallback to top 3 if none were cleanly requested
+    const displayPress = selectedPress.length > 0 ? selectedPress : allPress.slice(0, 3)
+    // console.log('JJJJ', displayPress)
     return (
         <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
             <div className="section-press">
@@ -14,12 +17,12 @@ export function PressSection({ scrollTop, align = 'left', onOpenModal }: Section
                     <span className="section-idx">04</span>
                     <h2 className="section-title">Press</h2>
                 </div>
-                <div className="press-list">
-                    {pressItems.map((item, i) => (
-                        <div key={i} className="press-row">
-                            <p className="press-quote">&ldquo;{item.quote}&rdquo;</p>
+                <div className="section-list press-list">
+                    {displayPress.map((item, i) => (
+                        <div key={`${item.title}-${i}`} className="press-row">
+                            <p className="press-quote">{item.title}</p>
                             <div className="press-byline">
-                                <span className="press-pub">{item.pub}</span>
+                                <span className="press-pub">{item.type}</span>
                                 <span className="press-date">{item.date}</span>
                             </div>
                         </div>

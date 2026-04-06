@@ -16,11 +16,11 @@ export class Scene {
     public onProgress?: (value: number) => void;
     public onReady?: () => void;
 
-    constructor(canvas: HTMLCanvasElement) {
-        this.init(canvas);
+    constructor(canvas: HTMLCanvasElement, photoUrls: string[]) {
+        this.init(canvas, photoUrls);
     }
 
-    init(canvas: HTMLCanvasElement) {
+    init(canvas: HTMLCanvasElement, photoUrls: string[]) {
         // Initialize PlayCanvas application using default WebGL2/WebGL fallback
         this.app = new pc.Application(canvas, {
             mouse: new pc.Mouse(canvas),
@@ -98,7 +98,7 @@ export class Scene {
         this.app.root.addChild(dome)
 
         // Initialize and add Photos
-        this.photos = new Photos(this.app)
+        this.photos = new Photos(this.app, photoUrls)
         this.app.root.addChild(this.photos.entity)
 
         // Initialize and add Model

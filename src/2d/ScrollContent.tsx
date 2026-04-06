@@ -20,11 +20,8 @@ export const CYCLE_VH = 3240
  * within one cycle of the 3240vh scrollable space.
  */
 export type {
-    Exhibition,
-    ExhibitionDetail,
-    PressEntry,
-    ProjectCard,
-    ProjectDetail,
+    PortfolioItem,
+    PortfolioItem,
     ModalKind,
     SectionProps,
 } from './sectionTypes'
@@ -42,11 +39,14 @@ const SECTION_CONFIG: Array<{ component: React.ComponentType<SectionProps>; scro
 /** How many cycles to seed on first render */
 const INITIAL_CYCLES = 3
 
+import type { PortfolioData } from './services/sheetApi';
+
 interface ScrollContentProps {
     visible: boolean
+    portfolioData: PortfolioData
 }
 
-export function ScrollContent({ visible }: ScrollContentProps) {
+export function ScrollContent({ visible, portfolioData }: ScrollContentProps) {
     const [cycles, setCycles] = useState(INITIAL_CYCLES)
     const [modalKind, setModalKind] = useState<ModalKind | null>(null)
     const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null)
@@ -118,12 +118,14 @@ export function ScrollContent({ visible }: ScrollContentProps) {
                         key={`${cycleIndex}-${i}`}
                         scrollTop={scrollTop + cycleIndex * CYCLE_VH}
                         align={align}
+                        portfolioData={portfolioData}
                         onOpenModal={onOpenModal}
                     />
                 ))
             )}
             <Modal
                 kind={modalKind}
+                portfolioData={portfolioData}
                 selectedProjectId={selectedProjectId}
                 selectedExhibitionId={selectedExhibitionId}
                 selectedBespokeId={selectedBespokeId}

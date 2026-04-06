@@ -1,17 +1,18 @@
-import type { ProjectDetail as ProjectDetailData } from '../sectionTypes'
+import type { PortfolioItem } from '../sectionTypes'
 
 export interface ProjectDetailProps {
-    project: ProjectDetailData
+    project: PortfolioItem
 }
 
 export function ProjectDetail({ project }: ProjectDetailProps) {
-    const { title, year, description, otherImages } = project
+    const { title, year, description, images } = project
+    const otherImages = images.slice(1)
     const hasGallery = otherImages.length > 0
 
     return (
         <article className="single-project">
             <header className="single-project-header">
-                <h2 id="section-detail-title" className="section-detail-title single-project-title">
+                <h2 id="modal-title" className="modal-title single-project-title">
                     {title}
                 </h2>
                 <time className="single-project-date" dateTime={year}>

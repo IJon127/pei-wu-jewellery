@@ -1,17 +1,17 @@
-import type { BespokeDetail as BespokeDetailData } from '../sectionTypes'
+import type { PortfolioItem } from '../sectionTypes'
 
 export interface BespokeDetailProps {
-    piece: BespokeDetailData
+    piece: PortfolioItem
 }
 
 export function BespokeDetail({ piece }: BespokeDetailProps) {
-    const { title, year, type, description, images } = piece
+    const { title, year, material, description, images } = piece
     const hasGallery = images && images.length > 0
 
     return (
         <article className="exhibition-detail bespoke-detail">
             <header className="exhibition-detail-header">
-                <h2 id="section-detail-title" className="section-detail-title exhibition-detail-title">
+                <h2 id="modal-title" className="modal-title exhibition-detail-title">
                     {title}
                 </h2>
                 <time className="exhibition-detail-date" dateTime={year}>
@@ -20,7 +20,7 @@ export function BespokeDetail({ piece }: BespokeDetailProps) {
             </header>
 
             <p className="exhibition-detail-venue bespoke-type-subtitle">
-                {type}
+                {material}
             </p>
 
             <div className="exhibition-detail-body">

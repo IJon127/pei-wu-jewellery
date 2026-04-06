@@ -1,17 +1,17 @@
-import type { ExhibitionDetail as ExhibitionDetailData } from '../sectionTypes'
+import type { PortfolioItem } from '../sectionTypes'
 
 export interface ExhibitionDetailProps {
-    exhibition: ExhibitionDetailData
+    exhibition: PortfolioItem
 }
 
 export function ExhibitionDetail({ exhibition }: ExhibitionDetailProps) {
-    const { title, year, venue, city, description, images } = exhibition
+    const { title, year, material, size, description, images } = exhibition
     const hasGallery = images.length > 0
 
     return (
         <article className="exhibition-detail">
             <header className="exhibition-detail-header">
-                <h2 id="section-detail-title" className="section-detail-title exhibition-detail-title">
+                <h2 id="modal-title" className="modal-title exhibition-detail-title">
                     {title}
                 </h2>
                 <time className="exhibition-detail-date" dateTime={year}>
@@ -20,7 +20,7 @@ export function ExhibitionDetail({ exhibition }: ExhibitionDetailProps) {
             </header>
 
             <p className="exhibition-detail-venue">
-                {venue}, {city}
+                {material}{size ? `, ${size}` : ''}
             </p>
 
             <div className="exhibition-detail-body">

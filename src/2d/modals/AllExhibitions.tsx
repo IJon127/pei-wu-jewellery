@@ -1,26 +1,26 @@
-import type { ModalKind } from '../sectionTypes'
-import { exhibitions } from '../sections/ExhibitionsSection'
+import type { ModalKind, PortfolioItem } from '../sectionTypes'
 
 export interface AllExhibitionsProps {
+    exhibitions: PortfolioItem[]
     onOpenModal: (kind: ModalKind, id?: string) => void
 }
 
-export function AllExhibitions({ onOpenModal }: AllExhibitionsProps) {
+export function AllExhibitions({ exhibitions, onOpenModal }: AllExhibitionsProps) {
     return (
-        <ul className="exhibitions-list">
+        <ul className="section-list">
             {exhibitions.map(ex => (
                 <li key={ex.id} className="exhibition-row">
-                    <button
-                        type="button"
-                        className="exhibition-row--btn"
-                        onClick={() => onOpenModal('exhibition', ex.id)}
-                    >
+                    <div className="ex-modal-row">
                         <span className="ex-year">{ex.year}</span>
-                        <span className="ex-title">{ex.title}</span>
-                        <span className="ex-venue">
-                            {ex.venue}, {ex.city}
-                        </span>
-                    </button>
+                        <div className="ex-info">
+                            <span className="ex-title ex-modal-title">{ex.title}</span>
+                            <div className="ex-location">
+                                <span className="ex-venue">{ex.venue}</span>
+                                <span className="ex-city">{ex.city}</span>
+                            </div>
+                        </div>
+                        <img className="ex-img" src={ex.image} alt={ex.title} />
+                    </div>
                 </li>
             ))}
         </ul>

@@ -6,10 +6,8 @@ import { ExhibitionDetail } from './modals/ExhibitionDetail'
 import { ProjectDetail } from './modals/ProjectDetail'
 import { AllBespoke } from './modals/AllBespoke'
 import { BespokeDetail } from './modals/BespokeDetail'
-import { getExhibitionById } from './sections/ExhibitionsSection'
-import { getProjectById } from './sections/ProjectsSection'
-import { getBespokeById } from './sections/BespokeSection'
 import type { ModalKind } from './sectionTypes'
+import type { PortfolioData } from './services/sheetApi'
 
 const titles: Record<string, string> = {
     allProjects: 'Projects',
@@ -20,6 +18,7 @@ const titles: Record<string, string> = {
 
 export interface ModalProps {
     kind: ModalKind | null
+    portfolioData: PortfolioData | undefined
     selectedProjectId: string | null
     selectedExhibitionId: string | null
     selectedBespokeId: string | null
@@ -27,7 +26,7 @@ export interface ModalProps {
     onOpenModal: (kind: ModalKind, id?: string) => void
 }
 
-export function Modal({ kind, selectedProjectId, selectedExhibitionId, selectedBespokeId, onClose, onOpenModal }: ModalProps) {
+export function Modal({ kind, portfolioData, selectedProjectId, selectedExhibitionId, selectedBespokeId, onClose, onOpenModal }: ModalProps) {
     useEffect(() => {
         if (!kind) return
         const prev = document.body.style.overflow
@@ -42,40 +41,41 @@ export function Modal({ kind, selectedProjectId, selectedExhibitionId, selectedB
         }
     }, [kind, onClose])
 
-    if (!kind) return null
+    if (!kind || !portfolioData) return null
 
     const projectDetail =
-        kind === 'project' && selectedProjectId ? getProjectById(selectedProjectId) : undefined
+        kind === 'project' && selectedProjectId ? portfolioData.projects.find(p => p.id === selectedProjectId) : undefined
 
     const exhibitionDetail =
         kind === 'exhibition' && selectedExhibitionId
-            ? getExhibitionById(selectedExhibitionId)
+            ? portfolioData.exhibitions.find(p => p.id === selectedExhibitionId)
             : undefined
 
     const bespokeDetail =
         kind === 'bespoke' && selectedBespokeId
-            ? getBespokeById(selectedBespokeId)
+            ? portfolioData.bespoke.find(p => p.id === selectedBespokeId)
             : undefined
+
 
     return (
         <div
-            className="section-detail-overlay"
+            className="modal-overlay"
             role="dialog"
             aria-modal="true"
-            aria-labelledby="section-detail-title"
+            aria-labelledby="modal-title"
             onClick={onClose}
         >
-            <div className="section-detail-panel" onClick={e => e.stopPropagation()}>
-                <div className="section-detail-head">
+            <div className="modal-panel" onClick={e => e.stopPropagation()}>
+                <div className="modal-head">
                     {(kind === 'allProjects' || kind === 'allExhibitions' || kind === 'allPress' || kind === 'allBespoke') && (
-                        <h2 id="section-detail-title" className="section-detail-title">{titles[kind]}</h2>
+                        <h2 id="modal-title" className="modal-title">{titles[kind]}</h2>
                     )}
                     {kind === 'project' && (
                         <button
                             type="button"
-                            className="section-detail-back"
+                            className="modal-back"
                             onClick={() => onOpenModal('allProjects')}
-                            aria-label= "Back to projects"
+                            aria-label="Back to projects"
                         >
                             ←
                         </button>
@@ -83,9 +83,9 @@ export function Modal({ kind, selectedProjectId, selectedExhibitionId, selectedB
                     {kind === 'exhibition' && (
                         <button
                             type="button"
-                            className="section-detail-back"
+                            className="modal-back"
                             onClick={() => onOpenModal('allExhibitions')}
-                            aria-label= "Back to exhibitions"
+                            aria-label="Back to exhibitions"
                         >
                             ←
                         </button>
@@ -93,21 +93,21 @@ export function Modal({ kind, selectedProjectId, selectedExhibitionId, selectedB
                     {kind === 'bespoke' && (
                         <button
                             type="button"
-                            className="section-detail-back"
+                            className="modal-back"
                             onClick={() => onOpenModal('allBespoke')}
-                            aria-label= "Back to bespoke"
+                            aria-label="Back to bespoke"
                         >
                             ←
                         </button>
                     )}
-                    <button type="button" className="section-detail-close" onClick={onClose} aria-label="Close">
+                    <button type="button" className="modal-close" onClick={onClose} aria-label="Close">
                         ×
                     </button>
                 </div>
-                <div className="section-detail-body">
-                    {kind === 'allProjects' && <AllProjects onOpenModal={onOpenModal} />}
-                    {kind === 'allExhibitions' && <AllExhibitions onOpenModal={onOpenModal} />}
-                    {kind === 'allPress' && <AllPress />}
+                <div className="modal-body">
+                    {kind === 'allProjects' && <AllProjects projects={portfolioData.projects} onOpenModal={onOpenModal} />}
+                    {kind === 'allExhibitions' && <AllExhibitions exhibitions={portfolioData.exhibitions} onOpenModal={onOpenModal} />}
+                    {kind === 'allPress' && <AllPress press={portfolioData.press} />}
                     {kind === 'project' && projectDetail && <ProjectDetail project={projectDetail} />}
                     {kind === 'project' && !projectDetail && (
                         <p className="single-project-missing">Project not found.</p>
@@ -118,7 +118,7 @@ export function Modal({ kind, selectedProjectId, selectedExhibitionId, selectedB
                     {kind === 'exhibition' && !exhibitionDetail && (
                         <p className="exhibition-detail-missing">Exhibition not found.</p>
                     )}
-                    {kind === 'allBespoke' && <AllBespoke onOpenModal={onOpenModal} />}
+                    {kind === 'allBespoke' && <AllBespoke bespoke={portfolioData.bespoke} onOpenModal={onOpenModal} />}
                     {kind === 'bespoke' && bespokeDetail && (
                         <BespokeDetail piece={bespokeDetail} />
                     )}

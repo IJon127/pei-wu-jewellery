@@ -9,27 +9,15 @@ export class Photos {
     private vertexBuffer!: pc.VertexBuffer;
     private instanceCount = 10;
 
-    constructor(app: pc.Application) {
+    constructor(app: pc.Application, imageUrls: string[]) {
         this.app = app;
+        this.instanceCount = imageUrls.length || 10;
         this.entity = new pc.Entity('photos');
 
         // Apply engine patches for Texture Arrays BEFORE shader compilation
         this.patchEngineForTextureArrays();
 
-        const images = [
-            '/assets/images/photos/photo1.png',
-            '/assets/images/photos/photo2.png',
-            '/assets/images/photos/photo3.png',
-            '/assets/images/photos/photo4.png',
-            '/assets/images/photos/photo5.png',
-            '/assets/images/photos/photo6.png',
-            '/assets/images/photos/photo7.png',
-            '/assets/images/photos/photo8.png',
-            '/assets/images/photos/photo9.png',
-            '/assets/images/photos/photo10.png',
-        ];
-
-        this.init(images);
+        this.init(imageUrls);
     }
 
     private patchEngineForTextureArrays() {
@@ -247,7 +235,6 @@ export class Photos {
             // Set the Texture Array Z-index (0 through 29)
             data[offset + 16] = i;
         }
-        console.log('JJJ data', data);
 
         this.vertexBuffer = new pc.VertexBuffer(device, vbFormat, this.instanceCount, {
             data: data.buffer

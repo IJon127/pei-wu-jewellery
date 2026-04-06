@@ -3,6 +3,7 @@ import { Scene } from '../3d/scene'
 import { LoadingScreen } from './LoadingScreen'
 import { ScrollContent, CYCLE_VH } from './ScrollContent'
 import { ScrollHint } from './ScrollHint'
+import { usePortfolioData } from '../hooks/usePortfolioData'
 import './index.css'
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
     const [isSceneReady, setIsSceneReady] = useState(false)
     const [hasScrolled, setHasScrolled] = useState(false)
 
+    const { data: portfolioData, isLoading: isDataLoading } = usePortfolioData()
+
     const isInteractingRef = useRef(isInteracting)
 
     // Sync state to ref so the scroll listener can access it without causing re-runs
@@ -20,10 +23,10 @@ function App() {
     }, [isInteracting])
 
     useEffect(() => {
-        if (!canvasRef.current) return
+        if (!canvasRef.current || isDataLoading || !portfolioData) return
 
-        // Initialize the abstracted 3D engine boundary
-        sceneRef.current = new Scene(canvasRef.current)
+        // Initialize the abstracted 3D engine boundary with proper selected photos
+        sceneRef.current = new Scene(canvasRef.current, portfolioData.selected.photos)
         sceneRef.current.onReady = () => setIsSceneReady(true)
         sceneRef.current.start()
 
@@ -46,7 +49,7 @@ function App() {
             window.removeEventListener('scroll', onScroll)
             sceneRef.current?.destroy()
         }
-    }, [])
+    }, [isDataLoading, portfolioData])
 
     const handleInteract = () => {
         setIsInteracting(true);
@@ -58,9 +61,11 @@ function App() {
         <div className="app-wrapper">
             <canvas ref={canvasRef} id="playcanvas-app" />
 
-            <LoadingScreen visible={!isSceneReady} />
+            {/* Show loading screen until both data is loaded and 3D scene compiles */}
+            <LoadingScreen visible={isDataLoading || !isSceneReady} />
 
-            <ScrollContent visible={isInteracting} />
+            {/* Only mount scroll content when data is ready so sections have access to their arrays */}
+            {portfolioData && <ScrollContent visible={isInteracting} portfolioData={portfolioData} />}
 
             <ScrollHint visible={isInteracting && !hasScrolled} />
 
