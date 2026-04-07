@@ -99,7 +99,8 @@ export class Scene {
 
         // Initialize and add Photos
         this.photos = new Photos(this.app, photoUrls)
-        this.app.root.addChild(this.photos.entity)
+        // Temporarily hide 3D photos
+        // this.app.root.addChild(this.photos.entity)
 
         // Initialize and add Model
         this.models = new Models(this.app)

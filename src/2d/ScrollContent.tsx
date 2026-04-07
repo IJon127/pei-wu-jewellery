@@ -6,6 +6,7 @@ import { PressSection } from './sections/PressSection'
 import { BespokeSection } from './sections/BespokeSection'
 import { NewsSection } from './sections/NewsSection'
 import { AboutSection } from './sections/AboutSection'
+import { PhotosSection } from './sections/PhotosSection'
 import { Modal } from './Modal'
 import type { ModalKind, SectionProps } from './sectionTypes'
 
@@ -21,7 +22,6 @@ export const CYCLE_VH = 3240
  */
 export type {
     PortfolioItem,
-    PortfolioItem,
     ModalKind,
     SectionProps,
 } from './sectionTypes'
@@ -30,6 +30,7 @@ const SECTION_CONFIG: Array<{ component: React.ComponentType<SectionProps>; scro
     { component: StatementSection, scrollTop: 160, align: 'center' },
     { component: ProjectsSection, scrollTop: 590, align: 'left' },
     { component: ExhibitionsSection, scrollTop: 1200, align: 'right' },
+    { component: PhotosSection, scrollTop: 1300, align: 'center' },
     { component: PressSection, scrollTop: 1700, align: 'left' },
     { component: BespokeSection, scrollTop: 2100, align: 'left' },
     { component: NewsSection, scrollTop: 2790, align: 'center' },
