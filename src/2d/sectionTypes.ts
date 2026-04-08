@@ -21,6 +21,26 @@ export interface PortfolioItem {
     link?: string
 }
 
+export interface StatementEntry {
+    quote: string,
+    body: string,
+    year: string
+}
+
+export interface PhotosEntry {
+    x: number,
+    y: number,
+    z: number,
+    scale: number,
+    image: string
+}
+
+export interface AboutEntry {
+    bio: string,
+    image: string,
+    cv: string,
+    email: string,
+}
 
 export interface SectionProps {
     scrollTop: number

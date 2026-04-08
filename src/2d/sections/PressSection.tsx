@@ -2,14 +2,12 @@ import type { SectionProps } from '../sectionTypes'
 
 export function PressSection({ scrollTop, align = 'left', portfolioData, onOpenModal }: SectionProps) {
     const allPress = portfolioData?.press || []
-    console.log('JJJJ', allPress)
-    console.log('JJJJ', portfolioData?.selected?.press)
 
     // Attempt to map selected press indices from the fetched data
     const selectedPress = (portfolioData?.selected?.press || []).map(ref => allPress[ref] || allPress[0]).filter(Boolean)
     // Fallback to top 3 if none were cleanly requested
     const displayPress = selectedPress.length > 0 ? selectedPress : allPress.slice(0, 3)
-    // console.log('JJJJ', displayPress)
+
     return (
         <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
             <div className="section-press">

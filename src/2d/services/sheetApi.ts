@@ -1,13 +1,16 @@
 import Papa from 'papaparse'
-import type { PortfolioItem } from '../sectionTypes'
+import type { PortfolioItem, StatementEntry, PhotosEntry, AboutEntry } from '../sectionTypes'
 
 const URLS = {
     selected: import.meta.env.VITE_SELECTED_DATA_URL,
+    statement: import.meta.env.VITE_STATEMENT_DATA_URL,
     projects: import.meta.env.VITE_PROJECTS_DATA_URL,
     exhibitions: import.meta.env.VITE_EXHIBITIONS_DATA_URL,
+    photos: import.meta.env.VITE_PHOTOS_DATA_URL,
     press: import.meta.env.VITE_PRESS_DATA_URL,
     bespoke: import.meta.env.VITE_BESPOKE_DATA_URL,
-    news: import.meta.env.VITE_NEWS_DATA_URL
+    news: import.meta.env.VITE_NEWS_DATA_URL,
+    about: import.meta.env.VITE_ABOUT_DATA_URL,
 }
 
 export interface SelectedData {
@@ -19,11 +22,14 @@ export interface SelectedData {
 
 export interface PortfolioData {
     selected: SelectedData
+    statement: StatementEntry
     projects: PortfolioItem[]
     exhibitions: PortfolioItem[]
+    photos: PhotosEntry[]
     press: PortfolioItem[]
     bespoke: PortfolioItem[]
     news: PortfolioItem[]
+    about: AboutEntry
 }
 
 async function fetchCsvAsJson<T>(url: string): Promise<T[]> {
@@ -76,13 +82,26 @@ function parsePortfolioRow(row: any): PortfolioItem {
 }
 
 export async function fetchPortfolioData(): Promise<PortfolioData> {
-    const [selectedRaw, projectsRaw, exhibitionsRaw, pressRaw, bespokeRaw, newsRaw] = await Promise.all([
+    const [
+        selectedRaw,
+        statementRaw,
+        projectsRaw,
+        exhibitionsRaw,
+        photosRaw,
+        pressRaw,
+        bespokeRaw,
+        newsRaw,
+        aboutRaw
+    ] = await Promise.all([
         fetchCsvAsJson<any>(URLS.selected),
+        fetchCsvAsJson<any>(URLS.statement),
         fetchCsvAsJson<any>(URLS.projects),
         fetchCsvAsJson<any>(URLS.exhibitions),
+        fetchCsvAsJson<any>(URLS.photos),
         fetchCsvAsJson<any>(URLS.press),
         fetchCsvAsJson<any>(URLS.bespoke),
-        fetchCsvAsJson<any>(URLS.news)
+        fetchCsvAsJson<any>(URLS.news),
+        fetchCsvAsJson<any>(URLS.about)
     ])
 
     // Skip the first row of selected Raw since it's informational text
@@ -103,32 +122,40 @@ export async function fetchPortfolioData(): Promise<PortfolioData> {
     const press = pressRaw.map(parsePortfolioRow).slice(1)
     const news = newsRaw.map(parsePortfolioRow).slice(1)
 
-    // const press = pressRaw.map(row => ({
-    //     pub: row.publication || row.pub || '',
-    //     quote: row.quote || '',
-    //     date: row.date || ''
-    // }))
 
-    // Skip the first row of news since it's just a description block
-    // const newsDataRows = newsRaw.slice(1)
+    const statement = {
+        quote: statementRaw[1].quote,
+        body: statementRaw[1].body,
+        year: statementRaw[1].year
+    };
 
-    // Map to PortfolioItem format and reverse grab the latest 5 elements
-    // const news: PortfolioItem[] = newsDataRows.map(row => ({
-    //     title: row.title || '',
-    //     type: row.type || '',
-    //     date: row.date || '',
-    //     link: row.link || undefined
-    // })).filter(n => n.title) // filter out completely empty trailing rows
+    const photos = photosRaw.map(row => ({
+        x: row.x,
+        y: row.y,
+        z: row.z,
+        scale: row.scale,
+        image: row.image
+    }))
+
+    const about = {
+        bio: aboutRaw[1].bio,
+        image: aboutRaw[1].image,
+        cv: aboutRaw[1].cv,
+        email: aboutRaw[1].email,
+    };
 
     // "last 5 news" usually implies chronological reversal if the end of spreadsheet is latest
     const last5News = news.slice(-5).reverse()
 
     return {
         selected,
+        statement,
         projects,
         exhibitions,
+        photos,
         press,
         bespoke,
-        news: last5News
+        news: last5News,
+        about
     }
 }
