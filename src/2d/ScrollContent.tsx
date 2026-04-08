@@ -30,7 +30,7 @@ const SECTION_CONFIG: Array<{ component: React.ComponentType<SectionProps>; scro
     { component: StatementSection, scrollTop: 160, align: 'center' },
     { component: ProjectsSection, scrollTop: 590, align: 'left' },
     { component: ExhibitionsSection, scrollTop: 1200, align: 'right' },
-    { component: PhotosSection, scrollTop: 1300, align: 'center' },
+    { component: PhotosSection, scrollTop: 1260, align: 'center' },
     { component: PressSection, scrollTop: 1700, align: 'left' },
     { component: BespokeSection, scrollTop: 2100, align: 'left' },
     { component: NewsSection, scrollTop: 2790, align: 'center' },
