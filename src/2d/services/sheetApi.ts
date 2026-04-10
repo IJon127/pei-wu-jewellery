@@ -130,6 +130,7 @@ export async function fetchPortfolioData(): Promise<PortfolioData> {
     };
 
     const photos = photosRaw.map(row => ({
+        alt: row.alt,
         x: row.x,
         y: row.y,
         z: row.z,

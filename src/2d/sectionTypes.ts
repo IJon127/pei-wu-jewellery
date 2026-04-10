@@ -28,6 +28,7 @@ export interface StatementEntry {
 }
 
 export interface PhotosEntry {
+    alt: string,
     x: number,
     y: number,
     z: number,

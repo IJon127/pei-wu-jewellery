@@ -75,9 +75,6 @@ function App() {
                         <span className="title-sans">Pei Wu </span>
                         <span className="title-serif">Jewellery</span>
                     </h1>
-                    <p className="landing-subtitle">
-                        The combination of all senses reflects the state of mind under her story. “We are all very similar.”
-                    </p>
                     <button className="landing-btn" onClick={handleInteract}>
                         Enter
                     </button>

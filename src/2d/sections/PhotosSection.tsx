@@ -1,25 +1,8 @@
 import { useMemo, useEffect, useState } from 'react'
 import type { SectionProps } from '../sectionTypes'
 
-// Define your custom positions here. 
-// x and y are in the range [-1, 1] where:
-// x: -1 is left edge, 0 is center, 1 is right edge
-// y: -1 is top edge, 0 is center, 1 is bottom edge
-const PHOTO_POSITIONS = [
-    { x: -0.6, y: -1, width: 200, zIndex: 1 },
-    { x: 0.5, y: -0.7, width: 250, zIndex: 2 },
-    { x: -0.5, y: 0.2, width: 180, zIndex: 3 },
-    { x: 0.7, y: 0.3, width: 220, zIndex: 1 },
-    { x: -0.7, y: 0.8, width: 240, zIndex: 2 },
-    { x: 0.3, y: 0.7, width: 190, zIndex: 4 },
-    { x: -0.1, y: -0.2, width: 260, zIndex: 5 },
-    { x: 0.8, y: -0.1, width: 210, zIndex: 2 },
-    { x: -0.9, y: 0.1, width: 200, zIndex: 3 },
-    { x: 0.1, y: 1, width: 230, zIndex: 1 },
-];
-
 export function PhotosSection({ scrollTop, align = 'center', portfolioData }: SectionProps) {
-    const photos = portfolioData?.selected?.photos || []
+    const photos = portfolioData?.photos || []
 
     const [scrollY, setScrollY] = useState(0);
 
@@ -31,21 +14,25 @@ export function PhotosSection({ scrollTop, align = 'center', portfolioData }: Se
     }, []);
 
     const positionedPhotos = useMemo(() => {
-        return photos.map((url, index) => {
-            // Loop over the array if there are more photos than positions
-            const pos = PHOTO_POSITIONS[index % PHOTO_POSITIONS.length];
+        return photos.map((photoRow) => {
+            // Parse values from string to numbers (data from CSV comes out as strings)
+            const xVal = Number(photoRow.x) || 50;
+            const yVal = Number(photoRow.y) || 0;
+            const zVal = Number(photoRow.z) || 1;
+            const scaleVal = Number(photoRow.scale) || 1;
 
-            // Map [-1, 1] to true vw/vh instead of percentages 
-            // (e.g., y: 0 -> 50vh, y: 1.5 -> 125vh)
-            const left = `${(pos.x + 1) * 50}vw`;
-            const top = `${(pos.y + 1) * 100}vh`;
+            // Values are now directly in 0 to 100 range, 
+            // no need to algebraically map from [-1, 1], so we map directly to vw/vh.
+            const left = `${xVal}vw`;
+            const top = `${yVal}vh`;
 
             return {
-                url,
+                alt: photoRow.alt,
+                url: photoRow.image,
                 top,
                 left,
-                width: `${pos.width}px`,
-                zIndex: pos.zIndex
+                width: `${200 * scaleVal}px`,
+                zIndex: zVal
             }
         })
     }, [photos])
@@ -66,7 +53,7 @@ export function PhotosSection({ scrollTop, align = 'center', portfolioData }: Se
                         <img
                             key={i}
                             src={photo.url}
-                            alt=""
+                            alt={photo.alt}
                             style={{
                                 position: 'absolute',
                                 top: photo.top,
