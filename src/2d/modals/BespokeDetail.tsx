@@ -5,34 +5,62 @@ export interface BespokeDetailProps {
 }
 
 export function BespokeDetail({ piece }: BespokeDetailProps) {
-    const { title, year, material, description, images } = piece
-    const hasGallery = images && images.length > 0
+    const { title, year, introduction, description, material, images, photoby } = piece
+    const mainImage = images && images.length > 0 ? images[0] : ''
+    const galleryImages = images.slice(1)
+    const materials = material ? material.split(',').map(m => m.trim()).filter(Boolean) : []
 
     return (
-        <article className="exhibition-detail bespoke-detail">
-            <header className="exhibition-detail-header">
-                <h2 id="modal-title" className="modal-title exhibition-detail-title">
-                    {title}
-                </h2>
-                <time className="exhibition-detail-date" dateTime={year}>
-                    {year}
-                </time>
+        <article className="bespoke-detail">
+            {/* Two-col header: image left, meta right */}
+            <header className="bespoke-detail-header">
+                <div className="bespoke-detail-header-left">
+                    {mainImage && <img src={mainImage} className="bespoke-detail-main-img" alt={title} />}
+                </div>
+                <div className="bespoke-detail-header-right">
+                    <h2 id="modal-title" className="bespoke-detail-title">
+                        {title}
+                    </h2>
+                    {introduction && (
+                        <p className="bespoke-detail-introduction">{introduction}</p>
+                    )}
+                    <div className="bespoke-detail-meta">
+                        {year && (
+                            <div className="project-detail-meta-row">
+                                <span className="project-detail-label">Year</span>
+                                <span className="project-detail-value">{year}</span>
+                            </div>
+                        )}
+                        {materials.length > 0 && (
+                            <div className="project-detail-meta-row">
+                                <span className="project-detail-label">Materials</span>
+                                <span className="project-detail-value">{materials.join(', ')}</span>
+                            </div>
+                        )}
+                        {photoby && photoby.length > 0 && (
+                            <div className="project-detail-meta-row">
+                                <span className="project-detail-label">Photo by</span>
+                                <span className="project-detail-value">{photoby.join(', ')}</span>
+                            </div>
+                        )}
+                    </div>
+                </div>
             </header>
 
-            <p className="exhibition-detail-venue bespoke-type-subtitle">
-                {material}
-            </p>
+            {/* Description body */}
+            {description && (
+                <div className="bespoke-detail-body">
+                    <p className="bespoke-detail-description">{description}</p>
+                </div>
+            )}
 
-            <div className="exhibition-detail-body">
-                <p className="exhibition-detail-description">{description}</p>
-            </div>
-
-            {hasGallery && (
-                <div className="exhibition-detail-gallery" aria-label={`${title} images`}>
-                    {images.map((src, i) => (
+            {/* Additional gallery images */}
+            {galleryImages.length > 0 && (
+                <div className="bespoke-detail-gallery" aria-label={`${title} images`}>
+                    {galleryImages.map((src, i) => (
                         <img
                             key={`${src}-${i}`}
-                            className="exhibition-detail-gallery-img"
+                            className="bespoke-detail-gallery-img"
                             src={src}
                             alt={`${title} — image ${i + 1}`}
                         />

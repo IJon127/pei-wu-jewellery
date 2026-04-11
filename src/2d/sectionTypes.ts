@@ -1,6 +1,6 @@
 import type { PortfolioData } from './services/sheetApi';
 
-export type ModalKind = 'allProjects' | 'allExhibitions' | 'allPress' | 'project' | 'exhibition' | 'allBespoke' | 'bespoke'
+export type ModalKind = 'allProjects' | 'allExhibitions' | 'allPress' | 'project' | 'exhibition' | 'bespoke'
 
 export interface PortfolioItem {
     id: string

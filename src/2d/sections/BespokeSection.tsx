@@ -29,7 +29,7 @@ export function BespokeSection({ scrollTop, align = 'left', portfolioData, onOpe
                                         <img src={piece.images[0]} alt={piece.title} className="bespoke-img" />
                                     )}
                                 </div>
-                                <div>
+                                <div className="bespoke-info">
                                     <div className="bespoke-title">{piece.title}</div>
                                     <div className="bespoke-introduction">{piece.introduction}</div>
                                 </div>
@@ -37,15 +37,6 @@ export function BespokeSection({ scrollTop, align = 'left', portfolioData, onOpe
                         </li>
                     ))}
                 </ul>
-                <button
-                    type="button"
-                    className="section-more-btn section-more-btn-right-align"
-                    data-reveal
-                    data-reveal-delay={String(bespokePieces.length + 2)}
-                    onClick={() => onOpenModal?.('allBespoke')}
-                >
-                    View All →
-                </button>
             </div>
         </div>
     )

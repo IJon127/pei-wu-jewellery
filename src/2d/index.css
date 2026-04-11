@@ -169,8 +169,7 @@ body {
   width: 60vw;
   height: 100vh;
   display: flex;
-  /* align-items: flex-end; */
-  /* pointer-events: auto; */
+  padding: 0 5vw;
 }
 
 .section-tall {
@@ -256,11 +255,9 @@ body {
 
 /* ── 01 Statement ───────────────────────────────────────── */
 .section-statement {
-  padding: 0 10vw 6rem;
+  padding: 0 3rem 0 12rem;
   /* max-width: 900px; */
   /* min-width: 600px; */
-  /* margin: 0 auto; */
-  /* text-align: center; */
 }
 
 .statement-quote {
@@ -293,7 +290,6 @@ body {
 /* ── 02 Projects ────────────────────────────────────────── */
 .section-projects {
   padding: 0 5vw 10rem;
-  width: 100%;
 }
 
 .projects-grid {
@@ -409,8 +405,8 @@ body {
 
 /* ── 03 Exhibitions ─────────────────────────────────────── */
 .section-exhibitions {
-  padding: 0 5vw 4rem;
-  width: 100%;
+  /* padding: 0 5vw 4rem; */
+  /* width: 100%; */
 }
 
 .exhibition-row {
@@ -523,7 +519,7 @@ body {
 
 /*  */
 .section-photos {
-  /* padding: 0 5vw 4rem; */
+  /* padding: 0 10vw 0 50vw; */
   position: absolute;
   top: 0;
   left: 0;
@@ -549,7 +545,7 @@ body {
 /* ── 04 Press ───────────────────────────────────────────── */
 .section-press {
   padding: 0 6vw 4rem;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .press-list {
@@ -598,12 +594,7 @@ body {
   color: rgba(20, 10, 20, 0.3);
 }
 
-/* ── 05 Lab ─────────────────────────────────────────────── */
-.section-bespoke {
-  padding: 0 5vw 4rem;
-  width: 80%;
-}
-
+/* ── 05 Bespoke ─────────────────────────────────────────────── */
 .bespoke-description {
   font-family: 'Quicksand', sans-serif;
   font-size: 0.9rem;
@@ -617,11 +608,13 @@ body {
 }
 
 .bespoke-row--btn {
-  display: flex;
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   align-items: center;
   padding: 1.5rem 0;
   gap: 1rem;
-  height: 20vh;
+  /* height: 20vw; */
   width: 100%;
   text-align: left;
   background: none;
@@ -632,7 +625,12 @@ body {
 }
 
 .bespoke-row--btn:hover {
-  background: linear-gradient(90deg, rgba(20, 10, 20, 0.07) 0%, rgba(20, 10, 20, 0) 100%);
+  background: linear-gradient(90deg, rgba(20, 10, 20, 0) 0%, rgba(20, 10, 20, 0.04) 50%, rgba(20, 10, 20, 0) 100%);
+
+}
+
+.bespoke-info {
+  /* flex-grow: 4; */
 }
 
 .bespoke-title {
@@ -654,8 +652,6 @@ body {
 .bespoke-img-wrapper {
   height: 100%;
   aspect-ratio: 6 / 4;
-  margin-left: auto;
-  justify-content: flex-end;
 }
 
 .bespoke-img {
@@ -665,7 +661,7 @@ body {
   border-radius: 2px;
   cursor: pointer;
   transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
-  transform-origin: left center;
+  transform-origin: left bottom;
   position: relative;
   z-index: 1;
   opacity: 0.8;
@@ -1276,4 +1272,84 @@ button.modal-project-card--btn img {
   font-family: 'Quicksand', sans-serif;
   color: rgba(20, 10, 20, 0.45);
   margin: 0;
+}
+
+/* ── Bespoke detail modal ─ */
+.bespoke-detail {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.bespoke-detail-header {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+  align-items: start;
+}
+
+.bespoke-detail-main-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 4px;
+  background: rgba(20, 10, 20, 0.04);
+}
+
+.bespoke-detail-header-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.bespoke-detail-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-style: italic;
+  font-weight: 400;
+  margin: 0;
+  color: rgba(20, 10, 20, 0.85);
+  line-height: 1.1;
+}
+
+.bespoke-detail-introduction {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(20, 10, 20, 0.55);
+  margin: 0;
+}
+
+.bespoke-detail-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.bespoke-detail-body {
+  margin-bottom: 2.5rem;
+}
+
+.bespoke-detail-description {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  line-height: 1.85;
+  color: rgba(20, 10, 20, 0.55);
+  margin: 0;
+}
+
+.bespoke-detail-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+
+.bespoke-detail-gallery-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 4px;
+  background: rgba(20, 10, 20, 0.06);
 }

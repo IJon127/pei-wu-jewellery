@@ -3,7 +3,6 @@ import { AllExhibitions } from './modals/AllExhibitions'
 import { AllPress } from './modals/AllPress'
 import { AllProjects } from './modals/AllProjects'
 import { ProjectDetail } from './modals/ProjectDetail'
-import { AllBespoke } from './modals/AllBespoke'
 import { BespokeDetail } from './modals/BespokeDetail'
 import type { ModalKind } from './sectionTypes'
 import type { PortfolioData } from './services/sheetApi'
@@ -12,7 +11,6 @@ const titles: Record<string, string> = {
     allProjects: 'Projects',
     allExhibitions: 'Exhibitions',
     allPress: 'Press',
-    allBespoke: 'Bespoke',
 }
 
 export interface ModalProps {
@@ -61,7 +59,7 @@ export function Modal({ kind, portfolioData, selectedProjectId, selectedExhibiti
         >
             <div className="modal-panel" onClick={e => e.stopPropagation()}>
                 <div className="modal-head">
-                    {(kind === 'allProjects' || kind === 'allExhibitions' || kind === 'allPress' || kind === 'allBespoke') && (
+                    {(kind === 'allProjects' || kind === 'allExhibitions' || kind === 'allPress') && (
                         <h2 id="modal-title" className="modal-title">{titles[kind]}</h2>
                     )}
                     {kind === 'project' && (
@@ -75,16 +73,7 @@ export function Modal({ kind, portfolioData, selectedProjectId, selectedExhibiti
                         </button>
                     )}
 
-                    {kind === 'bespoke' && (
-                        <button
-                            type="button"
-                            className="modal-back"
-                            onClick={() => onOpenModal('allBespoke')}
-                            aria-label="Back to bespoke"
-                        >
-                            ←
-                        </button>
-                    )}
+
                     <button type="button" className="modal-close" onClick={onClose} aria-label="Close">
                         ×
                     </button>
@@ -97,7 +86,7 @@ export function Modal({ kind, portfolioData, selectedProjectId, selectedExhibiti
                     {kind === 'project' && !projectDetail && (
                         <p className="project-detail-missing">Project not found.</p>
                     )}
-                    {kind === 'allBespoke' && <AllBespoke bespoke={portfolioData.bespoke} onOpenModal={onOpenModal} />}
+
                     {kind === 'bespoke' && bespokeDetail && (
                         <BespokeDetail piece={bespokeDetail} />
                     )}
