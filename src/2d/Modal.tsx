@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { AllExhibitions } from './modals/AllExhibitions'
 import { AllPress } from './modals/AllPress'
 import { AllProjects } from './modals/AllProjects'
-import { ExhibitionDetail } from './modals/ExhibitionDetail'
 import { ProjectDetail } from './modals/ProjectDetail'
 import { AllBespoke } from './modals/AllBespoke'
 import { BespokeDetail } from './modals/BespokeDetail'
@@ -46,11 +45,6 @@ export function Modal({ kind, portfolioData, selectedProjectId, selectedExhibiti
     const projectDetail =
         kind === 'project' && selectedProjectId ? portfolioData.projects.find(p => p.id === selectedProjectId) : undefined
 
-    const exhibitionDetail =
-        kind === 'exhibition' && selectedExhibitionId
-            ? portfolioData.exhibitions.find(p => p.id === selectedExhibitionId)
-            : undefined
-
     const bespokeDetail =
         kind === 'bespoke' && selectedBespokeId
             ? portfolioData.bespoke.find(p => p.id === selectedBespokeId)
@@ -80,16 +74,7 @@ export function Modal({ kind, portfolioData, selectedProjectId, selectedExhibiti
                             ←
                         </button>
                     )}
-                    {kind === 'exhibition' && (
-                        <button
-                            type="button"
-                            className="modal-back"
-                            onClick={() => onOpenModal('allExhibitions')}
-                            aria-label="Back to exhibitions"
-                        >
-                            ←
-                        </button>
-                    )}
+
                     {kind === 'bespoke' && (
                         <button
                             type="button"
@@ -106,17 +91,11 @@ export function Modal({ kind, portfolioData, selectedProjectId, selectedExhibiti
                 </div>
                 <div className="modal-body">
                     {kind === 'allProjects' && <AllProjects projects={portfolioData.projects} onOpenModal={onOpenModal} />}
-                    {kind === 'allExhibitions' && <AllExhibitions exhibitions={portfolioData.exhibitions} onOpenModal={onOpenModal} />}
+                    {kind === 'allExhibitions' && <AllExhibitions exhibitions={portfolioData.exhibitions} onOpenModal={onOpenModal} highlightId={selectedExhibitionId ?? undefined} />}
                     {kind === 'allPress' && <AllPress press={portfolioData.press} />}
                     {kind === 'project' && projectDetail && <ProjectDetail project={projectDetail} />}
                     {kind === 'project' && !projectDetail && (
                         <p className="project-detail-missing">Project not found.</p>
-                    )}
-                    {kind === 'exhibition' && exhibitionDetail && (
-                        <ExhibitionDetail exhibition={exhibitionDetail} />
-                    )}
-                    {kind === 'exhibition' && !exhibitionDetail && (
-                        <p className="exhibition-detail-missing">Exhibition not found.</p>
                     )}
                     {kind === 'allBespoke' && <AllBespoke bespoke={portfolioData.bespoke} onOpenModal={onOpenModal} />}
                     {kind === 'bespoke' && bespokeDetail && (

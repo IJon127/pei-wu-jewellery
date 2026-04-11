@@ -60,7 +60,7 @@ export function ScrollContent({ visible, portfolioData }: ScrollContentProps) {
             setSelectedProjectId(id ?? null)
             setSelectedExhibitionId(null)
             setSelectedBespokeId(null)
-        } else if (kind === 'exhibition') {
+        } else if (kind === 'exhibition' || kind === 'allExhibitions') {
             setSelectedExhibitionId(id ?? null)
             setSelectedProjectId(null)
             setSelectedBespokeId(null)

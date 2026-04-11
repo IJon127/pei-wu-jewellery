@@ -18,7 +18,7 @@ export function ExhibitionsSection({ scrollTop, align = 'left', portfolioData, o
                             <button
                                 type="button"
                                 className="exhibition-row--btn"
-                                onClick={() => onOpenModal?.('exhibition', ex.id)}
+                                onClick={() => onOpenModal?.('allExhibitions', ex.id)}
                             >
                                 <span className="ex-year">{ex.year}</span>
                                 <span className="ex-title">{ex.title}</span>
