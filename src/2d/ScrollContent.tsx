@@ -27,14 +27,14 @@ export type {
 } from './sectionTypes'
 
 const SECTION_CONFIG: Array<{ component: React.ComponentType<SectionProps>; scrollTop: number; align?: SectionProps['align'] }> = [
-    { component: StatementSection, scrollTop: 160, align: 'center' },
-    { component: ProjectsSection, scrollTop: 590, align: 'left' },
+    { component: StatementSection, scrollTop: 100, align: 'right' },
+    { component: ProjectsSection, scrollTop: 400, align: 'left' },
     { component: ExhibitionsSection, scrollTop: 1200, align: 'right' },
-    { component: PhotosSection, scrollTop: 1260, align: 'center' },
-    { component: PressSection, scrollTop: 1700, align: 'left' },
+    { component: PhotosSection, scrollTop: 1275, align: 'center' },
+    { component: PressSection, scrollTop: 1715, align: 'left' },
     { component: BespokeSection, scrollTop: 2100, align: 'left' },
     { component: NewsSection, scrollTop: 2790, align: 'center' },
-    { component: AboutSection, scrollTop: 3070, align: 'center' },
+    { component: AboutSection, scrollTop: 3010, align: 'center' },
 ]
 
 /** How many cycles to seed on first render */

@@ -41,6 +41,8 @@ export interface AboutEntry {
     image: string,
     cv: string,
     email: string,
+    socialType: string,
+    socialLink: string
 }
 
 export interface SectionProps {

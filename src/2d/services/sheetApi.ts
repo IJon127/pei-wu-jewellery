@@ -74,8 +74,8 @@ function parsePortfolioRow(row: any): PortfolioItem {
         introduction: row.introduction || '',
         description: row.description || '',
         image: row.image || '',
-        images: row.images ? row.images.split(',').map((u: string) => u.trim()).filter(Boolean) : [],
-        photoby: (row.photoby || '').split(',').map((u: string) => u.trim()).filter(Boolean),
+        images: row.images ? row.images.split('\n').map((u: string) => u.trim()).filter(Boolean) : [],
+        photoby: (row.photoby || '').split('\n').map((u: string) => u.trim()).filter(Boolean),
         illustration: row.illustration || undefined,
         link: row.link || undefined
     }
@@ -143,6 +143,8 @@ export async function fetchPortfolioData(): Promise<PortfolioData> {
         image: aboutRaw[1].image,
         cv: aboutRaw[1].cv,
         email: aboutRaw[1].email,
+        socialType: aboutRaw[1].socialType,
+        socialLink: aboutRaw[1].socialLink
     };
 
     // "last 5 news" usually implies chronological reversal if the end of spreadsheet is latest

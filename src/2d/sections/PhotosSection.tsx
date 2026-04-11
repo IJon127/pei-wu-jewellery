@@ -43,7 +43,7 @@ export function PhotosSection({ scrollTop, align = 'center', portfolioData }: Se
 
     return (
         <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh`, width: '100%', height: '100vh' }}>
-            <div className="section-photos" style={{ position: 'absolute', top: 0, left: 0, width: '100vw', height: '100vh', pointerEvents: 'none' }}>
+            <div className="section-photos">
                 {positionedPhotos.map((photo, i) => {
                     // Parallax multiplier based on zIndex. 
                     // Negative scrollDelta means moving UP faster.
@@ -54,16 +54,14 @@ export function PhotosSection({ scrollTop, align = 'center', portfolioData }: Se
                             key={i}
                             src={photo.url}
                             alt={photo.alt}
+                            className='photo-img'
                             style={{
-                                position: 'absolute',
                                 top: photo.top,
                                 left: photo.left,
                                 width: photo.width,
-                                objectFit: 'contain',
-                                pointerEvents: 'auto',
                                 transform: `translate(-50%, calc(-50% + ${parallaxOffset}px))`,
-                                boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-                                zIndex: photo.zIndex
+                                zIndex: photo.zIndex,
+                                boxShadow: `0 10px ${photo.zIndex * 10}px rgba(0, 0, 0, 0.25)`
                             }}
                         />
                     )

@@ -2,7 +2,7 @@ import type { SectionProps } from '../sectionTypes'
 
 export function BespokeSection({ scrollTop, align = 'left', portfolioData, onOpenModal }: SectionProps) {
     const bespokePieces = portfolioData?.bespoke || []
-    console.log(bespokePieces);
+
     return (
         <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
             <div className="section-bespoke">

@@ -51,7 +51,7 @@ body {
 /* Tall pill container */
 .scroll-hint-pill {
   width: 56px;
-  height: 90px;
+  height: 150px;
   /* border-radius: 100px; */
   /* border: 2px solid rgba(50,50,51, 0.5); */
   position: relative;
@@ -64,10 +64,10 @@ body {
 
 /* The ball — animates down; box-shadow creates the fading ghost trail above */
 .scroll-hint-ball {
-  width: 24px;
-  height: 24px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
-  background: #fff;
+  background: rgba(20, 10, 20, 0.5);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   flex-shrink: 0;
   animation: scroll-hint-fall 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
@@ -75,8 +75,8 @@ body {
 
 @keyframes scroll-hint-fall {
   0% {
-    transform: translateY(0);
-    opacity: 1;
+    transform: translateY(50px);
+    opacity: 0;
     box-shadow:
       0 -28px 0 rgba(20, 10, 20, 0.06),
       0 -56px 0 rgba(20, 10, 20, 0.03);
@@ -90,7 +90,7 @@ body {
   }
 
   80% {
-    transform: translateY(64px);
+    transform: translateY(120px);
     opacity: 0.8;
     box-shadow:
       0 -28px 0 rgba(20, 10, 20, 0.35),
@@ -98,7 +98,7 @@ body {
   }
 
   100% {
-    transform: translateY(64px);
+    transform: translateY(120px);
     opacity: 0;
     box-shadow:
       0 -28px 0 rgba(20, 10, 20, 0.15),
@@ -132,7 +132,7 @@ body {
 
 .scroll-section {
   position: absolute;
-  width: 70vw;
+  width: 60vw;
   height: 100vh;
   display: flex;
   /* align-items: flex-end; */
@@ -226,10 +226,10 @@ body {
 /* ── 01 Statement ───────────────────────────────────────── */
 .section-statement {
   padding: 0 10vw 6rem;
-  max-width: 900px;
-  min-width: 600px;
-  margin: 0 auto;
-  text-align: center;
+  /* max-width: 900px; */
+  /* min-width: 600px; */
+  /* margin: 0 auto; */
+  /* text-align: center; */
 }
 
 .statement-quote {
@@ -255,143 +255,110 @@ body {
   font-size: 0.8rem;
   color: rgba(20, 10, 20, 0.3);
   letter-spacing: 0.1em;
+  text-align: right;
 }
+
 
 /* ── 02 Projects ────────────────────────────────────────── */
 .section-projects {
-  padding: 0 5vw 4rem;
+  padding: 0 5vw 10rem;
   width: 100%;
 }
 
-/* Mosaic: 3-column flow, blocks self-align, gaps tight */
-.projects-mosaic {
+.projects-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2rem 1.5rem;
+  gap: 5.5rem 3.5rem;
   align-items: start;
 }
 
-/* Base block — carries the transform offset */
-.project-block {
+.project-item {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  will-change: transform;
 }
 
-button.project-block {
-  margin: 0;
-  padding: 0;
-  text-align: left;
-  font: inherit;
-  color: inherit;
-  background: none;
-  border: none;
-  cursor: pointer;
-  pointer-events: auto;
-  transition: opacity 0.2s;
-}
-
-button.project-block:focus-visible {
-  outline: 2px solid rgba(20, 10, 20, 0.35);
-  outline-offset: 4px;
-}
-
-button.project-block:hover {
-  opacity: 0.94;
-}
-
-.project-block-inner-btn {
-  margin: 0;
-  padding: 0;
-  text-align: left;
-  font: inherit;
-  color: inherit;
-  background: none;
-  border: none;
-  cursor: pointer;
-  pointer-events: auto;
-  transition: background 0.2s;
-}
-
-.project-block-img {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  object-position: center;
+.project-item-btn {
   display: block;
-  background: rgba(20, 10, 20, 0.06);
+  width: 100%;
+  padding: 0;
+  opacity: 0.75;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
 }
 
-/* Meta row beneath each image */
-.project-block-meta {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
+.project-item-btn:hover {
+  opacity: 1;
 }
 
-.project-block-id {
-  font-family: 'Quicksand', sans-serif;
-  font-size: 0.6rem;
-  color: rgba(20, 10, 20, 0.25);
-  letter-spacing: 0.12em;
+.project-item-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  border-radius: 0.5rem;
+  background: rgba(20, 10, 20, 0.04);
 }
 
-.project-block-year {
-  font-family: 'Quicksand', sans-serif;
-  font-size: 0.6rem;
-  color: rgba(20, 10, 20, 0.2);
-  letter-spacing: 0.08em;
+.project-item-info {
+  margin-top: 1.2rem;
 }
 
-.project-block-title {
-  font-family: 'Ubuntu', sans-serif;
-  font-size: 0.8rem;
+.project-item-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-style: italic;
   font-weight: 400;
-  color: rgba(20, 10, 20, 0.65);
+  color: rgba(20, 10, 20, 0.85);
   margin: 0;
-  flex: 1;
+  line-height: 1.2;
 }
 
-/* "More" card — empty image + ghost button */
-/* "More" card — glassmorphism panel, button centered */
-.project-block--more {
-  width: 45%;
-  aspect-ratio: 3 / 4;
-  background: rgba(20, 10, 20, 0.1);
-  border: 1px solid rgba(20, 10, 20, 0.28);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(20, 10, 20, 0.22);
+.project-item-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(20, 10, 20, 0.15);
+  margin: 0.5rem 0;
+}
+
+.project-item-subtitle {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(20, 10, 20, 0.45);
+  display: block;
+}
+
+.project-item--more {
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: auto;
+  aspect-ratio: 4 / 3;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(20, 10, 20, 0.08);
+  background: rgba(20, 10, 20, 0.02);
   cursor: pointer;
-  transition: background 0.25s;
+  pointer-events: auto;
+  transition: all 0.3s ease;
 }
 
-.project-block--more:hover {
-  background: rgba(20, 10, 20, 0.18);
+.project-item--more:hover {
+  background: rgba(20, 10, 20, 0.05);
+  border-color: rgba(20, 10, 20, 0.2);
 }
 
 .project-more-btn {
   font-family: 'Quicksand', sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(20, 10, 20, 0.75);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  pointer-events: none;
-  transition: color 0.2s;
-}
-
-.project-block--more:hover .project-more-btn {
-  color: rgba(20, 10, 20, 1);
+  color: rgba(20, 10, 20, 0.6);
 }
 
 /* ── 03 Exhibitions ─────────────────────────────────────── */
@@ -485,6 +452,30 @@ button.project-block:hover {
   object-position: center;
   display: block;
   background: rgba(20, 10, 20, 0.06);
+}
+
+/*  */
+.section-photos {
+  /* padding: 0 5vw 4rem; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+.photo-img {
+  position: absolute;
+  border-radius: 0.4rem;
+  opacity: 0.8;
+  object-fit: contain;
+  pointer-events: auto;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.photo-img:hover {
+  opacity: 1;
 }
 
 
@@ -610,12 +601,14 @@ button.project-block:hover {
   transform-origin: left center;
   position: relative;
   z-index: 1;
+  opacity: 0.8;
 }
 
 .bespoke-row--btn:hover .bespoke-img {
-  transform: scale(2);
+  transform: scale(1.5);
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
   z-index: 10;
+  opacity: 1;
 }
 
 /* ── 06 News ────────────────────────────────────────────── */
@@ -692,8 +685,8 @@ button.project-block:hover {
 
 .about-portrait {
   aspect-ratio: 3/4;
-  background: rgba(20, 10, 20, 0.05);
-  border: 1px solid rgba(20, 10, 20, 0.1);
+  border-radius: 0.5rem;
+  opacity: 0.8;
 }
 
 .about-bio {
@@ -712,22 +705,30 @@ button.project-block:hover {
 
 .about-contact {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   margin-top: 0.5rem;
 }
 
 .about-link {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   font-size: 0.8rem;
   color: rgba(20, 10, 20, 0.45);
   text-decoration: none;
-  border-bottom: 1px solid rgba(20, 10, 20, 0.2);
-  padding-bottom: 0.1rem;
-  transition: color 0.2s;
+  letter-spacing: 0.1em;
+  border: 1px solid rgba(20, 10, 20, 0.2);
+  padding: 0.2rem 0.8rem 0.3rem 0.8rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  align-self: center;
+  background: rgba(20, 10, 20, 0.02);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.3s ease;
 }
 
 .about-link:hover {
-  color: rgba(20, 10, 20, 0.8);
+  background: rgba(20, 10, 20, 0.05);
+  border-color: rgba(20, 10, 20, 0.2);
 }
 
 
