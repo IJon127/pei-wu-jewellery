@@ -1,22 +1,24 @@
+import { useScrollReveal } from '../../hooks/useScrollReveal'
 import type { SectionProps } from '../sectionTypes'
 
 export function BespokeSection({ scrollTop, align = 'left', portfolioData, onOpenModal }: SectionProps) {
     const bespokePieces = portfolioData?.bespoke || []
+    const ref = useScrollReveal<HTMLDivElement>()
 
     return (
         <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
-            <div className="section-bespoke">
+            <div className="section-bespoke" ref={ref}>
                 <div className="section-header-row">
-                    <span className="section-idx">05</span>
-                    <h2 className="section-title">Bespoke</h2>
+                    <span className="section-idx" data-reveal data-reveal-delay="0">05</span>
+                    <h2 className="section-title" data-reveal data-reveal-delay="0">Bespoke</h2>
                 </div>
-                <p className="bespoke-description">
+                <p className="bespoke-description" data-reveal data-reveal-delay="1">
                     Bespoke works are silent vessels translating intimate milestones—<br />
                     from weddings to private stories—into a tangible form.
                 </p>
                 <ul className="section-list">
-                    {bespokePieces.map((piece) => (
-                        <li key={piece.id} className="exhibition-row bespoke-row">
+                    {bespokePieces.map((piece, i) => (
+                        <li key={piece.id} className="exhibition-row bespoke-row" data-reveal data-reveal-delay={String(i + 2)}>
                             <button
                                 type="button"
                                 className="bespoke-row--btn"
@@ -38,6 +40,8 @@ export function BespokeSection({ scrollTop, align = 'left', portfolioData, onOpe
                 <button
                     type="button"
                     className="section-more-btn section-more-btn-right-align"
+                    data-reveal
+                    data-reveal-delay={String(bespokePieces.length + 2)}
                     onClick={() => onOpenModal?.('allBespoke')}
                 >
                     View All →

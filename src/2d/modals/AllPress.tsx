@@ -11,8 +11,8 @@ export function AllPress({ press }: AllPressProps) {
                 <li key={i} className="press-row">
                     <button type="button" className="press-row-btn" onClick={() => console.log('open press link in new tab')}>
                         {/* <p className="press-quote">&ldquo;{item.quote}&rdquo;</p>
-                        <div className="press-byline">
-                            <span className="press-pub">{item.pub}</span>
+                        <div className="press-info">
+                            <span className="press-type">{item.pub}</span>
                             <span className="press-date">{item.date}</span>
                         </div> */}
                     </button>

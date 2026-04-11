@@ -30,7 +30,7 @@ export function ScrollHint({ visible }: Props) {
 
     if (!isMounted) return null
 
-    const transition = opacity === 0 ? 'opacity 2s ease' : 'opacity 1s ease'
+    const transition = opacity === 0 ? 'opacity 1s ease' : 'opacity 0.7s ease'
 
     return (
         <div className="scroll-hint" style={{ opacity, transition, pointerEvents: 'none' }}>

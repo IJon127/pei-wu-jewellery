@@ -1,17 +1,20 @@
+import { useScrollReveal } from '../../hooks/useScrollReveal'
 import type { SectionProps } from '../sectionTypes'
 
 export function ExhibitionsSection({ scrollTop, align = 'left', portfolioData, onOpenModal }: SectionProps) {
     const exhibitions = portfolioData?.exhibitions || []
+    const ref = useScrollReveal<HTMLDivElement>()
+
     return (
         <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
-            <div className="section-exhibitions">
+            <div className="section-exhibitions" ref={ref}>
                 <div className="section-header-row">
-                    <span className="section-idx">03</span>
-                    <h2 className="section-title">Exhibitions</h2>
+                    <span className="section-idx" data-reveal data-reveal-delay="0">03</span>
+                    <h2 className="section-title" data-reveal data-reveal-delay="0">Exhibitions</h2>
                 </div>
                 <ul className="section-list">
-                    {exhibitions.map(ex => (
-                        <li key={ex.id} className="exhibition-row">
+                    {exhibitions.map((ex, i) => (
+                        <li key={ex.id} className="exhibition-row" data-reveal data-reveal-delay={String(i + 1)}>
                             <button
                                 type="button"
                                 className="exhibition-row--btn"
@@ -27,6 +30,8 @@ export function ExhibitionsSection({ scrollTop, align = 'left', portfolioData, o
                 <button
                     type="button"
                     className="section-more-btn section-more-btn-right-align"
+                    data-reveal
+                    data-reveal-delay={String(exhibitions.length + 1)}
                     onClick={() => onOpenModal?.('allExhibitions')}
                 >
                     View All →
