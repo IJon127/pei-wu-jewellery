@@ -515,7 +515,10 @@ body {
   color: rgba(20, 10, 20, 0.3);
   text-decoration: none;
   pointer-events: auto;
+}
 
+.ex-link:hover {
+  color: rgba(20, 10, 20, 0.6);
 }
 
 /*  */
@@ -565,7 +568,7 @@ body {
   border: none;
 }
 
-.press-quote {
+.press-title {
   font-family: 'Quicksand', sans-serif;
   font-size: 1.5rem;
   /* font-style: italic; */

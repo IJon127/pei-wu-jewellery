@@ -20,7 +20,7 @@ export function PressSection({ scrollTop, align = 'left', portfolioData, onOpenM
                 <div className="section-list press-list">
                     {displayPress.map((item, i) => (
                         <div key={`${item.title}-${i}`} className="press-row" data-reveal data-reveal-delay={String(i + 1)}>
-                            <p className="press-quote">{item.title}
+                            <p className="press-title">{item.title}
                                 {item.link && <a className="news-link" href={item.link} target="_blank" rel="noopener noreferrer">↗</a>}
                             </p>
                             <div className="press-info">

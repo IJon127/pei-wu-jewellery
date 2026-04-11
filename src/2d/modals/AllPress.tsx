@@ -6,18 +6,18 @@ export interface AllPressProps {
 
 export function AllPress({ press }: AllPressProps) {
     return (
-        <ul className="section-list press-list">
+        <div className="section-list press-list">
             {press.map((item, i) => (
-                <li key={i} className="press-row">
-                    <button type="button" className="press-row-btn" onClick={() => console.log('open press link in new tab')}>
-                        {/* <p className="press-quote">&ldquo;{item.quote}&rdquo;</p>
-                        <div className="press-info">
-                            <span className="press-type">{item.pub}</span>
-                            <span className="press-date">{item.date}</span>
-                        </div> */}
-                    </button>
-                </li>
+                <div key={`${item.title}-${i}`} className="press-row" style={{ borderTop: '1px solid rgba(20, 10, 20, 0.1)', paddingTop: '1rem' }}>
+                    <p className="press-title">{item.title}
+                        {item.link && <a className="news-link" href={item.link} target="_blank" rel="noopener noreferrer">↗</a>}
+                    </p>
+                    <div className="press-info">
+                        <span className="press-type">{item.type}</span>
+                        <span className="press-date">{item.date}</span>
+                    </div>
+                </div>
             ))}
-        </ul>
+        </div>
     )
 }

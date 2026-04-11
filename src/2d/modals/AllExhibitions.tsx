@@ -11,6 +11,8 @@ export interface AllExhibitionsProps {
 export function AllExhibitions({ exhibitions, highlightId }: AllExhibitionsProps) {
     const listRef = useRef<HTMLUListElement>(null)
 
+    const reversedExhibitions = [...exhibitions].reverse();
+
     useEffect(() => {
         if (!highlightId || !listRef.current) return
 
@@ -42,7 +44,7 @@ export function AllExhibitions({ exhibitions, highlightId }: AllExhibitionsProps
 
     return (
         <ul className="section-list" ref={listRef}>
-            {exhibitions.map(ex => (
+            {reversedExhibitions.map(ex => (
                 <li key={ex.id} className="exhibition-row" data-ex-id={ex.id}>
                     <div className="ex-modal-row">
                         <span className="ex-year">{ex.year}</span>
