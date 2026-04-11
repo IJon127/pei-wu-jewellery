@@ -110,7 +110,7 @@ export function Modal({ kind, portfolioData, selectedProjectId, selectedExhibiti
                     {kind === 'allPress' && <AllPress press={portfolioData.press} />}
                     {kind === 'project' && projectDetail && <ProjectDetail project={projectDetail} />}
                     {kind === 'project' && !projectDetail && (
-                        <p className="single-project-missing">Project not found.</p>
+                        <p className="project-detail-missing">Project not found.</p>
                     )}
                     {kind === 'exhibition' && exhibitionDetail && (
                         <ExhibitionDetail exhibition={exhibitionDetail} />
