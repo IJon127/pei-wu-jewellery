@@ -4,11 +4,13 @@ import { Camera } from './Camera'
 import domeVS from './shaders/domeVS.glsl?raw'
 import domeFS from './shaders/domeFS.glsl?raw'
 import { PostEffects } from './PostEffects'
+import { Stars } from './Stars'
 
 export class Scene {
     public app!: pc.Application;
     private models!: Models;
     private camera!: Camera;
+    private stars!: Stars;
     private postEffects!: PostEffects;
 
     public onProgress?: (value: number) => void;
@@ -96,6 +98,10 @@ export class Scene {
         // this.app.root.addChild(dome)
 
 
+        // Initialize and add Stars
+        this.stars = new Stars(this.app)
+        this.app.root.addChild(this.stars.entity)
+
         // Initialize and add Model
         this.models = new Models(this.app)
         this.app.root.addChild(this.models.entity)
@@ -107,6 +113,7 @@ export class Scene {
         this.app.on('update', (dt: number) => {
             this.models.update(dt)
             this.camera.update(dt)
+            this.stars.update(dt)
         })
 
         // Wire loading progress events to React
