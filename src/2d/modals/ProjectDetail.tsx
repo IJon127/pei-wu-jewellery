@@ -1,13 +1,17 @@
+import { useState } from 'react'
 import type { PortfolioItem } from '../sectionTypes'
+import { Lightbox } from '../components/Lightbox'
 
 export interface ProjectDetailProps {
     project: PortfolioItem
 }
 
 export function ProjectDetail({ project }: ProjectDetailProps) {
-    const { title, year, description, images, size, material } = project
+    const { title, year, description, images, size, material, photoby } = project
     const hasGallery = images.length > 0
     const materials = material.split(',').map(m => m.trim())
+
+    const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
     return (
         <article className="project-detail">
@@ -42,14 +46,30 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             {hasGallery && (
                 <div className="project-detail-gallery" aria-label="More images">
                     {images.map((src, i) => (
-                        <img
+                        <button
                             key={`${src}-${i}`}
-                            className="project-detail-gallery-img"
-                            src={src}
-                            alt={`${title} — detail ${i + 1}`}
-                        />
+                            type="button"
+                            className="lightbox-trigger"
+                            onClick={() => setLightboxIndex(i)}
+                            aria-label={`View image ${i + 1}`}
+                        >
+                            <img
+                                className="project-detail-gallery-img"
+                                src={src}
+                                alt={`${title} — detail ${i + 1}`}
+                            />
+                        </button>
                     ))}
                 </div>
+            )}
+
+            {lightboxIndex !== null && (
+                <Lightbox
+                    images={images}
+                    initialIndex={lightboxIndex}
+                    photoby={photoby}
+                    onClose={() => setLightboxIndex(null)}
+                />
             )}
         </article>
     )

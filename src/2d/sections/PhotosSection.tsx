@@ -1,10 +1,12 @@
 import { useMemo, useEffect, useState } from 'react'
 import type { SectionProps } from '../sectionTypes'
+import { Lightbox } from '../components/Lightbox'
 
 export function PhotosSection({ scrollTop, align = 'center', portfolioData }: SectionProps) {
     const photos = portfolioData?.photos || []
 
     const [scrollY, setScrollY] = useState(0);
+    const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
     useEffect(() => {
         const onScroll = () => setScrollY(window.scrollY);
@@ -41,6 +43,8 @@ export function PhotosSection({ scrollTop, align = 'center', portfolioData }: Se
     const sectionTopPx = typeof window !== 'undefined' ? (scrollTop * window.innerHeight) / 100 : 0;
     const scrollDelta = scrollY - sectionTopPx;
 
+    const allImages = useMemo(() => positionedPhotos.map(p => p.url), [positionedPhotos])
+
     return (
         <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh`, width: '100%', height: '100vh' }}>
             <div className="section-photos">
@@ -55,18 +59,28 @@ export function PhotosSection({ scrollTop, align = 'center', portfolioData }: Se
                             src={photo.url}
                             alt={photo.alt}
                             className='photo-img'
+                            onClick={() => setLightboxIndex(i)}
                             style={{
                                 top: photo.top,
                                 left: photo.left,
                                 width: photo.width,
                                 transform: `translate(-50%, calc(-50% + ${parallaxOffset}px))`,
                                 zIndex: photo.zIndex,
-                                boxShadow: `0 10px ${photo.zIndex * 10}px rgba(0, 0, 0, 0.25)`
+                                boxShadow: `0 10px ${photo.zIndex * 10}px rgba(0, 0, 0, 0.25)`,
+                                cursor: 'zoom-in'
                             }}
                         />
                     )
                 })}
             </div>
+
+            {lightboxIndex !== null && (
+                <Lightbox
+                    images={allImages}
+                    initialIndex={lightboxIndex}
+                    onClose={() => setLightboxIndex(null)}
+                />
+            )}
         </div>
     )
 }

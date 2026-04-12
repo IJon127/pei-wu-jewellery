@@ -75,7 +75,7 @@ function parsePortfolioRow(row: any): PortfolioItem {
         description: row.description || '',
         image: row.image || '',
         images: row.images ? row.images.split('\n').map((u: string) => u.trim()).filter(Boolean) : [],
-        photoby: (row.photoby || '').split('\n').map((u: string) => u.trim()).filter(Boolean),
+        photoby: (row.photoby || '').split(',').map((u: string) => u.trim()).filter(Boolean),
         illustration: row.illustration || undefined,
         link: row.link || undefined
     }
@@ -136,7 +136,7 @@ export async function fetchPortfolioData(): Promise<PortfolioData> {
         z: row.z,
         scale: row.scale,
         image: row.image
-    }))
+    })).slice(1)
 
     const about = {
         bio: aboutRaw[1].bio,
