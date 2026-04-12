@@ -3,24 +3,22 @@ import { Models } from './Models'
 import { Camera } from './Camera'
 import domeVS from './shaders/domeVS.glsl?raw'
 import domeFS from './shaders/domeFS.glsl?raw'
-import { Photos } from './Photos'
 import { PostEffects } from './PostEffects'
 
 export class Scene {
-    public app: pc.Application;
+    public app!: pc.Application;
     private models!: Models;
-    private photos!: Photos;
     private camera!: Camera;
     private postEffects!: PostEffects;
 
     public onProgress?: (value: number) => void;
     public onReady?: () => void;
 
-    constructor(canvas: HTMLCanvasElement, photoUrls: string[]) {
-        this.init(canvas, photoUrls);
+    constructor(canvas: HTMLCanvasElement) {
+        this.init(canvas);
     }
 
-    init(canvas: HTMLCanvasElement, photoUrls: string[]) {
+    init(canvas: HTMLCanvasElement) {
         // Initialize PlayCanvas application using default WebGL2/WebGL fallback
         this.app = new pc.Application(canvas, {
             mouse: new pc.Mouse(canvas),
@@ -47,7 +45,7 @@ export class Scene {
         this.app.root.addChild(light)
 
         // Load HDR Skybox
-        this.app.assets.loadFromUrl('/assets/hdr/the_sky_is_on_fire_1k.hdr', 'texture', (err, asset) => {
+        this.app.assets.loadFromUrl('/assets/hdr/qwantani_night_puresky_1k.hdr', 'texture', (err, asset) => {
             if (!err && asset && asset.resource) {
                 const texture = asset.resource as pc.Texture;
 
@@ -55,6 +53,8 @@ export class Scene {
                 const skybox = pc.EnvLighting.generateSkyboxCubemap(texture);
                 this.app.scene.skybox = skybox;
                 this.app.scene.skyboxMip = 0; // 0 shows the clear skybox
+                // Flip skybox upside down
+                this.app.scene.skyboxRotation = new pc.Quat().setFromEulerAngles(0, 10, 180);
 
                 // Generate lighting source and environment atlas
                 const lighting = pc.EnvLighting.generateLightingSource(texture);
@@ -64,7 +64,6 @@ export class Scene {
                 this.app.scene.envAtlas = envAtlas;
                 if (this.camera.entity.camera) {
                     this.camera.entity.camera.toneMapping = pc.TONEMAP_ACES;
-                    this.camera.entity.camera.exposure = 0.1;
                 }
             } else {
                 console.error("Failed to load HDR skybox", err);
@@ -81,7 +80,6 @@ export class Scene {
             uniqueName: 'domeShader',
             vertexGLSL: domeVS,
             fragmentGLSL: domeFS,
-            cull: pc.CULLFACE_FRONT,
             attributes: {
                 vertex_position: pc.SEMANTIC_POSITION,
                 vertex_texCoord0: pc.SEMANTIC_TEXCOORD0,
@@ -95,12 +93,8 @@ export class Scene {
 
         // Apply material to sphere
         dome.render!.meshInstances[0].material = domeMaterial
-        this.app.root.addChild(dome)
+        // this.app.root.addChild(dome)
 
-        // Initialize and add Photos
-        this.photos = new Photos(this.app, photoUrls)
-        // Temporarily hide 3D photos
-        // this.app.root.addChild(this.photos.entity)
 
         // Initialize and add Model
         this.models = new Models(this.app)

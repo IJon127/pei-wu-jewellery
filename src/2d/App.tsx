@@ -26,7 +26,7 @@ function App() {
         if (!canvasRef.current || isDataLoading || !portfolioData) return
 
         // Initialize the abstracted 3D engine boundary with proper selected photos
-        sceneRef.current = new Scene(canvasRef.current, portfolioData.selected.photos)
+        sceneRef.current = new Scene(canvasRef.current)
         sceneRef.current.onReady = () => setIsSceneReady(true)
         sceneRef.current.start()
 
