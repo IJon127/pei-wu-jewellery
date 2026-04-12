@@ -5,11 +5,9 @@ import starsFS from './shaders/starsFS.glsl?raw'
 export class Stars {
     public entity: pc.Entity;
     private _material: pc.ShaderMaterial;
-    private _app: pc.Application;
     private _time: number = 0;
 
     constructor(app: pc.Application) {
-        this._app = app;
         this.entity = new pc.Entity('stars');
 
         // Number of stars

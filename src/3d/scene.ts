@@ -1,8 +1,8 @@
 import * as pc from 'playcanvas'
 import { Models } from './Models'
 import { Camera } from './Camera'
-import domeVS from './shaders/domeVS.glsl?raw'
-import domeFS from './shaders/domeFS.glsl?raw'
+// import domeVS from './shaders/domeVS.glsl?raw'
+// import domeFS from './shaders/domeFS.glsl?raw'
 import { PostEffects } from './PostEffects'
 import { Stars } from './Stars'
 
@@ -11,7 +11,6 @@ export class Scene {
     private models!: Models;
     private camera!: Camera;
     private stars!: Stars;
-    private postEffects!: PostEffects;
 
     public onProgress?: (value: number) => void;
     public onReady?: () => void;
@@ -55,8 +54,7 @@ export class Scene {
                 const skybox = pc.EnvLighting.generateSkyboxCubemap(texture);
                 this.app.scene.skybox = skybox;
                 this.app.scene.skyboxMip = 0; // 0 shows the clear skybox
-                // Flip skybox upside down
-                this.app.scene.skyboxRotation = new pc.Quat().setFromEulerAngles(0, 10, 180);
+                this.app.scene.skyboxRotation = new pc.Quat().setFromEulerAngles(-150, 50, 65); //0 65 80
 
                 // Generate lighting source and environment atlas
                 const lighting = pc.EnvLighting.generateLightingSource(texture);
@@ -73,28 +71,22 @@ export class Scene {
         });
 
         // Create Dome with Shader Material
-        const dome = new pc.Entity('dome')
-        dome.addComponent('render', { type: 'sphere' })
-        // Diameter ~50 -> Scale 50 (since base sphere is diameter 1)
-        dome.setLocalScale(50, 50, 50)
+        // const dome = new pc.Entity('dome')
+        // dome.addComponent('render', { type: 'sphere' })
+        // dome.setLocalScale(50, 50, 50)
 
-        const domeMaterial = new pc.ShaderMaterial({
-            uniqueName: 'domeShader',
-            vertexGLSL: domeVS,
-            fragmentGLSL: domeFS,
-            attributes: {
-                vertex_position: pc.SEMANTIC_POSITION,
-                vertex_texCoord0: pc.SEMANTIC_TEXCOORD0,
-            }
-        });
-
-        // const domeMaterial = new pc.Material()
-        // domeMaterial.shader = shader
-        domeMaterial.cull = pc.CULLFACE_FRONT
-        domeMaterial.update()
-
-        // Apply material to sphere
-        dome.render!.meshInstances[0].material = domeMaterial
+        // const domeMaterial = new pc.ShaderMaterial({
+        //     uniqueName: 'domeShader',
+        //     vertexGLSL: domeVS,
+        //     fragmentGLSL: domeFS,
+        //     attributes: {
+        //         vertex_position: pc.SEMANTIC_POSITION,
+        //         vertex_texCoord0: pc.SEMANTIC_TEXCOORD0,
+        //     }
+        // });
+        // domeMaterial.cull = pc.CULLFACE_FRONT
+        // domeMaterial.update()
+        // dome.render!.meshInstances[0].material = domeMaterial
         // this.app.root.addChild(dome)
 
 
@@ -107,11 +99,10 @@ export class Scene {
         this.app.root.addChild(this.models.entity)
 
         // Initialize Post-processing (Bloom, Vignette)
-        // this.postEffects = new PostEffects(this.app, this.camera.entity);
+        new PostEffects(this.app, this.camera.entity);
 
         // Setup update loop for animation
         this.app.on('update', (dt: number) => {
-            this.models.update(dt)
             this.camera.update(dt)
             this.stars.update(dt)
         })
@@ -134,7 +125,6 @@ export class Scene {
 
     public updateScroll(progress: number) {
         this.camera?.updateScroll(progress);
-        this.models?.updateScroll(progress);
     }
 
     public start() {

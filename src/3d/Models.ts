@@ -4,11 +4,11 @@ import stoneTransformVSChunk from './shaders/stoneTransformVS.glsl?raw'
 
 export class Models {
     entity: pc.Entity;
-    private _donut: pc.Entity;
-    private _drip: pc.Entity;
-    private _egg: pc.Entity;
-    private _ring: pc.Entity;
-    private _stairs: pc.Entity;
+    private _donut!: pc.Entity;
+    private _drip!: pc.Entity;
+    private _egg!: pc.Entity;
+    private _ring!: pc.Entity;
+    private _stairs!: pc.Entity;
 
 
     constructor(app: pc.Application) {
@@ -56,22 +56,6 @@ export class Models {
         });
     }
 
-    update(dt: number) {
-        // Logic for rotating models removed; camera orbits instead
-    }
-
-    updateScroll(progress: number) {
-        return;
-        const startHideDrip = 0.9272;
-        const endHideDrip = 0.963;
-
-        if (progress >= startHideDrip && progress <= endHideDrip) {
-            this._drip.enabled = false;
-        } else {
-            this._drip.enabled = true;
-        }
-    }
-
     setDonut() {
         const material = this.createCrystalMaterial(new pc.Color(1.0, 1.0, 1.0), 1.0);
         this.applyMaterialToEntity(this._donut, material);
@@ -79,7 +63,6 @@ export class Models {
 
     setDrip() {
         const material = this.createCrystalMaterial(new pc.Color(0.65, 0.8, 1.0), 0.8);
-        // material.opacity = 0.5;
         material.cull = pc.CULLFACE_NONE;
         material.update();
         this.applyMaterialToEntity(this._drip, material);
@@ -103,9 +86,6 @@ export class Models {
     createCrystalMaterial(color: pc.Color, gloss: number) {
         const material = new pc.StandardMaterial();
         material.diffuse = color;
-        // material.opacity = 0.99;
-        // material.clearCoatGloss = 1.0;
-        // material.blendType = pc.BLEND_PREMULTIPLIED;
         material.metalness = 0.0;       // low metalness, otherwise it's reflective
         material.gloss = gloss;
         material.useMetalness = true; // refractive materials are currently supported only with metalness
@@ -113,8 +93,8 @@ export class Models {
         material.refractionIndex = 1.0 / 1.33; // water
         material.blendType = pc.BLEND_NORMAL;
         material.dispersion = 0.5;
-        material.thickness = 0.4;
-        material.useDynamicRefraction = true; // Allow scene-texture refraction
+        (material as any).thickness = 0.4;
+        (material as any).useDynamicRefraction = true; // Allow scene-texture refraction
         material.update();
         return material;
     }
@@ -147,9 +127,10 @@ export class Models {
     }
 
     applyMaterialToEntity(entity: pc.Entity, material: pc.Material) {
-        entity.children.forEach((child: pc.Entity) => {
-            if (!child.render) return;
-            child.render.meshInstances.forEach(meshInstance => {
+        entity.children.forEach((child: pc.GraphNode) => {
+            const childEntity = child as pc.Entity;
+            if (!childEntity.render) return;
+            childEntity.render.meshInstances.forEach(meshInstance => {
                 meshInstance.material = material;
             })
         })
