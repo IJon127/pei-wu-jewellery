@@ -13,7 +13,7 @@ export class Stars {
         this.entity = new pc.Entity('stars');
 
         // Number of stars
-        const count = 4000;
+        const count = 1000;
         const vertexCount = count * 4;
         const indexCount = count * 6;
 

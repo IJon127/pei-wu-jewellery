@@ -2,6 +2,7 @@ import { useScrollReveal } from '../../hooks/useScrollReveal'
 import type { SectionProps } from '../sectionTypes'
 
 export function BespokeSection({ scrollTop, align = 'left', portfolioData, onOpenModal }: SectionProps) {
+    const bespokeDescription = portfolioData?.selected?.bespoke
     const bespokePieces = portfolioData?.bespoke || []
     const ref = useScrollReveal<HTMLDivElement>()
 
@@ -13,8 +14,7 @@ export function BespokeSection({ scrollTop, align = 'left', portfolioData, onOpe
                     <h2 className="section-title" data-reveal data-reveal-delay="0">Bespoke</h2>
                 </div>
                 <p className="bespoke-description" data-reveal data-reveal-delay="1">
-                    Bespoke works are silent vessels translating intimate milestones—<br />
-                    from weddings to private stories—into a tangible form.
+                    {bespokeDescription}
                 </p>
                 <ul className="section-list">
                     {bespokePieces.map((piece, i) => (

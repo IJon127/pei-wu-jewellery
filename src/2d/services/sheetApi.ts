@@ -17,7 +17,7 @@ export interface SelectedData {
     projects: number[]
     exhibitions: number[]
     press: number[]
-    photos: string[]
+    bespoke: string
 }
 
 export interface PortfolioData {
@@ -112,7 +112,7 @@ export async function fetchPortfolioData(): Promise<PortfolioData> {
         projects: selectedDataRows.map(r => parseInt(r.projects)).filter(n => !isNaN(n)).map(parseIndex),
         exhibitions: selectedDataRows.map(r => parseInt(r.exhibitions)).filter(n => !isNaN(n)).map(parseIndex),
         press: selectedDataRows.map(r => parseInt(r.press)).filter(n => !isNaN(n)).map(parseIndex),
-        photos: selectedDataRows.map(r => r.photos?.trim()).filter(Boolean)
+        bespoke: selectedDataRows[0]?.bespoke || ''
     }
 
     // Process portfolio arrays
