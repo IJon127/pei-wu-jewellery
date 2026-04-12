@@ -16,9 +16,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
     return (
         <article className="project-detail">
             <header className="project-detail-header">
-                <h2 id="modal-title" className="project-detail-title">
-                    {title}
-                </h2>
+                <h2 className="modal-detail-title">{title}</h2>
                 <div className="project-detail-meta">
                     <div className="project-detail-meta-row">
                         <span className="project-detail-label">Year</span>

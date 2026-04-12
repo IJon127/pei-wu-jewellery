@@ -999,6 +999,14 @@ body {
   line-height: 1.1;
 }
 
+.modal-detail-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-style: italic;
+  font-weight: 400;
+  margin: 0;
+}
+
 .modal-back {
   flex-shrink: 0;
   width: 2.5rem;
@@ -1117,17 +1125,6 @@ button.modal-project-card--btn img {
   flex-direction: column;
   gap: 2rem;
   margin-bottom: 3rem;
-}
-
-
-.project-detail-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  font-style: italic;
-  font-weight: 400;
-  margin: 0;
-  color: rgba(45, 45, 45, 0.85);
-  line-height: 1.1;
 }
 
 .project-detail-meta {
@@ -1275,60 +1272,26 @@ button.modal-project-card--btn img {
 }
 
 /* ── Bespoke detail modal ─ */
-.bespoke-detail {
-  max-width: 720px;
-  margin: 0 auto;
-}
+.bespoke-detail {}
 
 .bespoke-detail-header {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 2.5rem;
   margin-bottom: 3rem;
-  align-items: start;
 }
 
 .bespoke-detail-main-img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
+  width: 70%;
+  aspect-ratio: 6 / 4;
   object-fit: cover;
   border-radius: 4px;
   background: rgba(45, 45, 45, 0.04);
+  margin-top: 2rem;
 }
 
-.bespoke-detail-header-right {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.bespoke-detail-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  font-style: italic;
-  font-weight: 400;
-  margin: 0;
-  color: rgba(45, 45, 45, 0.85);
-  line-height: 1.1;
-}
-
-.bespoke-detail-introduction {
-  font-family: 'Quicksand', sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: rgba(45, 45, 45, 0.55);
-  margin: 0;
-}
-
-.bespoke-detail-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
 
 .bespoke-detail-body {
   margin-bottom: 2.5rem;
 }
+
 
 .bespoke-detail-description {
   font-family: 'Quicksand', sans-serif;
@@ -1336,6 +1299,11 @@ button.modal-project-card--btn img {
   line-height: 1.85;
   color: rgba(45, 45, 45, 0.55);
   margin: 0;
+}
+
+.bespoke-detail-illustration {
+  width: 100%;
+  margin-top: 2rem;
 }
 
 .bespoke-detail-gallery {
