@@ -14,7 +14,7 @@ export function AboutSection({ scrollTop, align = 'left', portfolioData }: Secti
     const ref = useScrollReveal<HTMLDivElement>()
 
     return (
-        <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
+        <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}dvh` }}>
             <div className="section-about" ref={ref}>
                 <div className="section-header-row">
                     <span className="section-idx" data-reveal data-reveal-delay="0">07</span>

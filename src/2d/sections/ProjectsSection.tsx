@@ -13,7 +13,7 @@ export function ProjectsSection({ scrollTop, align = 'left', portfolioData, onOp
     const ref = useScrollReveal<HTMLDivElement>()
 
     return (
-        <div className={`scroll-section section-tall section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
+        <div className={`scroll-section section-tall section-align-${align}`} style={{ top: `${scrollTop}dvh` }}>
             <div className="section-projects" ref={ref}>
                 <div className="section-header-row" style={{ marginBottom: '8rem' }}>
                     <span className="section-idx" data-reveal data-reveal-delay="0">02</span>

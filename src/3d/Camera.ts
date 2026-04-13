@@ -27,6 +27,9 @@ export class Camera {
     private targetPos: pc.Vec3 = new pc.Vec3();
     private targetRot: pc.Quat = new pc.Quat();
 
+    private baseFov: number = 45;
+    private animFov: number = 70;
+
     constructor(app: pc.Application) {
         this.app = app;
 
@@ -39,8 +42,11 @@ export class Camera {
         this.entity.addComponent('camera', {
             clearColor: new pc.Color(0.1, 0.15, 0.2),
             toneMapping: pc.TONEMAP_ACES,
-            fov: 45,
+            fov: this.baseFov,
         });
+
+        this.resize(); // Calculate initial FOV based on screen size
+        window.addEventListener('resize', () => this.resize());
 
         // Needed to capture background for dynamic refraction
         this.entity.camera!.requestSceneColorMap(true);
@@ -52,6 +58,31 @@ export class Camera {
 
         // Stage 3 Initialization: Load animated camera glb
         this.loadCameraLoop();
+    }
+
+    resize() {
+        if (!this.entity.camera) return;
+
+        const aspectRatio = window.innerWidth / window.innerHeight;
+
+        if (aspectRatio < 1) {
+            // Portrait mode (mobile): widen the lens so models aren't cut off
+            // Multiply by 0.8 as a dampener so it doesn't get overly fish-eyed
+            const scale = 1.0 / aspectRatio;
+            this.baseFov = Math.min(45 * scale * 1.3, 95);
+            this.animFov = Math.min(70 * scale * 1.3, 100);
+        } else {
+            // Landscape (desktop)
+            this.baseFov = 45;
+            this.animFov = 70;
+        }
+
+        // Apply immediately if not transitioning
+        if (this.stage === CameraStage.ORBIT) {
+            this.entity.camera.fov = this.baseFov;
+        } else if (this.stage === CameraStage.ANIMATION) {
+            this.entity.camera.fov = this.animFov;
+        }
     }
 
     loadCameraLoop() {
@@ -159,7 +190,7 @@ export class Camera {
             // Lerp transformations 
             const p = new pc.Vec3().lerp(this.startPos, this.targetPos, t);
             const r = new pc.Quat().slerp(this.startRot, this.targetRot, t);
-            const f = pc.math.lerp(45, 70, t);
+            const f = pc.math.lerp(this.baseFov, this.animFov, t);
 
             this.entity.setPosition(p);
             this.entity.setRotation(r);

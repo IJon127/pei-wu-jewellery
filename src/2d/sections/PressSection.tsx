@@ -11,7 +11,7 @@ export function PressSection({ scrollTop, align = 'left', portfolioData, onOpenM
     const ref = useScrollReveal<HTMLDivElement>()
 
     return (
-        <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
+        <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}dvh` }}>
             <div className="section-press" ref={ref}>
                 <div className="section-header-row">
                     <span className="section-idx" data-reveal data-reveal-delay="0">04</span>

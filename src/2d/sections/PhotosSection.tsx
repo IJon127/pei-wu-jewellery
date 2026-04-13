@@ -46,7 +46,7 @@ export function PhotosSection({ scrollTop, align = 'center', portfolioData }: Se
     const allImages = useMemo(() => positionedPhotos.map(p => p.url), [positionedPhotos])
 
     return (
-        <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh`, width: '100%', height: '100vh' }}>
+        <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}dvh`, width: '100%', height: '100vh' }}>
             <div className="section-photos">
                 {positionedPhotos.map((photo, i) => {
                     // Parallax multiplier based on zIndex. 

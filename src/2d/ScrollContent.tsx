@@ -101,7 +101,7 @@ export function ScrollContent({ visible, portfolioData }: ScrollContentProps) {
             if (cyclesPassed >= cycles - 1) {
                 const next = cycles + 2
                 setCycles(next)
-                document.body.style.minHeight = `${next * CYCLE_VH}vh`
+                document.body.style.minHeight = `${next * CYCLE_VH}dvh`
             }
         }
 

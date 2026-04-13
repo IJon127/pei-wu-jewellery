@@ -7,7 +7,7 @@ export function BespokeSection({ scrollTop, align = 'left', portfolioData, onOpe
     const ref = useScrollReveal<HTMLDivElement>()
 
     return (
-        <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
+        <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}dvh` }}>
             <div className="section-bespoke" ref={ref}>
                 <div className="section-header-row">
                     <span className="section-idx" data-reveal data-reveal-delay="0">05</span>

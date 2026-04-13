@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -5,7 +11,7 @@
 
   color-scheme: light dark;
   color: rgba(0, 0, 0, 0.87);
-  background-color: #242424;
+  background-color: #f1f1ee;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,12 +19,25 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  /* Critical: using 'clip' instead of 'hidden' forbids the browser from secretly trapping vertical scroll-wheel events on nested React layers */
+}
+
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  padding: 0;
   min-width: 320px;
   min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: clip;
+  /* Strongly enforce absolutely no horizontal scrolling */
+  background-color: transparent;
+  position: relative;
+  /* CRITICAL: allows #root (height: 100%) to inherit body's infinite scroll height instead of clipping to viewport! */
 }
 
 /* PlayCanvas will be z-index 0, React 1 */
@@ -30,10 +49,9 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  /* Let clicks pass through to 3D canvas by default */
 }
 
-/* ── App Layout ───────────────────────────────────�
+/* ── App Layout ─────────────────────────────────── */
 /* ── Scroll Hint (pill + falling ball) ─────────────────── */
 .scroll-hint {
   position: fixed;
@@ -52,17 +70,21 @@ body {
 .scroll-hint-pill {
   width: 56px;
   height: 150px;
-  /* border-radius: 100px; */
-  /* border: 2px solid rgba(50,50,51, 0.5); */
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding-top: 10px;
+  /* background: rgba(50,50,51, 0.1); */
 }
 
-/* The ball — animates down; box-shadow creates the fading ghost trail above */
+.scroll-hint-pill-glass {
+  background: rgba(188, 188, 188, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
 .scroll-hint-ball {
   width: 15px;
   height: 15px;
@@ -159,7 +181,6 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  pointer-events: none;
   display: flex;
   flex-direction: column;
 }
@@ -168,12 +189,15 @@ body {
   position: absolute;
   width: 60vw;
   height: 100vh;
+  height: 100dvh;
+  /* Use dynamic height to respect mobile address bar */
   display: flex;
   padding: 0 5vw;
 }
 
 .section-tall {
   height: 140vh;
+  height: 140dvh;
 }
 
 /* Horizontal alignment of the section panel */
@@ -241,6 +265,11 @@ body {
   pointer-events: auto;
   transition: color 0.2s;
   /* text-align: right; */
+  /* Prevent scroll blocking on mobile */
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .section-more-btn:hover {
@@ -255,9 +284,7 @@ body {
 
 /* ── 01 Statement ───────────────────────────────────────── */
 .section-statement {
-  padding: 0 3rem 0 12rem;
-  /* max-width: 900px; */
-  /* min-width: 600px; */
+  padding: 0 3rem 0 8rem;
 }
 
 .statement-quote {
@@ -316,6 +343,12 @@ body {
   cursor: pointer;
   pointer-events: auto;
   transition: opacity 0.3s ease;
+
+  /* Prevent scroll blocking on mobile */
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .project-item-btn:hover {
@@ -372,6 +405,12 @@ body {
   cursor: pointer;
   pointer-events: auto;
   transition: opacity 0.3s ease;
+
+  /* Prevent scroll blocking on mobile */
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .project-item--more:hover {
@@ -433,6 +472,12 @@ body {
   cursor: pointer;
   pointer-events: auto;
   transition: background 0.2s;
+
+  /* Prevent scroll blocking on mobile */
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .exhibition-row--btn:hover {
@@ -535,6 +580,12 @@ body {
   object-fit: contain;
   pointer-events: auto;
   transition: opacity 0.3s ease, transform 0.3s ease;
+
+  /* Prevent scroll blocking on mobile */
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .photo-img:hover {
@@ -622,6 +673,12 @@ body {
   cursor: pointer;
   pointer-events: auto;
   transition: background 0.2s;
+
+  /* Prevent scroll blocking on mobile */
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .bespoke-row--btn:hover {
@@ -725,6 +782,12 @@ body {
   font-weight: 800;
   text-decoration: none;
   pointer-events: auto;
+
+  /* Prevent scroll blocking on mobile */
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .news-link:hover {
@@ -787,6 +850,12 @@ body {
   cursor: pointer;
   pointer-events: auto;
   transition: all 0.3s ease;
+
+  /* Prevent scroll blocking on mobile */
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .about-link:hover {
@@ -798,10 +867,12 @@ body {
 /* ── PlayCanvas Canvas ──────────────────────────────────── */
 #playcanvas-app {
   display: block;
-  width: 100vw;
-  height: 100vh;
   position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Using 100% with fixed positioning perfectly maps to the viewport's immediate layout rect */
   z-index: 0;
   pointer-events: auto;
 }
@@ -1488,4 +1559,111 @@ button.modal-project-card--btn img {
 .lightbox-close:hover {
   background: rgba(255, 255, 255, 0.18);
   color: #fff;
+}
+
+/* ── Responsive Web Design (RWD) ───────────────────────── */
+
+@media (max-width: 1440px) {
+  .scroll-section {
+    width: 70vw;
+    padding: 0 3vw;
+  }
+
+  .section-statement {
+    padding: 0 3rem 0 6rem;
+  }
+}
+
+/* Tablet & Smaller Laptops */
+@media (max-width: 1024px) {
+  .scroll-section {
+    width: 80vw;
+    padding: 0 2vw;
+  }
+
+  .section-title {
+    font-size: 4.5rem;
+  }
+
+  .landing-title {
+    font-size: 5rem;
+  }
+
+  .all-projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .scroll-section {
+    width: 100vw;
+    padding: 0 1rem;
+    align-items: center;
+    /* Center content vertically if flex row, or adjust based on layout */
+  }
+
+  /* Reset alignments on mobile so they don't offset off-screen */
+  .section-align-left,
+  .section-align-center,
+  .section-align-right {
+    left: 0;
+    transform: none;
+    justify-content: center;
+  }
+
+  .section-title {
+    font-size: 3.5rem;
+  }
+
+  .landing-title {
+    font-size: 3.5rem;
+  }
+
+  .landing-subtitle {
+    font-size: 1rem;
+  }
+
+  .all-projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    width: 95vw;
+    height: 90vh;
+    padding: 1.5rem 1rem;
+  }
+
+  /* For complex grids like news row, collapse them */
+  .news-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .news-date {
+    margin-bottom: 0;
+  }
+
+  /* Adjust bespoke row */
+  .bespoke-row--btn {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .bespoke-thumb-container {
+    align-self: flex-start;
+  }
+
+  /* Reduce huge spaces */
+  .section-tall {
+    height: 100vh;
+  }
+}
+
+/* Mobile L*/
+@media (max-width: 440px) {
+  .section-statement {
+    padding: 0 3rem 0 3rem;
+  }
 }

@@ -53,7 +53,7 @@ function App() {
 
     const handleInteract = () => {
         setIsInteracting(true);
-        document.body.style.minHeight = `${3 * CYCLE_VH}vh`; // 3 initial cycles
+        document.body.style.minHeight = `${3 * CYCLE_VH}dvh`; // 3 initial cycles
         sceneRef.current?.startInteraction();
     };
 

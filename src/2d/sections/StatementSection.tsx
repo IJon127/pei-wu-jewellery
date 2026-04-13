@@ -9,7 +9,7 @@ export function StatementSection({ scrollTop, align = 'center', portfolioData }:
     const ref = useScrollReveal<HTMLDivElement>()
 
     return (
-        <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}vh` }}>
+        <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}dvh` }}>
             <div className="section-statement" ref={ref}>
                 <blockquote className="statement-quote" data-reveal data-reveal-delay="0">
                     "{quote}"
