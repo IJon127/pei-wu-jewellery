@@ -26,13 +26,9 @@ export class Scene {
             touch: new pc.TouchDevice(canvas)
         })
 
-        // Use NONE so PlayCanvas doesn't overwrite our CSS (width: 100vw, height: 100dvh, position: fixed)
-        // with arbitrary inline styles like position: absolute.
-        this.app.setCanvasFillMode(pc.FILLMODE_NONE);
+        // Enforce engine-side dynamic scaling
+        this.app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
         this.app.setCanvasResolution(pc.RESOLUTION_AUTO);
-        
-        // Immediately sync internal resolution to our CSS-defined layout size
-        this.app.resizeCanvas(canvas.clientWidth, canvas.clientHeight);
 
 
         // Initialize Camera
@@ -138,7 +134,8 @@ export class Scene {
     }
 
     public resize() {
-        this.app?.resizeCanvas()
+        this.app?.resizeCanvas();
+        this.camera?.resize();
     }
 
     public destroy() {
