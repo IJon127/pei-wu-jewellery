@@ -65,7 +65,7 @@ export function Modal({ kind, portfolioData, selectedProjectId, selectedExhibiti
                     {kind === 'project' && (
                         <button
                             type="button"
-                            className="modal-back"
+                            className="modal-nav-btn modal-back"
                             onClick={() => onOpenModal('allProjects')}
                             aria-label="Back to projects"
                         >
@@ -74,7 +74,7 @@ export function Modal({ kind, portfolioData, selectedProjectId, selectedExhibiti
                     )}
 
 
-                    <button type="button" className="modal-close" onClick={onClose} aria-label="Close">
+                    <button type="button" className="modal-nav-btn modal-close" onClick={onClose} aria-label="Close">
                         ×
                     </button>
                 </div>

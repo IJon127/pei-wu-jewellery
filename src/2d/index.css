@@ -75,14 +75,6 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  /* background: rgba(50,50,51, 0.1); */
-}
-
-.scroll-hint-pill-glass {
-  background: rgba(188, 188, 188, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 
 .scroll-hint-ball {
@@ -129,13 +121,13 @@ body {
 }
 
 .scroll-hint-text {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: rgba(25, 25, 25, 0.6);
-  text-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+  /* text-shadow: 0 3px 3px rgba(0, 0, 0, 0.2); */
   margin: 0;
 }
 
@@ -200,6 +192,10 @@ body {
   height: 140dvh;
 }
 
+/* .section-container {
+  padding: 0 5vw;
+} */
+
 /* Horizontal alignment of the section panel */
 .section-align-left {
   left: 0;
@@ -227,18 +223,19 @@ body {
 }
 
 .section-idx {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.8rem;
   letter-spacing: 0.2em;
   color: rgba(25, 25, 25, 0.5);
 }
 
 .section-title {
-  font-family: 'Bonheur Royale', serif;
-  font-size: 6rem;
+  font-family: 'Marcellus', serif;
+  text-transform: uppercase;
+  font-size: 4.5rem;
   font-weight: 500;
   color: rgba(25, 25, 25, 0.55);
-  text-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   margin: 0;
 }
 
@@ -253,11 +250,11 @@ body {
 
 .section-more-btn {
   margin-top: 2rem;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
   text-transform: uppercase;
-  color: rgba(25, 25, 25, 0.75);
+  color: rgba(25, 25, 25, 0.6);
   background: none;
   border: none;
   cursor: pointer;
@@ -288,17 +285,18 @@ body {
 }
 
 .statement-quote {
-  font-family: 'Bonheur Royale', serif;
-  font-size: 3.5rem;
-  font-style: italic;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 2rem;
+  /* font-style: italic; */
   color: rgba(25, 25, 25, 0.6);
   line-height: 1.2;
   margin: 0 0 2.5rem;
   border: none;
+  text-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
 }
 
 .statement-body {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 1rem;
   line-height: 1.9;
   color: rgba(25, 25, 25, 0.55);
@@ -306,7 +304,7 @@ body {
 }
 
 .statement-sig {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.8rem;
   color: rgba(25, 25, 25, 0.5);
   letter-spacing: 0.1em;
@@ -316,7 +314,7 @@ body {
 
 /* ── 02 Projects ────────────────────────────────────────── */
 .section-projects {
-  padding: 0 5vw 10rem;
+  padding: 0 4vw;
 }
 
 .projects-grid {
@@ -369,11 +367,11 @@ body {
 }
 
 .project-item-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.25rem;
-  font-style: italic;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 1.1rem;
+  /* font-style: italic; */
   font-weight: 400;
-  color: rgba(25, 25, 25, 0.85);
+  color: rgba(25, 25, 25, 0.6);
   margin: 0;
 }
 
@@ -385,9 +383,9 @@ body {
 }
 
 .project-item-subtitle {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: rgba(25, 25, 25, 0.45);
@@ -419,12 +417,12 @@ body {
 }
 
 .project-more-btn {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(25, 25, 25, 0.6);
+  color: rgba(25, 25, 25, 0.5);
 }
 
 .all-projects-grid {
@@ -499,15 +497,15 @@ body {
 }
 
 .ex-year {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.75rem;
   color: rgba(25, 25, 25, 0.35);
 }
 
 .ex-title {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Libre Baskerville', serif;
   font-size: 1rem;
-  color: rgba(25, 25, 25, 0.85);
+  color: rgba(25, 25, 25, 0.6);
 }
 
 .ex-modal-title {
@@ -515,7 +513,7 @@ body {
 }
 
 .ex-city {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.85rem;
   color: rgba(25, 25, 25, 0.4);
   text-transform: uppercase;
@@ -536,7 +534,7 @@ body {
 }
 
 .ex-venue {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Libre Baskerville', sans-serif;
   font-size: 0.85rem;
   color: rgba(25, 25, 25, 0.4);
 }
@@ -551,7 +549,7 @@ body {
 }
 
 .ex-link {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Libre Baskerville', sans-serif;
   font-size: 1rem;
   color: rgba(25, 25, 25, 0.3);
   text-decoration: none;
@@ -596,16 +594,12 @@ body {
 /* ── 04 Press ───────────────────────────────────────────── */
 .section-press {
   padding: 0 6vw 4rem;
-  /* width: 100%; */
 }
 
 .press-list {
   gap: 2.1rem;
 }
 
-.press-row {
-  /* max-width: 660px; */
-}
 
 .press-row-btn {
   display: block;
@@ -616,10 +610,9 @@ body {
 }
 
 .press-title {
-  font-family: 'Quicksand', sans-serif;
-  font-size: 1.5rem;
-  /* font-style: italic; */
-  color: rgba(25, 25, 25, 0.8);
+  font-family: 'Libre Baskerville', serif;
+  font-size: 1.3rem;
+  color: rgba(25, 25, 25, 0.6);
   margin: 0 0 0.75rem;
   line-height: 1.3;
 }
@@ -631,7 +624,7 @@ body {
 }
 
 .press-type {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -640,14 +633,14 @@ body {
 }
 
 .press-date {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.8rem;
   color: rgba(25, 25, 25, 0.3);
 }
 
 /* ── 05 Bespoke ─────────────────────────────────────────────── */
 .bespoke-description {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.9rem;
   line-height: 1.8;
   color: rgba(25, 25, 25, 0.45);
@@ -659,13 +652,11 @@ body {
 }
 
 .bespoke-row--btn {
-  /* display: flex; */
   display: grid;
   grid-template-columns: 1fr 2fr;
   align-items: center;
   padding: 1.5rem 0;
   gap: 1rem;
-  /* height: 20vw; */
   width: 100%;
   text-align: left;
   background: none;
@@ -673,8 +664,6 @@ body {
   cursor: pointer;
   pointer-events: auto;
   transition: background 0.2s;
-
-  /* Prevent scroll blocking on mobile */
   touch-action: pan-y;
   -webkit-user-select: none;
   user-select: none;
@@ -691,18 +680,18 @@ body {
 }
 
 .bespoke-title {
-  font-family: 'Ubuntu', sans-serif;
-  font-size: 1.25rem;
+  font-family: 'Libre Baskerville', sans-serif;
+  font-size: 1.5rem;
   font-weight: 400;
-  color: rgba(25, 25, 25, 0.75);
+  color: rgba(25, 25, 25, 0.6);
   margin-bottom: 1rem;
 }
 
 .bespoke-introduction {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
-  color: rgba(25, 25, 25, 0.75);
+  color: rgba(25, 25, 25, 0.45);
 }
 
 
@@ -733,27 +722,39 @@ body {
 
 /* ── 06 News ────────────────────────────────────────────── */
 .section-news {
-  padding: 0 5vw 4rem;
+  width: 100%;
+}
+
+.section-list {
   width: 100%;
 }
 
 .news-item {
+  width: 100%;
   display: grid;
-  grid-template-columns: 6rem 7rem 1fr;
-  gap: 1.5rem;
+  grid-template-columns: 2fr 3.5fr;
+  gap: 2rem;
   padding: 1rem 0;
   border-top: 1px solid rgba(25, 25, 25, 0.07);
   align-items: baseline;
 }
 
+.news-info {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
 .news-date {
-  font-family: 'Quicksand', sans-serif;
+  width: 40%;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.7rem;
   color: rgba(25, 25, 25, 0.3);
 }
 
 .news-type {
-  font-family: 'Quicksand', sans-serif;
+  width: 60%;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.65rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -762,27 +763,25 @@ body {
   padding: 0.15rem 0.5rem;
   border-radius: 20px;
   white-space: nowrap;
-  align-self: center;
 }
 
 .news-title {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Libre Baskerville', serif;
   font-size: 0.9rem;
   font-weight: 400;
-  color: rgba(25, 25, 25, 0.7);
+  color: rgba(25, 25, 25, 0.6);
   margin: 0;
   line-height: 1.5;
 }
 
 .news-link {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Libre Baskerville', sans-serif;
   font-size: 1rem;
   color: rgba(25, 25, 25, 0.3);
   margin-left: 0.5rem;
   font-weight: 800;
   text-decoration: none;
   pointer-events: auto;
-
   /* Prevent scroll blocking on mobile */
   touch-action: pan-y;
   -webkit-user-select: none;
@@ -795,23 +794,20 @@ body {
 }
 
 /* ── 07 About ───────────────────────────────────────────── */
-.section-about {
-  padding: 4rem 5vw;
-  width: 100%;
-  border-radius: 12px;
-  /* background/shadow handled dynamically via inline styles */
-}
+.section-about {}
 
 .about-layout {
   display: grid;
   grid-template-columns: 240px 1fr;
-  gap: 4rem;
+  gap: 3rem;
   align-items: start;
 }
 
 .about-portrait {
+  width: 100%;
   aspect-ratio: 3/4;
   border-radius: 0.5rem;
+  object-fit: cover;
   opacity: 0.8;
 }
 
@@ -822,7 +818,7 @@ body {
 }
 
 .about-bio p {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.95rem;
   line-height: 1.9;
   color: rgba(25, 25, 25, 0.55);
@@ -833,10 +829,11 @@ body {
   display: flex;
   gap: 1rem;
   margin-top: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .about-link {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Libre Baskerville', sans-serif;
   font-size: 0.8rem;
   color: rgba(25, 25, 25, 0.45);
   text-decoration: none;
@@ -890,47 +887,69 @@ body {
 }
 
 .landing-title {
-  color: rgba(25, 25, 25, 0.7);
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  color: rgba(25, 25, 25, 0.6);
+  /* text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); */
   white-space: nowrap;
   margin: 0;
 }
 
-.landing-title .title-sans {
-  font-family: 'Ubuntu', sans-serif;
+.landing-title .title-name {
+  font-family: 'Marcellus', serif;
   font-weight: 500;
   font-size: 4rem;
+  line-height: 0.8;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+  /* letter-spacing: 0.1em; */
   padding: 0;
 }
 
-.landing-title .title-serif {
-  font-family: 'Bonheur Royale', serif;
-  font-weight: normal;
-  font-style: italic;
-  font-size: 7rem;
+.landing-title .title-jewellery {
+  font-family: 'Overpass', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.20em;
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
 }
 
 
 .landing-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 30vw;
+  /* width: max-content; */
+  /* max-width: 90vw; */
+  gap: 1rem;
   margin-top: 1rem;
-  padding: 1.2rem 4rem;
-  background: rgba(25, 25, 25, 0.12);
-  color: rgba(25, 25, 25, 0.35);
-  border: 1px solid rgba(25, 25, 25, 0.35);
-  border-radius: 40px;
+  padding: 0.8rem 2rem;
+  background: none;
+  border: none;
+  color: rgba(25, 25, 25, 0.5);
   cursor: pointer;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 1.2rem;
-  font-weight: bold;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(25, 25, 25, 0.1);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: transform 0.2s, background 0.2s;
+  font-weight: 300;
+  position: fixed;
+  z-index: 1;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
 }
 
 .landing-btn:hover {
-  transform: scale(1.05);
-  background: rgba(25, 25, 25, 0.22);
+  color: rgba(25, 25, 25, 0.8);
+}
+
+.landing-btn-line {
+  width: 3rem;
+  height: 1px;
+  background: rgba(25, 25, 25, 0.3);
+  margin: 0.5rem 0;
+  z-index: 1;
+  flex-shrink: 0;
 }
 
 /* ── Loading Screen ─────────────────────────────────────── */
@@ -949,7 +968,7 @@ body {
   font-family: sans-serif;
   font-size: 3.3rem;
   font-weight: 200;
-  color: rgba(25, 25, 25, 0.7);
+  color: rgba(25, 25, 25, 0.6);
   margin: 0;
   letter-spacing: -0.02em;
   line-height: 1;
@@ -1059,39 +1078,45 @@ body {
 }
 
 .modal-title {
-  font-family: 'Bonheur Royale', serif;
+  font-family: 'Marcellus', serif;
   font-size: clamp(2.5rem, 6vw, 3.75rem);
   font-weight: 500;
-  color: rgba(25, 25, 25, 0.7);
+  color: rgba(25, 25, 25, 0.6);
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   padding: 0;
   margin-top: 0;
   margin-bottom: 2rem;
   line-height: 1.1;
+  text-transform: uppercase;
 }
 
 .modal-detail-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Libre Baskerville', serif;
   font-size: 2rem;
-  font-style: italic;
+  /* font-style: italic; */
   font-weight: 400;
   margin: 0;
+  color: rgba(25, 25, 25, 0.6);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
-.modal-back {
-  flex-shrink: 0;
+.modal-nav-btn {
   width: 2.5rem;
   height: 2.5rem;
+  font-size: 1.75rem;
+  font-family: 'Overpass', sans-serif;
+  color: rgba(25, 25, 25, 0.55);
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.modal-back {
   margin: 0;
-  padding: 0;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 1.75rem;
-  color: rgba(25, 25, 25, 0.55);
   background: none;
   border: none;
+  padding: 0;
 }
 
 .modal-back:hover {
@@ -1099,19 +1124,9 @@ body {
 }
 
 .modal-close {
-  flex-shrink: 0;
-  width: 2.5rem;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin: 0 0 0 auto;
-  padding: 0;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 1.75rem;
-  line-height: 1;
+  padding-top: 0.27rem;
   font-weight: 300;
-  color: rgba(25, 25, 25, 0.55);
   background: rgba(25, 25, 25, 0.06);
   border: 1px solid rgba(25, 25, 25, 0.15);
   border-radius: 50%;
@@ -1207,9 +1222,10 @@ button.modal-project-card--btn img {
 .project-detail-meta-row {
   display: flex;
   gap: 0.8rem;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.9rem;
   line-height: 1.4;
+  flex-wrap: wrap;
 }
 
 .project-detail-label {
@@ -1221,7 +1237,7 @@ button.modal-project-card--btn img {
 }
 
 .project-detail-value {
-  color: rgba(25, 25, 25, 0.65);
+  color: rgba(25, 25, 25, 0.6);
   flex: 1;
 }
 
@@ -1242,7 +1258,7 @@ button.modal-project-card--btn img {
 }
 
 .project-detail-description {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 1rem;
   line-height: 1.85;
   color: rgba(25, 25, 25, 0.55);
@@ -1266,7 +1282,7 @@ button.modal-project-card--btn img {
 }
 
 .project-detail-missing {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   color: rgba(25, 25, 25, 0.45);
   margin: 0;
 }
@@ -1293,7 +1309,7 @@ button.modal-project-card--btn img {
 }
 
 .exhibition-detail-date {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.85rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1301,7 +1317,7 @@ button.modal-project-card--btn img {
 }
 
 .exhibition-detail-venue {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Libre Baskerville', sans-serif;
   font-size: 0.9rem;
   color: rgba(25, 25, 25, 0.45);
   margin: 0 0 1.5rem;
@@ -1313,7 +1329,7 @@ button.modal-project-card--btn img {
 }
 
 .exhibition-detail-description {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 1rem;
   line-height: 1.85;
   color: rgba(25, 25, 25, 0.55);
@@ -1337,7 +1353,7 @@ button.modal-project-card--btn img {
 }
 
 .exhibition-detail-missing {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   color: rgba(25, 25, 25, 0.45);
   margin: 0;
 }
@@ -1365,7 +1381,7 @@ button.modal-project-card--btn img {
 
 
 .bespoke-detail-description {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 1rem;
   line-height: 1.85;
   color: rgba(25, 25, 25, 0.55);
@@ -1482,6 +1498,7 @@ button.modal-project-card--btn img {
 .lightbox-nav {
   position: absolute;
   top: 50%;
+  padding-bottom: 0.4rem;
   transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -1504,19 +1521,21 @@ button.modal-project-card--btn img {
 }
 
 .lightbox-nav--prev {
+  padding-right: 0.5rem;
   right: calc(100% + 1.25rem);
 }
 
 .lightbox-nav--next {
+  padding-left: 0.5rem;
   left: calc(100% + 1.25rem);
 }
 
 .lightbox-counter {
   position: absolute;
   bottom: -2.25rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: 'Quicksand', sans-serif;
+  right: 100%;
+  transform: translateX(100%);
+  font-family: 'Overpass', sans-serif;
   font-size: 0.8rem;
   letter-spacing: 0.15em;
   color: rgba(255, 255, 255, 0.4);
@@ -1527,7 +1546,7 @@ button.modal-project-card--btn img {
   position: absolute;
   bottom: -2.25rem;
   right: 0;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   color: rgba(255, 255, 255, 0.3);
@@ -1566,7 +1585,7 @@ button.modal-project-card--btn img {
 @media (max-width: 1440px) {
   .scroll-section {
     width: 70vw;
-    padding: 0 3vw;
+    padding: 0 3.5vw;
   }
 
   .section-statement {
@@ -1578,19 +1597,15 @@ button.modal-project-card--btn img {
 @media (max-width: 1024px) {
   .scroll-section {
     width: 80vw;
-    padding: 0 2vw;
-  }
-
-  .section-title {
-    font-size: 4.5rem;
-  }
-
-  .landing-title {
-    font-size: 5rem;
+    padding: 0 3rem;
   }
 
   .all-projects-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-projects {
+    padding: 0 3vw;
   }
 }
 
@@ -1598,7 +1613,7 @@ button.modal-project-card--btn img {
 @media (max-width: 768px) {
   .scroll-section {
     width: 100vw;
-    padding: 0 1rem;
+    padding: 0 2rem;
     align-items: center;
     /* Center content vertically if flex row, or adjust based on layout */
   }
@@ -1616,14 +1631,6 @@ button.modal-project-card--btn img {
     font-size: 3.5rem;
   }
 
-  .landing-title {
-    font-size: 3.5rem;
-  }
-
-  .landing-subtitle {
-    font-size: 1rem;
-  }
-
   .all-projects-grid {
     grid-template-columns: 1fr;
   }
@@ -1634,22 +1641,16 @@ button.modal-project-card--btn img {
     padding: 1.5rem 1rem;
   }
 
-  /* For complex grids like news row, collapse them */
-  .news-row {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
+  .section-press {
+    width: 100vw;
+    padding: 0 2rem;
   }
 
-  .news-date {
-    margin-bottom: 0;
+  .press-title {
+    font-size: 1.1rem;
+    margin: 0 0 0.4rem;
   }
 
-  /* Adjust bespoke row */
-  .bespoke-row--btn {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
 
   .bespoke-thumb-container {
     align-self: flex-start;
@@ -1659,11 +1660,190 @@ button.modal-project-card--btn img {
   .section-tall {
     height: 100vh;
   }
+
+  .projects-grid {
+    gap: 3.5rem 2.5rem;
+  }
+
+  .news-item {
+    grid-template-columns: 2fr 3fr;
+  }
+
+  .news-date {
+    width: 45%;
+
+  }
+
+  .news-type {
+    width: 55%;
+  }
+
+  .about-layout {
+    grid-template-columns: 1.5fr 3fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 550px) {
+
+  .projects-grid {
+    gap: 3rem 2rem;
+  }
+
+  .project-item-title {
+    font-size: 1rem;
+  }
+
+  .exhibition-row--btn,
+  .ex-modal-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .ex-city {
+    padding-left: 0;
+  }
+
+  .section-press {
+    padding: 0;
+  }
+
+  /* Adjust bespoke row */
+  .bespoke-row--btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .bespoke-img-wrapper {
+    width: 90%;
+    margin-bottom: 0.9rem;
+  }
+
+  .bespoke-row--btn:hover .bespoke-img {
+    transform: scale(1.1);
+  }
+
+  .news-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .news-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.3rem;
+  }
+
+  .news-date {
+    width: auto;
+  }
+
+  .news-type {
+    width: 7rem;
+  }
+
+  .about-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .about-portrait {
+    width: 50%;
+  }
+
+  .modal-panel {
+    padding: 1.75rem 2.5rem 4rem 2.5rem;
+  }
+
+  .modal-nav-btn {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1.7rem;
+  }
+
+  .modal-close {
+    padding-top: 0.3rem;
+  }
+
+  .modal-detail-title {
+    font-size: 1.75rem;
+  }
+
+  .bespoke-detail-main-img {
+    width: 100%;
+  }
+
+  .lightbox-nav {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 2rem;
+  }
+
+  .lightbox-nav--prev {
+    right: calc(100% + 1rem);
+  }
+
+  .lightbox-nav--next {
+    left: calc(100% + 1rem);
+  }
 }
 
 /* Mobile L*/
 @media (max-width: 440px) {
+  .landing-btn {
+    top: 77%;
+    width: 50vw;
+    gap: 0.5rem;
+  }
+
+  .landing-btn-line {
+    width: 10vw;
+  }
+
+  .scroll-section {
+    padding: 0 1.5rem;
+  }
+
+  .section-header-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+  }
+
+  .section-title {
+    font-size: 3.2rem;
+  }
+
+
   .section-statement {
-    padding: 0 3rem 0 3rem;
+    padding: 0;
+  }
+
+  .section-projects {
+    padding: 0;
+  }
+
+  .projects-grid {
+    gap: 2.5rem 1.4rem;
+  }
+
+  .project-item-title {
+    font-size: 0.95rem;
+  }
+
+  .project-item-divider {
+    margin: 0.3rem 0;
+  }
+
+  .project-item-subtitle {
+    font-size: 0.6rem;
   }
 }

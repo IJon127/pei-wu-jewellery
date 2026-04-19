@@ -12,7 +12,7 @@ export function StatementSection({ scrollTop, align = 'center', portfolioData }:
         <div className={`scroll-section section-align-${align}`} style={{ top: `${scrollTop}dvh` }}>
             <div className="section-statement" ref={ref}>
                 <blockquote className="statement-quote" data-reveal data-reveal-delay="0">
-                    "{quote}"
+                    “︁{quote}︁”︁
                 </blockquote>
                 <p className="statement-body" data-reveal data-reveal-delay="1">
                     {body.map((line, i) => (

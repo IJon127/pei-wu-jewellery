@@ -70,15 +70,21 @@ function App() {
             <ScrollHint visible={isInteracting && !hasScrolled} />
 
             {!isInteracting && (
-                <div className="landing-overlay">
-                    <h1 className="landing-title">
-                        <span className="title-sans">Pei Wu </span>
-                        <span className="title-serif">Jewellery</span>
-                    </h1>
+                <>
+                    <div className="landing-overlay">
+                        <h1 className="landing-title">
+                            <div className="title-name" style={{ letterSpacing: '0.15em' }}>PEI</div>
+                            <div className="title-name">WU</div>
+                            <div className="title-jewellery">JEWELLERY</div>
+                        </h1>
+                    </div>
                     <button className="landing-btn" onClick={handleInteract}>
-                        Enter
+                        <div className="landing-btn-line"></div>
+                        <div>Enter</div>
+                        <div className='landing-btn-line'></div>
                     </button>
-                </div>
+
+                </>
             )}
         </div>
     )

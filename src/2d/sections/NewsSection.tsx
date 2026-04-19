@@ -16,8 +16,10 @@ export function NewsSection({ scrollTop, align = 'left', portfolioData }: Sectio
                     {news.map((item, i) => {
                         return (
                             <li key={i} className="news-item" data-reveal data-reveal-delay={String(i + 1)}>
-                                <span className="news-date">{item.date}</span>
-                                <span className="news-type">{item.type}</span>
+                                <div className="news-info">
+                                    <span className="news-date">{item.date}</span>
+                                    <span className="news-type">{item.type}</span>
+                                </div>
                                 <p className="news-title">
                                     <span>{item.title} </span>
                                     {item.link && <a className="news-link" href={item.link} target="_blank" rel="noopener noreferrer">↗</a>}

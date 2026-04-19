@@ -44,7 +44,7 @@ export function ProjectsSection({ scrollTop, align = 'left', portfolioData, onOp
                         data-reveal-delay={String(selectedProjects.length + 1)}
                         onClick={() => onOpenModal?.('allProjects')}
                     >
-                        <div className="project-more-btn">More →</div>
+                        <div className="project-more-btn">More</div>
                     </button>
                 </div>
             </div>
