@@ -10,6 +10,7 @@ export interface LightboxProps {
 
 export function Lightbox({ images, initialIndex = 0, photoby, onClose }: LightboxProps) {
     const [index, setIndex] = useState(initialIndex)
+    const [loadedIndex, setLoadedIndex] = useState<number | null>(null)
 
     const prev = useCallback(() => setIndex(i => (i - 1 + images.length) % images.length), [images.length])
     const next = useCallback(() => setIndex(i => (i + 1) % images.length), [images.length])
@@ -31,6 +32,7 @@ export function Lightbox({ images, initialIndex = 0, photoby, onClose }: Lightbo
     }, [onClose, prev, next])
 
     const hasMult = images.length > 1
+    const isImageLoaded = index === loadedIndex
 
     return createPortal(
         <div
@@ -47,9 +49,10 @@ export function Lightbox({ images, initialIndex = 0, photoby, onClose }: Lightbo
                     className="lightbox-img"
                     src={images[index]}
                     alt={`Image ${index + 1} of ${images.length}`}
+                    onLoad={() => setLoadedIndex(index)}
                 />
 
-                {hasMult && (
+                {hasMult && isImageLoaded && (
                     <>
                         <button
                             type="button"
@@ -71,7 +74,7 @@ export function Lightbox({ images, initialIndex = 0, photoby, onClose }: Lightbo
                     </>
                 )}
 
-                {photoby && photoby[index] && (
+                {isImageLoaded && photoby && photoby[index] && (
                     <p className="lightbox-photoby">Photo — {photoby[index]}</p>
                 )}
             </div>

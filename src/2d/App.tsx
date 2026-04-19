@@ -10,6 +10,7 @@ function App() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const sceneRef = useRef<Scene | null>(null)
     const [isInteracting, setIsInteracting] = useState(false)
+    const [isLandingMounted, setIsLandingMounted] = useState(true)
     const [isSceneReady, setIsSceneReady] = useState(false)
     const [hasScrolled, setHasScrolled] = useState(false)
 
@@ -55,6 +56,7 @@ function App() {
         setIsInteracting(true);
         document.body.style.minHeight = `${3 * CYCLE_VH}dvh`; // 3 initial cycles
         sceneRef.current?.startInteraction();
+        setTimeout(() => setIsLandingMounted(false), 1000);
     };
 
     return (
@@ -69,16 +71,16 @@ function App() {
 
             <ScrollHint visible={isInteracting && !hasScrolled} />
 
-            {!isInteracting && (
+            {isLandingMounted && (
                 <>
-                    <div className="landing-overlay">
+                    <div className={`landing-overlay ${isInteracting ? 'fade-out' : ''}`}>
                         <h1 className="landing-title">
                             <div className="title-name" style={{ letterSpacing: '0.15em' }}>PEI</div>
                             <div className="title-name">WU</div>
                             <div className="title-jewellery">JEWELLERY</div>
                         </h1>
                     </div>
-                    <button className="landing-btn" onClick={handleInteract}>
+                    <button className={`landing-btn ${isInteracting ? 'fade-out' : ''}`} onClick={handleInteract}>
                         <div className="landing-btn-line"></div>
                         <div>Enter</div>
                         <div className='landing-btn-line'></div>
