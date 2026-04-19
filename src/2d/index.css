@@ -313,9 +313,7 @@ body {
 
 
 /* ── 02 Projects ────────────────────────────────────────── */
-.section-projects {
-  padding: 0 4vw;
-}
+.section-projects {}
 
 .projects-grid {
   display: grid;
