@@ -13,22 +13,10 @@ export class PostEffects {
         this.cameraFrame.rendering.sceneColorMap = true;
         this.cameraFrame.rendering.toneMapping = pc.TONEMAP_NEUTRAL;
 
-        // this.applyDepthOfField();
-
-        // Configure Bloom for a professional, soft glow
         this.applyBloom();
 
-        // Configure Vignette for cinematic framing
-        // this.applyVignette();
-
-
-
-        // Enable TAA (Temporal Anti-Aliasing) for smooth edges
         this.cameraFrame.taa.enabled = true;
-        // this.cameraFrame.taa.jitter = 1.0;
-        // this.cameraFrame.rendering.sharpness = 1;
 
-        // Apply initial configuration
         this.cameraFrame.update();
     }
 
@@ -42,7 +30,6 @@ export class PostEffects {
         this.cameraFrame.vignette.inner = 0.8;
         this.cameraFrame.vignette.outer = 1.0;
         this.cameraFrame.vignette.curvature = 0.5;
-        // this.cameraFrame.vignette.color.set(0.15, 0.10, 0.12);
         this.cameraFrame.vignette.color.set(0.1, 0.1, 0.1);
     }
 

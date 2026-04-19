@@ -1,8 +1,6 @@
 import * as pc from 'playcanvas'
 import { Models } from './Models'
 import { Camera } from './Camera'
-// import domeVS from './shaders/domeVS.glsl?raw'
-// import domeFS from './shaders/domeFS.glsl?raw'
 import { PostEffects } from './PostEffects'
 import { Stars } from './Stars'
 
@@ -71,25 +69,6 @@ export class Scene {
                 console.error("Failed to load HDR skybox", err);
             }
         });
-
-        // Create Dome with Shader Material
-        // const dome = new pc.Entity('dome')
-        // dome.addComponent('render', { type: 'sphere' })
-        // dome.setLocalScale(50, 50, 50)
-
-        // const domeMaterial = new pc.ShaderMaterial({
-        //     uniqueName: 'domeShader',
-        //     vertexGLSL: domeVS,
-        //     fragmentGLSL: domeFS,
-        //     attributes: {
-        //         vertex_position: pc.SEMANTIC_POSITION,
-        //         vertex_texCoord0: pc.SEMANTIC_TEXCOORD0,
-        //     }
-        // });
-        // domeMaterial.cull = pc.CULLFACE_FRONT
-        // domeMaterial.update()
-        // dome.render!.meshInstances[0].material = domeMaterial
-        // this.app.root.addChild(dome)
 
 
         // Initialize and add Stars

@@ -127,7 +127,6 @@ body {
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: rgba(25, 25, 25, 0.6);
-  /* text-shadow: 0 3px 3px rgba(0, 0, 0, 0.2); */
   margin: 0;
 }
 
@@ -192,9 +191,7 @@ body {
   height: 140dvh;
 }
 
-/* .section-container {
-  padding: 0 5vw;
-} */
+
 
 /* Horizontal alignment of the section panel */
 .section-align-left {
@@ -261,8 +258,6 @@ body {
   padding: 0;
   pointer-events: auto;
   transition: color 0.2s;
-  /* text-align: right; */
-  /* Prevent scroll blocking on mobile */
   touch-action: pan-y;
   -webkit-user-select: none;
   user-select: none;
@@ -287,7 +282,6 @@ body {
 .statement-quote {
   font-family: 'Libre Baskerville', serif;
   font-size: 2rem;
-  /* font-style: italic; */
   color: rgba(25, 25, 25, 0.6);
   line-height: 1.2;
   margin: 0 0 2.5rem;
@@ -313,7 +307,7 @@ body {
 
 
 /* ── 02 Projects ────────────────────────────────────────── */
-.section-projects {}
+
 
 .projects-grid {
   display: grid;
@@ -433,16 +427,8 @@ body {
   margin: 0;
 }
 
-/* .all-projects-grid .project-item-title {
-  font-size: 1.2rem;
-} */
-
 
 /* ── 03 Exhibitions ─────────────────────────────────────── */
-.section-exhibitions {
-  /* padding: 0 5vw 4rem; */
-  /* width: 100%; */
-}
 
 .exhibition-row {
   border-top: 1px solid rgba(25, 25, 25, 0.1);
@@ -558,9 +544,8 @@ body {
   color: rgba(25, 25, 25, 0.6);
 }
 
-/*  */
+/* ── Photos ───────────────────────────────────────────── */
 .section-photos {
-  /* padding: 0 10vw 0 50vw; */
   position: absolute;
   top: 0;
   left: 0;
@@ -673,9 +658,6 @@ body {
 
 }
 
-.bespoke-info {
-  /* flex-grow: 4; */
-}
 
 .bespoke-title {
   font-family: 'Libre Baskerville', sans-serif;
@@ -892,7 +874,6 @@ body {
 
 .landing-title {
   color: rgba(25, 25, 25, 0.6);
-  /* text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); */
   white-space: nowrap;
   margin: 0;
 }
@@ -903,8 +884,6 @@ body {
   font-size: 4rem;
   line-height: 0.8;
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-
-  /* letter-spacing: 0.1em; */
   padding: 0;
 }
 
@@ -923,8 +902,6 @@ body {
   align-items: center;
   justify-content: center;
   width: 30vw;
-  /* width: max-content; */
-  /* max-width: 90vw; */
   gap: 1rem;
   margin-top: 1rem;
   padding: 0.8rem 2rem;
@@ -1098,7 +1075,6 @@ body {
 .modal-detail-title {
   font-family: 'Libre Baskerville', serif;
   font-size: 2rem;
-  /* font-style: italic; */
   font-weight: 400;
   margin: 0;
   color: rgba(25, 25, 25, 0.6);

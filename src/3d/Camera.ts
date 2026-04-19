@@ -12,13 +12,10 @@ export class Camera {
     private app: pc.Application;
 
     public stage: CameraStage = CameraStage.ORBIT;
-    public id: string = Math.random().toString(36).substring(7); // Debug ID to catch React double-mounting
 
     private cameraRig: pc.Entity | null = null;
     private animatedNode: pc.GraphNode | null = null;
     private animTrack: pc.AnimTrack | null = null;
-
-    // private overlay: pc.Entity | null = null;
 
     private transitionTime: number = 0;
     private transitionDuration: number = 2.5;

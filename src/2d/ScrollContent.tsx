@@ -8,6 +8,7 @@ import { NewsSection } from './sections/NewsSection'
 import { AboutSection } from './sections/AboutSection'
 import { PhotosSection } from './sections/PhotosSection'
 import { Modal } from './Modal'
+import type { PortfolioData } from './services/sheetApi';
 import type { ModalKind, SectionProps } from './sectionTypes'
 
 /**
@@ -20,11 +21,6 @@ export const CYCLE_VH = 3240
  * Adjust scrollTop (in vh) to control when each section appears
  * within one cycle of the 3240vh scrollable space.
  */
-export type {
-    PortfolioItem,
-    ModalKind,
-    SectionProps,
-} from './sectionTypes'
 
 const SECTION_CONFIG: Array<{ component: React.ComponentType<SectionProps>; scrollTop: number; align?: SectionProps['align'] }> = [
     { component: StatementSection, scrollTop: 100, align: 'right' },
@@ -39,8 +35,6 @@ const SECTION_CONFIG: Array<{ component: React.ComponentType<SectionProps>; scro
 
 /** How many cycles to seed on first render */
 const INITIAL_CYCLES = 3
-
-import type { PortfolioData } from './services/sheetApi';
 
 interface ScrollContentProps {
     visible: boolean
