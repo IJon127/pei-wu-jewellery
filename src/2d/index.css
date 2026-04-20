@@ -280,7 +280,7 @@ body {
 }
 
 .statement-quote {
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Libre Baskerville', 'Noto Serif TC', serif;
   font-size: 2rem;
   color: rgba(25, 25, 25, 0.6);
   line-height: 1.2;
@@ -359,7 +359,7 @@ body {
 }
 
 .project-item-title {
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Libre Baskerville', 'Noto Serif TC', serif;
   font-size: 1.1rem;
   /* font-style: italic; */
   font-weight: 400;
@@ -487,7 +487,7 @@ body {
 }
 
 .ex-title {
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Libre Baskerville', 'Noto Serif TC', serif;
   font-size: 1rem;
   color: rgba(25, 25, 25, 0.6);
 }
@@ -515,12 +515,26 @@ body {
 .ex-location {
   display: flex;
   gap: 1rem;
+  margin: 0.5rem 0;
 }
 
 .ex-venue {
-  font-family: 'Libre Baskerville', sans-serif;
+  font-family: 'Overpass', sans-serif;
   font-size: 0.85rem;
+  font-weight: 300;
+  color: rgba(25, 25, 25, 0.3);
+}
+
+.ex-type {
+  width: 4rem;
+  font-family: 'Overpass', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   color: rgba(25, 25, 25, 0.4);
+  border: 1px solid rgba(25, 25, 25, 0.2);
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
 }
 
 .ex-img {
@@ -533,7 +547,7 @@ body {
 }
 
 .ex-link {
-  font-family: 'Libre Baskerville', sans-serif;
+  font-family: 'Libre Baskerville', 'Noto Serif TC', serif;
   font-size: 1rem;
   color: rgba(25, 25, 25, 0.3);
   text-decoration: none;
@@ -593,7 +607,7 @@ body {
 }
 
 .press-title {
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Libre Baskerville', 'Noto Serif TC', serif;
   font-size: 1.3rem;
   color: rgba(25, 25, 25, 0.6);
   margin: 0 0 0.75rem;
@@ -660,7 +674,7 @@ body {
 
 
 .bespoke-title {
-  font-family: 'Libre Baskerville', sans-serif;
+  font-family: 'Libre Baskerville', 'Noto Serif TC', serif;
   font-size: 1.5rem;
   font-weight: 400;
   color: rgba(25, 25, 25, 0.6);
@@ -746,7 +760,7 @@ body {
 }
 
 .news-title {
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Libre Baskerville', 'Noto Serif TC', serif;
   font-size: 0.9rem;
   font-weight: 400;
   color: rgba(25, 25, 25, 0.6);
@@ -755,7 +769,7 @@ body {
 }
 
 .news-link {
-  font-family: 'Libre Baskerville', sans-serif;
+  font-family: 'Libre Baskerville', 'Noto Serif TC', serif;
   font-size: 1rem;
   color: rgba(25, 25, 25, 0.3);
   margin-left: 0.5rem;
@@ -813,7 +827,7 @@ body {
 }
 
 .about-link {
-  font-family: 'Libre Baskerville', sans-serif;
+  font-family: 'Libre Baskerville', 'Noto Serif TC', serif;
   font-size: 0.8rem;
   color: rgba(25, 25, 25, 0.45);
   text-decoration: none;
@@ -851,7 +865,7 @@ body {
   height: 100% !important;
   /* locked !important overrides engine injection to guard fixed viewport sizes */
   z-index: 0;
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 /* ── Landing Overlay ────────────────────────────────────── */
@@ -1073,7 +1087,7 @@ body {
 }
 
 .modal-detail-title {
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Libre Baskerville', 'Noto Serif TC', serif;
   font-size: 2rem;
   font-weight: 400;
   margin: 0;
@@ -1148,7 +1162,7 @@ body {
   border-radius: 2px;
 }
 
-
+/* 
 button.modal-project-card--btn {
   display: block;
   width: 100%;
@@ -1160,26 +1174,28 @@ button.modal-project-card--btn {
   border-radius: 2px;
   overflow: hidden;
   transition: opacity 0.2s;
-}
+} */
 
-button.modal-project-card--btn:hover {
+/* button.modal-project-card--btn:hover {
   opacity: 0.9;
-}
+} */
 
-button.modal-project-card--btn:focus-visible {
+/* button.modal-project-card--btn:focus-visible {
   outline: 2px solid rgba(25, 25, 25, 0.35);
   outline-offset: 2px;
-}
+} */
 
-button.modal-project-card--btn img {
+/* button.modal-project-card--btn img {
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
   object-position: center;
   display: block;
   background: rgba(25, 25, 25, 0.06);
-  vertical-align: middle;
+  /* vertical-align: middle; */
 }
+
+*/
 
 /* ── Single project (modal) ─ */
 .project-detail {
@@ -1298,7 +1314,7 @@ button.modal-project-card--btn img {
 }
 
 .exhibition-detail-venue {
-  font-family: 'Libre Baskerville', sans-serif;
+  font-family: 'Libre Baskerville', 'Noto Serif TC', serif;
   font-size: 0.9rem;
   color: rgba(25, 25, 25, 0.45);
   margin: 0 0 1.5rem;

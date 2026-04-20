@@ -51,11 +51,12 @@ export function AllExhibitions({ exhibitions, highlightId }: AllExhibitionsProps
 
                         <div className="ex-info">
                             <div>
-                                <span className="ex-title ex-modal-title">{ex.title}</span>
+                                <div className="ex-title ex-modal-title">{ex.title}</div>
                                 <div className="ex-location">
                                     <span className="ex-venue">{ex.venue}</span>
                                     <span className="ex-city">{ex.city}</span>
                                 </div>
+                                <div className="ex-type">{ex.type}</div>
                             </div>
                             {ex.link && <a className="ex-link" href={ex.link} target="_blank" rel="noopener noreferrer">more ↗</a>}
 
