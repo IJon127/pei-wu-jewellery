@@ -27,7 +27,7 @@ export class Camera {
     private baseFov: number = 45;
     private animFov: number = 70;
 
-    constructor(app: pc.Application) {
+    constructor(app: pc.Application, private onProgress?: () => void) {
         this.app = app;
 
         // Create pivot to easily orbit the origin
@@ -109,19 +109,16 @@ export class Camera {
                         activate: true
                     });
 
-                    // Assign the first animation track to a default state
-                    this.cameraRig.anim?.assignAnimation('CameraAction', this.animTrack as pc.AnimTrack);
-
-                    // Force the state graph to transition and resolve its layout
-                    this.cameraRig.anim?.baseLayer?.play('CameraAction');
-                    this.cameraRig.anim?.update(0);
-
-                    // Now safely pause it for manual scrubbing logic in Stage 3
-                    if (this.cameraRig.anim?.baseLayer) {
-                        this.cameraRig.anim.baseLayer.playing = false;
+                    if (this.animTrack) {
+                        this.cameraRig.anim!.assignAnimation('CameraAction', this.animTrack);
+                        this.cameraRig.anim!.baseLayer.transition('CameraAction', 0);
+                        this.cameraRig.anim!.playing = false; // We scrub manually with scroll
                     }
                 }
+            } else {
+                console.error("Failed to load Camera loop", err);
             }
+            this.onProgress?.();
         });
     }
 

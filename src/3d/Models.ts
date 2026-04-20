@@ -11,7 +11,7 @@ export class Models {
     private _stairs!: pc.Entity;
 
 
-    constructor(app: pc.Application) {
+    constructor(app: pc.Application, onProgress?: () => void) {
         this.entity = new pc.Entity('models')
 
         const glbs = [
@@ -52,6 +52,7 @@ export class Models {
                 } else {
                     console.error(`Failed to load ${glb}:`, err);
                 }
+                onProgress?.();
             });
         });
     }

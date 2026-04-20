@@ -13,6 +13,7 @@ function App() {
     const [isLandingMounted, setIsLandingMounted] = useState(true)
     const [isSceneReady, setIsSceneReady] = useState(false)
     const [hasScrolled, setHasScrolled] = useState(false)
+    const [loadingProgress, setLoadingProgress] = useState(0)
 
     const { data: portfolioData, isLoading: isDataLoading } = usePortfolioData()
 
@@ -24,10 +25,19 @@ function App() {
     }, [isInteracting])
 
     useEffect(() => {
+        if (isDataLoading) {
+            setLoadingProgress(0);
+        } else {
+            setLoadingProgress(20);
+        }
+    }, [isDataLoading]);
+
+    useEffect(() => {
         if (!canvasRef.current || isDataLoading || !portfolioData) return
 
         // Initialize the abstracted 3D engine boundary with proper selected photos
         sceneRef.current = new Scene(canvasRef.current)
+        sceneRef.current.onProgress = (v: number) => setLoadingProgress(20 + (v * 0.8))
         sceneRef.current.onReady = () => setIsSceneReady(true)
         sceneRef.current.start()
 
@@ -64,7 +74,7 @@ function App() {
             <canvas ref={canvasRef} id="playcanvas-app" />
 
             {/* Show loading screen until both data is loaded and 3D scene compiles */}
-            <LoadingScreen visible={isDataLoading || !isSceneReady} />
+            <LoadingScreen visible={!isSceneReady} progress={loadingProgress} />
 
             {/* Only mount scroll content when data is ready so sections have access to their arrays */}
             {portfolioData && <ScrollContent visible={isInteracting} portfolioData={portfolioData} />}

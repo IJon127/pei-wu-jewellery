@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 
 interface Props {
     visible: boolean  // false = scene is ready
+    progress: number
 }
 
-export function LoadingScreen({ visible }: Props) {
+export function LoadingScreen({ visible, progress }: Props) {
     const [isMounted, setIsMounted] = useState(true)
     const [count, setCount] = useState(0)
+    const [targetProgress, setTargetProgress] = useState(0)
 
     // Phase flags
     const [numberFadeOut, setNumberFadeOut] = useState(false)  // number opacity -> 0; 500ms
@@ -22,20 +24,21 @@ export function LoadingScreen({ visible }: Props) {
         }
     }
 
-    // Uniform 0→100 over exactly 1000ms (100 steps × 10ms)
+    // Receive the network progress and set it as the goal
     useEffect(() => {
-        let n = 0
-        const tick = setInterval(() => {
-            n++
-            setCount(n)
-            if (n >= 100) {
-                clearInterval(tick)
-                countDone.current = true
-                tryBeginExit()
-            }
-        }, 10)
-        return () => clearInterval(tick)
-    }, [])
+        setTargetProgress(Math.round(progress))
+    }, [progress])
+
+    // Smoothly step the counter towards the network target (10ms per number)
+    useEffect(() => {
+        if (count < targetProgress) {
+            const timer = setTimeout(() => setCount(c => c + 1), 10)
+            return () => clearTimeout(timer)
+        } else if (count >= 100 && targetProgress >= 100) {
+            countDone.current = true
+            tryBeginExit()
+        }
+    }, [count, targetProgress])
 
     // Scene-ready gate
     useEffect(() => {

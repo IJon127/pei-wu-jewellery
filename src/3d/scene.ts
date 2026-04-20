@@ -29,8 +29,18 @@ export class Scene {
         this.app.setCanvasResolution(pc.RESOLUTION_AUTO);
 
 
+        let loadedAssets = 0;
+        const totalAssets = 7; // 1 HDR + 1 Camera + 5 Models
+        const reportProgress = () => {
+            loadedAssets++;
+            this.onProgress?.(loadedAssets / totalAssets * 100);
+            if (loadedAssets === totalAssets) {
+                this.onReady?.();
+            }
+        };
+
         // Initialize Camera
-        this.camera = new Camera(this.app);
+        this.camera = new Camera(this.app, reportProgress);
 
         // Rearrange depth layer to capture environment/skybox for dynamic refraction
         const depthLayer = this.app.scene.layers.getLayerById(pc.LAYERID_DEPTH)
@@ -68,6 +78,7 @@ export class Scene {
             } else {
                 console.error("Failed to load HDR skybox", err);
             }
+            reportProgress();
         });
 
 
@@ -76,7 +87,7 @@ export class Scene {
         this.app.root.addChild(this.stars.entity)
 
         // Initialize and add Model
-        this.models = new Models(this.app)
+        this.models = new Models(this.app, reportProgress)
         this.app.root.addChild(this.models.entity)
 
         // Initialize Post-processing (Bloom, Vignette)
@@ -86,17 +97,6 @@ export class Scene {
         this.app.on('update', (dt: number) => {
             this.camera.update(dt)
             this.stars.update(dt)
-        })
-
-        // Wire loading progress events to React
-        this.app.on('preload:end', () => {
-            this.app.off('preload:progress')
-        })
-        this.app.on('preload:progress', (value: number) => {
-            this.onProgress?.(value)
-        })
-        this.app.on('start', () => {
-            this.onReady?.()
         })
     }
 
