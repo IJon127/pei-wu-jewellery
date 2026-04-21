@@ -111,7 +111,7 @@ export class Camera {
 
                     if (this.animTrack) {
                         this.cameraRig.anim!.assignAnimation('CameraAction', this.animTrack);
-                        this.cameraRig.anim!.baseLayer.transition('CameraAction', 0);
+                        this.cameraRig.anim!.baseLayer?.transition('CameraAction', 0);
                         this.cameraRig.anim!.playing = false; // We scrub manually with scroll
                     }
                 }
