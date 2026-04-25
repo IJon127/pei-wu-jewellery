@@ -5,12 +5,19 @@ export interface LightboxProps {
     images: string[]
     initialIndex?: number
     photoby?: string[]
+    names?: string[]
+    sizes?: string[]
+    materials?: string[]
     onClose: () => void
 }
 
-export function Lightbox({ images, initialIndex = 0, photoby, onClose }: LightboxProps) {
+export function Lightbox({ images, initialIndex = 0, photoby, names, sizes, materials, onClose }: LightboxProps) {
     const [index, setIndex] = useState(initialIndex)
     const [loadedIndex, setLoadedIndex] = useState<number | null>(null)
+
+
+    // const sizeArray = sizes?.split(',').map(m => m.trim()) || []
+    // const nameArray = names?.split(',').map(m => m.trim()) || []
 
     const prev = useCallback(() => setIndex(i => (i - 1 + images.length) % images.length), [images.length])
     const next = useCallback(() => setIndex(i => (i + 1) % images.length), [images.length])
@@ -74,8 +81,21 @@ export function Lightbox({ images, initialIndex = 0, photoby, onClose }: Lightbo
                     </>
                 )}
 
-                {isImageLoaded && photoby && photoby[index] && (
-                    <p className="lightbox-photoby">Photo — {photoby[index]}</p>
+                {isImageLoaded && (
+                    <div className="lightbox-meta">
+                        {names && names[index] && (
+                            <p className="lightbox-detail">{names[index]}</p>
+                        )}
+                        {materials && materials[index] && (
+                            <p className="lightbox-detail">{materials[index]}</p>
+                        )}
+                        {sizes && sizes[index] && (
+                            <p className="lightbox-detail">{sizes[index]}</p>
+                        )}
+                        {photoby && photoby[index] && (
+                            <p className="lightbox-detail">photo by {photoby[index]}</p>
+                        )}
+                    </div>
                 )}
             </div>
 

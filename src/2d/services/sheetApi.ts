@@ -43,6 +43,7 @@ async function fetchCsvAsJson<T>(url: string): Promise<T[]> {
         Papa.parse(csvText, {
             header: true,
             skipEmptyLines: true,
+            transformHeader: (h: string) => h.trim(),
             complete: (results) => {
                 if (results.errors.length > 0) {
                     console.error("PapaParse errors:", results.errors)
@@ -67,15 +68,16 @@ function parsePortfolioRow(row: any): PortfolioItem {
         year: row.year || '',
         date: row.date || '',
         type: row.type || '',
-        material: row.material || '',
-        size: row.size || '',
         city: row.city || '',
         venue: row.venue || '',
         introduction: row.introduction || '',
         description: row.description || '',
         image: row.image || '',
         images: row.images ? row.images.split('\n').map((u: string) => u.trim()).filter(Boolean) : [],
-        photoby: (row.photoby || '').split(',').map((u: string) => u.trim()).filter(Boolean),
+        photoby: row.photoby ? (row.photoby || '').split('\n').map((u: string) => u.trim()).filter(Boolean) : [],
+        materials: row.materials ? (row.materials || '').split('\n').map((u: string) => u.trim()).filter(Boolean) : [],
+        sizes: row.sizes ? (row.sizes || '').split('\n').map((u: string) => u.trim()).filter(Boolean) : [],
+        names: row.names ? (row.names || '').split('\n').map((u: string) => u.trim()).filter(Boolean) : [],
         illustration: row.illustration || undefined,
         link: row.link || undefined
     }
@@ -130,13 +132,15 @@ export async function fetchPortfolioData(): Promise<PortfolioData> {
     };
 
     const photos = photosRaw.map(row => ({
-        alt: row.alt,
+        name: row.name,
         x: row.x,
         y: row.y,
         z: row.z,
         scale: row.scale,
-        image: row.image
+        image: row.image,
+        photoby: row.photoby
     })).slice(1)
+
 
     const about = {
         bio: aboutRaw[1].bio,

@@ -294,7 +294,7 @@ body {
   font-size: 1rem;
   line-height: 1.9;
   color: rgba(25, 25, 25, 0.55);
-  margin: 0 0 2rem;
+  margin: 0 0 1rem;
 }
 
 .statement-sig {
@@ -1162,40 +1162,8 @@ body {
   border-radius: 2px;
 }
 
-/* 
-button.modal-project-card--btn {
-  display: block;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-  border-radius: 2px;
-  overflow: hidden;
-  transition: opacity 0.2s;
-} */
 
-/* button.modal-project-card--btn:hover {
-  opacity: 0.9;
-} */
 
-/* button.modal-project-card--btn:focus-visible {
-  outline: 2px solid rgba(25, 25, 25, 0.35);
-  outline-offset: 2px;
-} */
-
-/* button.modal-project-card--btn img {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  background: rgba(25, 25, 25, 0.06);
-  /* vertical-align: middle; */
-}
-
-*/
 
 /* ── Single project (modal) ─ */
 .project-detail {
@@ -1211,31 +1179,7 @@ button.modal-project-card--btn {
 }
 
 .project-detail-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-.project-detail-meta-row {
-  display: flex;
-  gap: 0.8rem;
-  font-family: 'Overpass', sans-serif;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  flex-wrap: wrap;
-}
-
-.project-detail-label {
-  font-weight: 600;
   color: rgba(25, 25, 25, 0.35);
-  min-width: 100px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.project-detail-value {
-  color: rgba(25, 25, 25, 0.6);
-  flex: 1;
 }
 
 .project-detail-material {
@@ -1252,19 +1196,25 @@ button.modal-project-card--btn {
 
 .project-detail-body {
   margin-bottom: 2rem;
+  /* line-height: 1; */
 }
 
 .project-detail-description {
   font-family: 'Overpass', sans-serif;
   font-size: 1rem;
-  line-height: 1.85;
+  line-height: 1.6;
   color: rgba(25, 25, 25, 0.55);
-  margin: 0;
+  margin: 0 0 0.75rem;
+}
+
+.project-detail-description:last-child {
+  margin-bottom: 0;
 }
 
 .project-detail-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  flex-wrap: wrap;
   gap: 0.75rem;
 }
 
@@ -1472,7 +1422,7 @@ button.modal-project-card--btn {
 
 .lightbox-img {
   max-width: 70vw;
-  max-height: 80vh;
+  max-height: 75vh;
   object-fit: contain;
   display: block;
   border-radius: 4px;
@@ -1529,9 +1479,9 @@ button.modal-project-card--btn {
 
 .lightbox-counter {
   position: absolute;
-  bottom: -2.25rem;
-  right: 100%;
-  transform: translateX(100%);
+  top: calc(100% + 1rem);
+  right: 0;
+
   font-family: 'Overpass', sans-serif;
   font-size: 0.8rem;
   letter-spacing: 0.15em;
@@ -1539,10 +1489,15 @@ button.modal-project-card--btn {
   white-space: nowrap;
 }
 
-.lightbox-photoby {
+.lightbox-meta {
   position: absolute;
-  bottom: -2.25rem;
-  right: 0;
+  top: calc(100% + 1rem);
+  right: 100%;
+  transform: translateX(100%);
+}
+
+.lightbox-detail {
+  top: 0;
   font-family: 'Overpass', sans-serif;
   font-size: 0.75rem;
   letter-spacing: 0.08em;

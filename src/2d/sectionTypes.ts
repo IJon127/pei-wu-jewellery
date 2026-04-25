@@ -8,8 +8,6 @@ export interface PortfolioItem {
     year: string
     date: string
     type: string
-    material: string
-    size: string
     introduction: string
     description: string
     city: string
@@ -17,6 +15,9 @@ export interface PortfolioItem {
     image: string
     images: string[]
     photoby: string[]
+    names: string[]
+    materials: string[]
+    sizes: string[]
     illustration?: string
     link?: string
 }
@@ -28,7 +29,8 @@ export interface StatementEntry {
 }
 
 export interface PhotosEntry {
-    alt: string,
+    name: string,
+    photoby: string,
     x: number,
     y: number,
     z: number,

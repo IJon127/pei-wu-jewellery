@@ -7,9 +7,10 @@ export interface ProjectDetailProps {
 }
 
 export function ProjectDetail({ project }: ProjectDetailProps) {
-    const { title, year, description, images, size, material, photoby } = project
+    const { title, year, description, images, photoby, names, sizes, materials } = project
     const hasGallery = images.length > 0
-    const materials = material.split(',').map(m => m.trim())
+    // const materialArray = materials.split(',').map(m => m.trim())
+    const descriptionLines = description.split('\n').map(line => line.trim())
 
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
@@ -17,28 +18,13 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         <article className="project-detail">
             <header className="project-detail-header">
                 <h2 className="modal-detail-title">{title}</h2>
-                <div className="project-detail-meta">
-                    <div className="project-detail-meta-row">
-                        <span className="project-detail-label">Year</span>
-                        <span className="project-detail-value">{year}</span>
-                    </div>
-                    {size && (
-                        <div className="project-detail-meta-row">
-                            <span className="project-detail-label">Size</span>
-                            <span className="project-detail-value">{size}</span>
-                        </div>
-                    )}
-                    {material && (
-                        <div className="project-detail-meta-row">
-                            <span className="project-detail-label">Materials</span>
-                            {materials.map((m, i) => <span key={i} className="project-detail-material">{m}</span>)}
-                        </div>
-                    )}
-                </div>
+                <div className="project-detail-meta">{year}</div>
             </header>
 
             <div className="project-detail-body">
-                <p className="project-detail-description">{description}</p>
+                {descriptionLines.map((line, i) => (
+                    <p key={i} className="project-detail-description">{line}</p>
+                ))}
             </div>
 
             {hasGallery && (
@@ -66,6 +52,9 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                     images={images}
                     initialIndex={lightboxIndex}
                     photoby={photoby}
+                    names={names}
+                    sizes={sizes}
+                    materials={materials}
                     onClose={() => setLightboxIndex(null)}
                 />
             )}

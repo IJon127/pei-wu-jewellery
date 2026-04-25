@@ -55,7 +55,8 @@ export function PhotosSection({ scrollTop, align = 'center', portfolioData }: Se
             const top = `${yVal}vh`;
 
             return {
-                alt: photoRow.alt,
+                name: photoRow.name,
+                photoby: photoRow.photoby,
                 url: photoRow.image,
                 top,
                 left,
@@ -70,6 +71,8 @@ export function PhotosSection({ scrollTop, align = 'center', portfolioData }: Se
     const scrollDelta = scrollY - sectionTopPx;
 
     const allImages = useMemo(() => positionedPhotos.map(p => p.url), [positionedPhotos])
+    const allNames = useMemo(() => positionedPhotos.map(p => p.name), [positionedPhotos])
+    const allPhotoby = useMemo(() => positionedPhotos.map(p => p.photoby), [positionedPhotos])
 
     return (
         <div className={`scroll-section section-align-${align}`} style={{ top: `${adjustedScrollTop}dvh`, width: '100%', height: '100vh' }}>
@@ -83,7 +86,7 @@ export function PhotosSection({ scrollTop, align = 'center', portfolioData }: Se
                         <img
                             key={i}
                             src={photo.url}
-                            alt={photo.alt}
+                            alt={photo.name}
                             className='photo-img'
                             onClick={() => setLightboxIndex(i)}
                             style={{
@@ -103,6 +106,8 @@ export function PhotosSection({ scrollTop, align = 'center', portfolioData }: Se
             {lightboxIndex !== null && (
                 <Lightbox
                     images={allImages}
+                    names={allNames}
+                    photoby={allPhotoby}
                     initialIndex={lightboxIndex}
                     onClose={() => setLightboxIndex(null)}
                 />

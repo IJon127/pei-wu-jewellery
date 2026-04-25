@@ -14,11 +14,11 @@ export function StatementSection({ scrollTop, align = 'center', portfolioData }:
                 <blockquote className="statement-quote" data-reveal data-reveal-delay="0">
                     “︁{quote}︁”︁
                 </blockquote>
-                <p className="statement-body" data-reveal data-reveal-delay="1">
-                    {body.map((line, i) => (
-                        <span key={i}>{line}<br /></span>
-                    ))}
-                </p>
+                {body.map((line, i) => (
+                    <p key={i} className="statement-body" data-reveal data-reveal-delay={i + 1}>
+                        {line}
+                    </p>
+                ))}
                 <div className="statement-sig" data-reveal data-reveal-delay="2">— Pei Wu, {year}</div>
             </div>
         </div>
