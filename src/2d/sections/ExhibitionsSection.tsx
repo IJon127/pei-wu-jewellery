@@ -2,7 +2,9 @@ import { useScrollReveal } from '../../hooks/useScrollReveal'
 import type { SectionProps } from '../sectionTypes'
 
 export function ExhibitionsSection({ scrollTop, align = 'left', portfolioData, onOpenModal }: SectionProps) {
-    const exhibitions = portfolioData?.exhibitions || []
+    const allExhibitions = portfolioData?.exhibitions || []
+    const selectedIndices = portfolioData?.selected?.exhibitions || []
+    const exhibitions = selectedIndices.map(ref => allExhibitions[ref]).filter(Boolean)
     const ref = useScrollReveal<HTMLDivElement>()
 
     return (
